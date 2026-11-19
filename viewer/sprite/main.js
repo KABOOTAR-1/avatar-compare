@@ -10,7 +10,7 @@ const EXPRESSION_LABELS = { neutral: "Neutral", smile: "Smile", laugh: "Laugh", 
 
 const params = new URLSearchParams(location.search);
 const avatarId = params.get("avatar") ?? DEFAULT_AVATAR;
-const root = `../../out/sprite/${avatarId}/`;
+const root = `https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@5ffbf6886acb94733d21c76b9bf917aaa4f9591c/out/sprite/${avatarId}/`;
 const $ = (id) => document.getElementById(id);
 
 function button(label, onClick, title = "") {
