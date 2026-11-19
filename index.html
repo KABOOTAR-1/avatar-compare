@@ -44,6 +44,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
 // Every approach's output for each person; LAM is Gaussian splats, so it links to its own viewer.
 const PEOPLE = {
@@ -81,7 +82,13 @@ const TALK_STEP_MS = 160;
 const viewers = [];
 let current = { name: "neutral", strength: 1 };
 
-const loader = new GLTFLoader();
+const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+// a model downloads only once its card is about to scroll into view
+const LAZY_MARGIN = "400px";
+function whenNear(el, load) {
+  const io = new IntersectionObserver((seen) => { if (seen.some((e) => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: LAZY_MARGIN });
+  io.observe(el);
+}
 const grid = document.getElementById("grid");
 
 function applyExpression(viewer) {
@@ -125,7 +132,8 @@ function addGlbViewer(card, entry) {
   const camera = new THREE.PerspectiveCamera(30, 3 / 4, 0.01, 100);
   const controls = new OrbitControls(camera, canvas);
   const stats = card.querySelector(".stats");
-  loader.load(entry.glb, (gltf) => {
+  stats.textContent = "Loading when scrolled into view…";
+  whenNear(canvas, () => loader.load(entry.glb, (gltf) => {
     scene.add(gltf.scene);
     frameHead(camera, controls, gltf.scene);
     let tris = 0; const morphs = new Set();
@@ -138,7 +146,7 @@ function addGlbViewer(card, entry) {
     const viewer = { root: gltf.scene };
     viewers.push(viewer);
     applyExpression(viewer);
-  }, undefined, (err) => { stats.innerHTML = `<span class="missing">Failed to load ${entry.glb}: ${err.message ?? err}</span>`; });
+  }, undefined, (err) => { stats.innerHTML = `<span class="missing">Failed to load ${entry.glb}: ${err.message ?? err}</span>`; }));
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (canvas.width !== Math.floor(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
