@@ -58,6 +58,7 @@ const PEOPLE = {
     { title: "Concept → sculpt → wrap v2 (Hunyuan 2.1 sculpt)", glb: "out/wrap/arvind-v2-hy21/avatar.glb", note: "Same v2 pipeline on the newer hy21 sculpt: closer quiff/hair silhouette" },
     { title: "Concept → sculpt → wrap v3", glb: "out/wrap/arvind-v3/avatar.glb", note: "hy21 body/hair; the template's own smooth face warped to the image's layout (no sculpt face or paint), image face texture on plain skin, bigger glossy eyes" },
     { title: "Concept → multi-view sculpt + HD head → wrap v5 (best wrap)", glb: "out/wrap/arvind-v5/avatar.glb", note: "v4 with the high-detail no-glasses head sculpt spliced onto the multi-view body (scripts/avatar3d/wrap/splice_head.py): full hair, clean face, no painted-glasses smears. jawOpen stretches the chin." },
+    { title: "v14: v11 face on Mixamo Leonard body + Mixamo clips", glb: "out/mixamo/v14-real-v11face/avatar_anim.glb", note: "v11's stylized sculpt head (real lips, tuned mouth, 15 visemes, aviators) at 1.1x Leonard's head size on his real Mixamo body and clothes; clips match the Mixamo Y Bot. HEAD_SCALE=1.1 scripts/avatar3d/real/run_mixamo.sh, $0." },
     { title: "v13 realistic: Mixamo Leonard body + photo-fitted head + Mixamo clips", glb: "out/mixamo/v13-real/avatar_anim.glb", note: "Real Mixamo character body (Leonard: clothes, Mixamo skin weights) with our photo-fitted head (52 ARKit + visemes, sculpted hair, aviators) transplanted at the collar; skin retinted to the face. Clips match the Mixamo Y Bot. scripts/avatar3d/real/run_mixamo.sh (any Mixamo character + our head), $0." },
     { title: "v11: HD head + real lips + re-tuned mouth + skin weights + Mixamo clips", glb: "out/mixamo/v11/avatar_anim.glb", note: "Real 3D lips (lips.py) and re-tuned mouth shapes (mouth_v11.py; jaw, aa, smile, rolls pass; O/U/RR/pucker still weak). Built from the saved defaults: mouth_shapes.py --defaults + reweight_stage.py, $0 per user. 9 Mixamo clips under Animation, retargeted faithfully: every bone within ~1-3 deg of the Mixamo Y Bot on the same clip, only forearm twist shared to stop the wrist candy-wrapper (retarget_mixamo.py + retarget_defaults.json). Hands land differently than on Mixamo only because of our proportions (bigger head, shorter arms)." },
     { title: "v9: HD head + Gemini-scored mouth + Gemini-picked skin weights + Mixamo clips", glb: "out/mixamo/v9-reweight/avatar_anim.glb", note: "Real jaw rotation (mouth_shapes.py); body skin weights re-solved by the default method Gemini chose (heat + smoothing, reweight_stage.py; deformation score 5.2 -> 7.8 over 9 clips); 9 Mixamo clips under Animation. Rounded mouth shapes (O, U, pucker) still weak - real lips in progress." },
@@ -96,7 +97,7 @@ const CLIPS = ["idle", "idle_variant", "listen", "talk_gesture", "wave", "think"
 let currentClip = "";
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/b0623fe47d329de51030fefaa8c856d25b6b69ab/";
+const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/c7db61d8524af63582debdb945632e27a0fbdfa2/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
