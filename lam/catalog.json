@@ -1,0 +1,33 @@
+{
+ "avatars": [
+  {
+   "name": "arvind",
+   "zip": "arvind/arvind.zip",
+   "bytes": 4079937,
+   "timings": {
+    "flame_tracking_s": 18.14,
+    "reconstruct_and_render_3_views_s": 57.28,
+    "render_driving_clip_s": 60.04,
+    "driving_clip_frames": 519,
+    "export_zip_s": 12.36,
+    "skin_glb": "identity-shaped skin.glb from template_file.fbx (FBX SDK + Blender, as app_lam.py)",
+    "zip_bytes": 4079937,
+    "driving_clip": "Look_In_My_Eyes",
+    "gpu": "Tesla T4"
+   },
+   "previews": []
+  }
+ ],
+ "tracks": [
+  {
+   "name": "BarackObama_english (Audio2Expression)",
+   "json": "_audio/BarackObama_english.json",
+   "audio": "_audio/BarackObama_english.wav"
+  },
+  {
+   "name": "HillaryClinton_english (Audio2Expression)",
+   "json": "_audio/HillaryClinton_english.json",
+   "audio": "_audio/HillaryClinton_english.wav"
+  }
+ ]
+}
