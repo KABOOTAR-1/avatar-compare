@@ -83,6 +83,7 @@ const TALK_STEP_MS = 160;
 const viewers = [];
 let current = { name: "neutral", strength: 1 };
 
+const ASSET = "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@79bddc7e16fa84e0678879c56222625f0c6f40e4/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
@@ -134,7 +135,7 @@ function addGlbViewer(card, entry) {
   const controls = new OrbitControls(camera, canvas);
   const stats = card.querySelector(".stats");
   stats.textContent = "Loading when scrolled into view…";
-  whenNear(canvas, () => loader.load(entry.glb, (gltf) => {
+  whenNear(canvas, () => loader.load(ASSET + entry.glb, (gltf) => {
     scene.add(gltf.scene);
     frameHead(camera, controls, gltf.scene);
     let tris = 0; const morphs = new Set();
@@ -172,7 +173,7 @@ async function render(person) {
     if (entry.link && !entry.glb) {
       const card = document.createElement("section");
       card.className = "card";
-      card.innerHTML = `<h2>${entry.title}</h2><div class="view"><img src="${entry.image ?? ""}" alt=""></div><div class="stats"><a href="${entry.link}" target="_blank">Open</a>${entry.note ? ` · ${entry.note}` : ""}</div>`;
+      card.innerHTML = `<h2>${entry.title}</h2><div class="view"><img src="${entry.image ? ASSET + entry.image : ""}" alt=""></div><div class="stats"><a href="${entry.link}" target="_blank">Open</a>${entry.note ? ` · ${entry.note}` : ""}</div>`;
       grid.append(card);
       continue;
     }
@@ -183,7 +184,7 @@ async function render(person) {
     const slot = card.querySelector(".slot");
     const stats = card.querySelector(".stats");
     if (entry.image) {
-      slot.innerHTML = `<img src="${entry.image}" alt="">`;
+      slot.innerHTML = `<img src="${ASSET + entry.image}" alt="">`;
       if (entry.note) stats.textContent = entry.note;
     }
     else if (entry.missing) stats.innerHTML = `<span class="missing">${entry.missing}</span>`;
