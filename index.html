@@ -57,7 +57,7 @@ const PEOPLE = {
     { title: "Concept → sculpt → wrap v2 (Hunyuan 2.1 sculpt)", glb: "out/wrap/arvind-v2-hy21/avatar.glb", note: "Same v2 pipeline on the newer hy21 sculpt: closer quiff/hair silhouette" },
     { title: "Concept → sculpt → wrap v3", glb: "out/wrap/arvind-v3/avatar.glb", note: "hy21 body/hair; the template's own smooth face warped to the image's layout (no sculpt face or paint), image face texture on plain skin, bigger glossy eyes" },
     { title: "Concept → multi-view sculpt + HD head → wrap v5 (best wrap)", glb: "out/wrap/arvind-v5/avatar.glb", note: "v4 with the high-detail no-glasses head sculpt spliced onto the multi-view body (scripts/avatar3d/wrap/splice_head.py): full hair, clean face, no painted-glasses smears. jawOpen stretches the chin." },
-    { title: "Head only on the shared base body → wrap v6", glb: "out/wrap/arvind-v6/avatar.glb", note: "Only the head is generated (HD head sculpt); the body is the template's own rigged body, dressed by colour from the concept (scripts/avatar3d/wrap/head_on_template.py). Same skeleton and clips for every user." },
+    { title: "Head only on the shared base body → wrap v6", glb: "out/wrap/arvind-v6/avatar.glb", note: "Only the head is generated (HD head sculpt); the body is the template's own rigged body (male preset), dressed by colour from the concept (scripts/avatar3d/wrap/head_on_template.py). Same skeleton and clips for every user." },
     { title: "MetaPerson (vendor, free web export)", glb: "out/metaperson-web/arvind/avatar.glb", note: "Full body, Mixamo skeleton, 51 ARKit, no visemes, hair painted on" },
     { title: "Template head: realistic (ICT-FaceKit)", glb: "out/ict/arvind/realistic.glb", note: "Head only, 52 ARKit + 15 visemes, photo-projected texture" },
     { title: "Template head: caricature (ICT ×1.5)", glb: "out/ict/arvind/caricature.glb", note: "Same fit, identity exaggerated 1.5×, toon texture" },
@@ -85,7 +85,7 @@ const TALK_STEP_MS = 160;
 const viewers = [];
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@422eb76cc6a58faad4ab5b1d1d97ed99a0774d9b/";
+const ASSET = "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@3e2577b40b63c02b1121ecd09a6fbd29a2c142b2/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
