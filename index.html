@@ -58,7 +58,7 @@ const PEOPLE = {
     { title: "Concept → sculpt → wrap v2 (Hunyuan 2.1 sculpt)", glb: "out/wrap/arvind-v2-hy21/avatar.glb", note: "Same v2 pipeline on the newer hy21 sculpt: closer quiff/hair silhouette" },
     { title: "Concept → sculpt → wrap v3", glb: "out/wrap/arvind-v3/avatar.glb", note: "hy21 body/hair; the template's own smooth face warped to the image's layout (no sculpt face or paint), image face texture on plain skin, bigger glossy eyes" },
     { title: "Concept → multi-view sculpt + HD head → wrap v5 (best wrap)", glb: "out/wrap/arvind-v5/avatar.glb", note: "v4 with the high-detail no-glasses head sculpt spliced onto the multi-view body (scripts/avatar3d/wrap/splice_head.py): full hair, clean face, no painted-glasses smears. jawOpen stretches the chin." },
-    { title: "v9: v8 + Gemini-scored mouth (real jaw) + Mixamo clips", glb: "out/mixamo/v9/avatar_anim.glb", note: "jawOpen is a jaw rotation now; mouth shapes generated as candidates and picked by Gemini scores (fallback: Gemini-drawn targets) - 23/32 shapes pass 7/10, rounded ones (O, U, pucker, funnel) still weak (scripts/avatar3d/wrap/mouth_shapes.py). 9 Mixamo clips under Animation." },
+    { title: "v9: HD head + Gemini-scored mouth + Gemini-picked skin weights + Mixamo clips", glb: "out/mixamo/v9-reweight/avatar_anim.glb", note: "Real jaw rotation (mouth_shapes.py); body skin weights re-solved by the default method Gemini chose (heat + smoothing, reweight_stage.py; deformation score 5.2 -> 7.8 over 9 clips); 9 Mixamo clips under Animation. Rounded mouth shapes (O, U, pucker) still weak - real lips in progress." },
     { title: "v8: HD head sculpt rigged directly + Mixamo clips", glb: "out/mixamo/v8/avatar_anim.glb", note: "The head sculpt itself is the visible head; v7's rig drives it (rig_head.sh). Body clips: 9 Mixamo mocap clips retargeted onto our skeleton (scripts/avatar3d/anim/retarget_mixamo.py) and reviewed by Gemini (gemini_review_clips.mjs): pick one under Animation. Full jawOpen still stretches the chin (mouth rebuild in progress)." },
     { title: "v8-tex: v7 + Gemini-cleaned face texture (walks)", glb: "out/wrap/arvind-v8-tex/avatar_walk.glb", note: "v7 with its face repainted by Gemini (3 views, landmark-aligned, projected onto a new hi-res face UV island; 6 calls, ~$0.80; scripts/avatar3d/wrap/face_texture.sh). Cleaner skin than v7, same hair and blink as v7." },
     { title: "Head only on the shared v5 body → wrap v7 (walks)", glb: "out/wrap/arvind-v7/avatar_walk.glb", note: "Shared base body = v5's concept body (t-shirt, jeans, sneakers; made once, reused for every user); only the head is generated per user (HD head sculpt) and wrapped (head_on_template.py --body-from). Same skeleton and clips for all; press Walk for the in-place walk cycle (add_walk.py)." },
@@ -94,7 +94,7 @@ const CLIPS = ["idle", "idle_variant", "listen", "talk_gesture", "wave", "think"
 let currentClip = "";
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/3ad8ebfeda68c6478e2e7fef7af55de80eafa03b/";
+const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/099d6853940764b2e19618a86598a46cb7c9251b/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
