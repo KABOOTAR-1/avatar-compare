@@ -38,7 +38,7 @@
   <span id="expr"></span>
   <label>Strength <input id="strength" type="range" min="0" max="1" step="0.05" value="1"></label>
   <button id="talk">Talk loop</button>
-  <button id="walk">Walk</button>
+  <label>Animation <select id="clip"><option value="">none</option></select></label>
 </header>
 <main id="grid"></main>
 <script type="module">
@@ -58,7 +58,7 @@ const PEOPLE = {
     { title: "Concept → sculpt → wrap v2 (Hunyuan 2.1 sculpt)", glb: "out/wrap/arvind-v2-hy21/avatar.glb", note: "Same v2 pipeline on the newer hy21 sculpt: closer quiff/hair silhouette" },
     { title: "Concept → sculpt → wrap v3", glb: "out/wrap/arvind-v3/avatar.glb", note: "hy21 body/hair; the template's own smooth face warped to the image's layout (no sculpt face or paint), image face texture on plain skin, bigger glossy eyes" },
     { title: "Concept → multi-view sculpt + HD head → wrap v5 (best wrap)", glb: "out/wrap/arvind-v5/avatar.glb", note: "v4 with the high-detail no-glasses head sculpt spliced onto the multi-view body (scripts/avatar3d/wrap/splice_head.py): full hair, clean face, no painted-glasses smears. jawOpen stretches the chin." },
-    { title: "v8: HD head sculpt rigged directly (walks)", glb: "out/wrap/arvind-v8-rig/avatar_walk.glb", note: "The head sculpt itself is the visible head (its own hair and paint); v7's rig drives it: weights + ARKit/viseme morphs transferred, eyes and mouth cut open, template eyeballs/teeth (scripts/avatar3d/wrap/rig_head.sh). Shared v5 body. Press Walk. Full jawOpen still stretches the chin." },
+    { title: "v8: HD head sculpt rigged directly + Mixamo clips", glb: "out/mixamo/v8/avatar_anim.glb", note: "The head sculpt itself is the visible head; v7's rig drives it (rig_head.sh). Body clips: 9 Mixamo mocap clips retargeted onto our skeleton (scripts/avatar3d/anim/retarget_mixamo.py) and reviewed by Gemini (gemini_review_clips.mjs): pick one under Animation. Full jawOpen still stretches the chin (mouth rebuild in progress)." },
     { title: "v8-tex: v7 + Gemini-cleaned face texture (walks)", glb: "out/wrap/arvind-v8-tex/avatar_walk.glb", note: "v7 with its face repainted by Gemini (3 views, landmark-aligned, projected onto a new hi-res face UV island; 6 calls, ~$0.80; scripts/avatar3d/wrap/face_texture.sh). Cleaner skin than v7, same hair and blink as v7." },
     { title: "Head only on the shared v5 body → wrap v7 (walks)", glb: "out/wrap/arvind-v7/avatar_walk.glb", note: "Shared base body = v5's concept body (t-shirt, jeans, sneakers; made once, reused for every user); only the head is generated per user (HD head sculpt) and wrapped (head_on_template.py --body-from). Same skeleton and clips for all; press Walk for the in-place walk cycle (add_walk.py)." },
     { title: "MetaPerson (vendor, free web export)", glb: "out/metaperson-web/arvind/avatar.glb", note: "Full body, Mixamo skeleton, 51 ARKit, no visemes, hair painted on" },
@@ -87,11 +87,13 @@ const TALK_STEP_MS = 160;
 
 const viewers = [];
 // avatars whose GLB carries this clip (scripts/avatar3d/wrap/add_walk.py) walk in place on the Walk button
-const WALK_CLIP = "walk";
-let walking = false;
+// body clips baked into an avatar's GLB (scripts/avatar3d/anim/retarget_mixamo.py, add_walk.py):
+// the picker plays the named clip on every avatar that has it
+const CLIPS = ["idle", "idle_variant", "listen", "talk_gesture", "wave", "think", "nod", "laugh", "walk"];
+let currentClip = "";
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/c47882527a9eca99dbc91fe3d63f6e7be1098312/";
+const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/b1eb5aa7512dd1716c7554556aaec369f15782a7/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
@@ -153,12 +155,11 @@ function addGlbViewer(card, entry) {
     });
     const visemes = [...morphs].filter((m) => m.startsWith("viseme_")).length;
     stats.textContent = `${Math.round(tris).toLocaleString()} tris · ${morphs.size} morphs (${visemes} visemes)` + (entry.note ? ` · ${entry.note}` : "");
-    const viewer = { root: gltf.scene, mixer: null, walk: null };
-    const walkClip = gltf.animations.find((a) => a.name === WALK_CLIP);
-    if (walkClip) {
+    const viewer = { root: gltf.scene, mixer: null, actions: {} };
+    if (gltf.animations.length) {
       viewer.mixer = new THREE.AnimationMixer(gltf.scene);
-      viewer.walk = viewer.mixer.clipAction(walkClip);
-      if (walking) viewer.walk.play();
+      for (const clip of gltf.animations) viewer.actions[clip.name] = viewer.mixer.clipAction(clip);
+      viewer.actions[currentClip]?.play();
     }
     viewers.push(viewer);
     applyExpression(viewer);
@@ -226,10 +227,15 @@ document.getElementById("strength").oninput = (e) => { current.strength = +e.tar
 
 let talkTimer = null;
 function stopTalk() { clearInterval(talkTimer); talkTimer = null; document.getElementById("talk").classList.remove("on"); }
-document.getElementById("walk").onclick = () => {
-  walking = !walking;
-  document.getElementById("walk").classList.toggle("on", walking);
-  for (const v of viewers) if (v.walk) (walking ? v.walk.play() : v.walk.stop());
+const clipSelect = document.getElementById("clip");
+for (const name of CLIPS) clipSelect.append(new Option(name, name));
+clipSelect.onchange = () => {
+  currentClip = clipSelect.value;
+  for (const v of viewers) {
+    if (!v.mixer) continue;
+    v.mixer.stopAllAction();
+    v.actions[currentClip]?.play();
+  }
 };
 document.getElementById("talk").onclick = () => {
   if (talkTimer) return stopTalk();
