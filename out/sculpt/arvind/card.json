@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Hunyuan3D-2mv body (4 Gemini views) + Hunyuan3D-2.1 PBR paint",
+    "glb": "out/sculpt/arvind/hy2mv/textured_pbr.glb",
+    "note": "Best full-body sculpt: multi-view shape from front/left/back/right concepts, so head, chest and hair have real depth (the single-view shape.glb was flat in profile). 2.1 PBR paint gives a legible face, thin glasses frames and the concept's dark-brown hair; skin reads a bit warm/orange. Full-res geometry: hy2mv/shape.glb (264k faces). Tencent Hunyuan community licence (not EU/UK/KR)."
+  },
+  {
+    "title": "Hunyuan3D-2mv head (2K head turnaround, no glasses)",
+    "glb": "out/sculpt/arvind/head/multiview/textured.glb",
+    "note": "Best head, for wrapping the face: 2mv at octree 512 from front/left/back 2K head concepts without glasses; matches the concept from all four sides. 2.0 paint without delight (truest skin tone); textured_pbr.glb is the punchier 2.1 PBR alternative. Full-res geometry: head/multiview/shape.glb (1.56M faces). Tencent Hunyuan community licence (not EU/UK/KR)."
+  }
+]

@@ -1,0 +1,756 @@
+{
+ "id": "phonemes",
+ "text": "Five quick chefs think the jazz show starts at seven, so move over.",
+ "voice": "Daniel",
+ "audio": "speech/phonemes.wav",
+ "duration": 4.14,
+ "expression": "neutral",
+ "source": "macOS say + Rhubarb 1.14 dialog-guided phone alignment -> Oculus visemes",
+ "visemes": [
+  {
+   "start": 0,
+   "end": 0.06,
+   "viseme": "sil",
+   "phone": ""
+  },
+  {
+   "start": 0.06,
+   "end": 0.15,
+   "viseme": "FF",
+   "phone": "F"
+  },
+  {
+   "start": 0.15,
+   "end": 0.216,
+   "viseme": "aa",
+   "phone": "AY"
+  },
+  {
+   "start": 0.216,
+   "end": 0.27,
+   "viseme": "I",
+   "phone": "AY"
+  },
+  {
+   "start": 0.27,
+   "end": 0.35,
+   "viseme": "FF",
+   "phone": "V"
+  },
+  {
+   "start": 0.35,
+   "end": 0.44,
+   "viseme": "kk",
+   "phone": "K"
+  },
+  {
+   "start": 0.44,
+   "end": 0.5,
+   "viseme": "U",
+   "phone": "W"
+  },
+  {
+   "start": 0.5,
+   "end": 0.55,
+   "viseme": "I",
+   "phone": "IH"
+  },
+  {
+   "start": 0.55,
+   "end": 0.62,
+   "viseme": "kk",
+   "phone": "K"
+  },
+  {
+   "start": 0.62,
+   "end": 0.72,
+   "viseme": "CH",
+   "phone": "SH"
+  },
+  {
+   "start": 0.72,
+   "end": 0.86,
+   "viseme": "E",
+   "phone": "EH"
+  },
+  {
+   "start": 0.86,
+   "end": 0.91,
+   "viseme": "FF",
+   "phone": "F"
+  },
+  {
+   "start": 0.91,
+   "end": 1.02,
+   "viseme": "SS",
+   "phone": "S"
+  },
+  {
+   "start": 1.02,
+   "end": 1.12,
+   "viseme": "TH",
+   "phone": "TH"
+  },
+  {
+   "start": 1.12,
+   "end": 1.19,
+   "viseme": "I",
+   "phone": "IH"
+  },
+  {
+   "start": 1.19,
+   "end": 1.29,
+   "viseme": "kk",
+   "phone": "NG"
+  },
+  {
+   "start": 1.29,
+   "end": 1.35,
+   "viseme": "TH",
+   "phone": "DH"
+  },
+  {
+   "start": 1.35,
+   "end": 1.42,
+   "viseme": "aa",
+   "phone": "AH"
+  },
+  {
+   "start": 1.42,
+   "end": 1.52,
+   "viseme": "CH",
+   "phone": "JH"
+  },
+  {
+   "start": 1.52,
+   "end": 1.66,
+   "viseme": "aa",
+   "phone": "AE"
+  },
+  {
+   "start": 1.66,
+   "end": 1.71,
+   "viseme": "SS",
+   "phone": "Z"
+  },
+  {
+   "start": 1.71,
+   "end": 1.78,
+   "viseme": "CH",
+   "phone": "SH"
+  },
+  {
+   "start": 1.78,
+   "end": 1.857,
+   "viseme": "O",
+   "phone": "OW"
+  },
+  {
+   "start": 1.857,
+   "end": 1.92,
+   "viseme": "U",
+   "phone": "OW"
+  },
+  {
+   "start": 1.92,
+   "end": 2.01,
+   "viseme": "SS",
+   "phone": "S"
+  },
+  {
+   "start": 2.01,
+   "end": 2.1,
+   "viseme": "DD",
+   "phone": "T"
+  },
+  {
+   "start": 2.1,
+   "end": 2.23,
+   "viseme": "aa",
+   "phone": "AA"
+  },
+  {
+   "start": 2.23,
+   "end": 2.27,
+   "viseme": "RR",
+   "phone": "R"
+  },
+  {
+   "start": 2.27,
+   "end": 2.32,
+   "viseme": "DD",
+   "phone": "T"
+  },
+  {
+   "start": 2.32,
+   "end": 2.4,
+   "viseme": "SS",
+   "phone": "S"
+  },
+  {
+   "start": 2.4,
+   "end": 2.48,
+   "viseme": "aa",
+   "phone": "AE"
+  },
+  {
+   "start": 2.48,
+   "end": 2.56,
+   "viseme": "DD",
+   "phone": "T"
+  },
+  {
+   "start": 2.56,
+   "end": 2.65,
+   "viseme": "SS",
+   "phone": "S"
+  },
+  {
+   "start": 2.65,
+   "end": 2.76,
+   "viseme": "E",
+   "phone": "EH"
+  },
+  {
+   "start": 2.76,
+   "end": 2.83,
+   "viseme": "FF",
+   "phone": "V"
+  },
+  {
+   "start": 2.83,
+   "end": 2.89,
+   "viseme": "aa",
+   "phone": "AH"
+  },
+  {
+   "start": 2.89,
+   "end": 3.06,
+   "viseme": "nn",
+   "phone": "N"
+  },
+  {
+   "start": 3.06,
+   "end": 3.27,
+   "viseme": "sil",
+   "phone": ""
+  },
+  {
+   "start": 3.27,
+   "end": 3.39,
+   "viseme": "SS",
+   "phone": "S"
+  },
+  {
+   "start": 3.39,
+   "end": 3.45,
+   "viseme": "O",
+   "phone": "OW"
+  },
+  {
+   "start": 3.45,
+   "end": 3.5,
+   "viseme": "U",
+   "phone": "OW"
+  },
+  {
+   "start": 3.5,
+   "end": 3.58,
+   "viseme": "PP",
+   "phone": "M"
+  },
+  {
+   "start": 3.58,
+   "end": 3.68,
+   "viseme": "U",
+   "phone": "UW"
+  },
+  {
+   "start": 3.68,
+   "end": 3.74,
+   "viseme": "FF",
+   "phone": "V"
+  },
+  {
+   "start": 3.74,
+   "end": 3.812,
+   "viseme": "O",
+   "phone": "OW"
+  },
+  {
+   "start": 3.812,
+   "end": 3.87,
+   "viseme": "U",
+   "phone": "OW"
+  },
+  {
+   "start": 3.87,
+   "end": 3.93,
+   "viseme": "FF",
+   "phone": "V"
+  },
+  {
+   "start": 3.93,
+   "end": 4.1,
+   "viseme": "RR",
+   "phone": "ER"
+  },
+  {
+   "start": 4.1,
+   "end": 4.14,
+   "viseme": "sil",
+   "phone": ""
+  }
+ ],
+ "words": [
+  {
+   "start": 0.06,
+   "end": 0.35,
+   "word": "five"
+  },
+  {
+   "start": 0.35,
+   "end": 0.62,
+   "word": "quick"
+  },
+  {
+   "start": 0.62,
+   "end": 1.02,
+   "word": "chefs"
+  },
+  {
+   "start": 1.02,
+   "end": 1.29,
+   "word": "think"
+  },
+  {
+   "start": 1.29,
+   "end": 1.42,
+   "word": "the"
+  },
+  {
+   "start": 1.42,
+   "end": 1.71,
+   "word": "jazz"
+  },
+  {
+   "start": 1.71,
+   "end": 1.92,
+   "word": "show"
+  },
+  {
+   "start": 1.92,
+   "end": 2.4,
+   "word": "starts"
+  },
+  {
+   "start": 2.4,
+   "end": 2.56,
+   "word": "at"
+  },
+  {
+   "start": 2.56,
+   "end": 3.06,
+   "word": "seven"
+  },
+  {
+   "start": 3.27,
+   "end": 3.5,
+   "word": "so"
+  },
+  {
+   "start": 3.5,
+   "end": 3.74,
+   "word": "move"
+  },
+  {
+   "start": 3.74,
+   "end": 4.1,
+   "word": "over"
+  }
+ ],
+ "phones": [
+  {
+   "start": 0.06,
+   "end": 0.15,
+   "phone": "F"
+  },
+  {
+   "start": 0.15,
+   "end": 0.27,
+   "phone": "AY"
+  },
+  {
+   "start": 0.27,
+   "end": 0.35,
+   "phone": "V"
+  },
+  {
+   "start": 0.35,
+   "end": 0.44,
+   "phone": "K"
+  },
+  {
+   "start": 0.44,
+   "end": 0.5,
+   "phone": "W"
+  },
+  {
+   "start": 0.5,
+   "end": 0.55,
+   "phone": "IH"
+  },
+  {
+   "start": 0.55,
+   "end": 0.62,
+   "phone": "K"
+  },
+  {
+   "start": 0.62,
+   "end": 0.72,
+   "phone": "SH"
+  },
+  {
+   "start": 0.72,
+   "end": 0.86,
+   "phone": "EH"
+  },
+  {
+   "start": 0.86,
+   "end": 0.91,
+   "phone": "F"
+  },
+  {
+   "start": 0.91,
+   "end": 1.02,
+   "phone": "S"
+  },
+  {
+   "start": 1.02,
+   "end": 1.12,
+   "phone": "TH"
+  },
+  {
+   "start": 1.12,
+   "end": 1.19,
+   "phone": "IH"
+  },
+  {
+   "start": 1.19,
+   "end": 1.26,
+   "phone": "NG"
+  },
+  {
+   "start": 1.26,
+   "end": 1.29,
+   "phone": "K"
+  },
+  {
+   "start": 1.29,
+   "end": 1.35,
+   "phone": "DH"
+  },
+  {
+   "start": 1.35,
+   "end": 1.42,
+   "phone": "AH"
+  },
+  {
+   "start": 1.42,
+   "end": 1.52,
+   "phone": "JH"
+  },
+  {
+   "start": 1.52,
+   "end": 1.66,
+   "phone": "AE"
+  },
+  {
+   "start": 1.66,
+   "end": 1.71,
+   "phone": "Z"
+  },
+  {
+   "start": 1.71,
+   "end": 1.78,
+   "phone": "SH"
+  },
+  {
+   "start": 1.78,
+   "end": 1.92,
+   "phone": "OW"
+  },
+  {
+   "start": 1.92,
+   "end": 2.01,
+   "phone": "S"
+  },
+  {
+   "start": 2.01,
+   "end": 2.1,
+   "phone": "T"
+  },
+  {
+   "start": 2.1,
+   "end": 2.23,
+   "phone": "AA"
+  },
+  {
+   "start": 2.23,
+   "end": 2.27,
+   "phone": "R"
+  },
+  {
+   "start": 2.27,
+   "end": 2.32,
+   "phone": "T"
+  },
+  {
+   "start": 2.32,
+   "end": 2.4,
+   "phone": "S"
+  },
+  {
+   "start": 2.4,
+   "end": 2.48,
+   "phone": "AE"
+  },
+  {
+   "start": 2.48,
+   "end": 2.56,
+   "phone": "T"
+  },
+  {
+   "start": 2.56,
+   "end": 2.65,
+   "phone": "S"
+  },
+  {
+   "start": 2.65,
+   "end": 2.76,
+   "phone": "EH"
+  },
+  {
+   "start": 2.76,
+   "end": 2.83,
+   "phone": "V"
+  },
+  {
+   "start": 2.83,
+   "end": 2.89,
+   "phone": "AH"
+  },
+  {
+   "start": 2.89,
+   "end": 3.06,
+   "phone": "N"
+  },
+  {
+   "start": 3.27,
+   "end": 3.39,
+   "phone": "S"
+  },
+  {
+   "start": 3.39,
+   "end": 3.5,
+   "phone": "OW"
+  },
+  {
+   "start": 3.5,
+   "end": 3.58,
+   "phone": "M"
+  },
+  {
+   "start": 3.58,
+   "end": 3.68,
+   "phone": "UW"
+  },
+  {
+   "start": 3.68,
+   "end": 3.74,
+   "phone": "V"
+  },
+  {
+   "start": 3.74,
+   "end": 3.87,
+   "phone": "OW"
+  },
+  {
+   "start": 3.87,
+   "end": 3.93,
+   "phone": "V"
+  },
+  {
+   "start": 3.93,
+   "end": 4.1,
+   "phone": "ER"
+  }
+ ],
+ "rhubarbCues": [
+  {
+   "start": 0,
+   "end": 0.06,
+   "value": "X"
+  },
+  {
+   "start": 0.06,
+   "end": 0.13,
+   "value": "G"
+  },
+  {
+   "start": 0.13,
+   "end": 0.19,
+   "value": "C"
+  },
+  {
+   "start": 0.19,
+   "end": 0.26,
+   "value": "B"
+  },
+  {
+   "start": 0.26,
+   "end": 0.33,
+   "value": "G"
+  },
+  {
+   "start": 0.33,
+   "end": 0.75,
+   "value": "B"
+  },
+  {
+   "start": 0.75,
+   "end": 0.89,
+   "value": "C"
+  },
+  {
+   "start": 0.89,
+   "end": 1.38,
+   "value": "B"
+  },
+  {
+   "start": 1.38,
+   "end": 1.45,
+   "value": "C"
+  },
+  {
+   "start": 1.45,
+   "end": 1.52,
+   "value": "B"
+  },
+  {
+   "start": 1.52,
+   "end": 1.66,
+   "value": "C"
+  },
+  {
+   "start": 1.66,
+   "end": 1.8,
+   "value": "B"
+  },
+  {
+   "start": 1.8,
+   "end": 1.87,
+   "value": "E"
+  },
+  {
+   "start": 1.87,
+   "end": 1.94,
+   "value": "F"
+  },
+  {
+   "start": 1.94,
+   "end": 2.01,
+   "value": "B"
+  },
+  {
+   "start": 2.01,
+   "end": 2.2,
+   "value": "D"
+  },
+  {
+   "start": 2.2,
+   "end": 2.25,
+   "value": "C"
+  },
+  {
+   "start": 2.25,
+   "end": 2.64,
+   "value": "B"
+  },
+  {
+   "start": 2.64,
+   "end": 2.78,
+   "value": "C"
+  },
+  {
+   "start": 2.78,
+   "end": 2.85,
+   "value": "G"
+  },
+  {
+   "start": 2.85,
+   "end": 3.06,
+   "value": "C"
+  },
+  {
+   "start": 3.06,
+   "end": 3.27,
+   "value": "X"
+  },
+  {
+   "start": 3.27,
+   "end": 3.36,
+   "value": "B"
+  },
+  {
+   "start": 3.36,
+   "end": 3.43,
+   "value": "E"
+  },
+  {
+   "start": 3.43,
+   "end": 3.5,
+   "value": "F"
+  },
+  {
+   "start": 3.5,
+   "end": 3.58,
+   "value": "A"
+  },
+  {
+   "start": 3.58,
+   "end": 3.68,
+   "value": "F"
+  },
+  {
+   "start": 3.68,
+   "end": 3.75,
+   "value": "G"
+  },
+  {
+   "start": 3.75,
+   "end": 3.82,
+   "value": "E"
+  },
+  {
+   "start": 3.82,
+   "end": 3.89,
+   "value": "F"
+  },
+  {
+   "start": 3.89,
+   "end": 3.96,
+   "value": "G"
+  },
+  {
+   "start": 3.96,
+   "end": 4.1,
+   "value": "E"
+  },
+  {
+   "start": 4.1,
+   "end": 4.14,
+   "value": "X"
+  }
+ ]
+}

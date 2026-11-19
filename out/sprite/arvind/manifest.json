@@ -1,0 +1,976 @@
+{
+ "id": "arvind",
+ "width": 896,
+ "height": 1200,
+ "base": "frames/face.png",
+ "poster": "frames/base.png",
+ "draw_order": [
+  "brows",
+  "eyes",
+  "mouth",
+  "glasses"
+ ],
+ "overlay": {
+  "glasses": "glasses"
+ },
+ "layers": {
+  "mouth": {
+   "PP": {
+    "file": "layers/mouth/PP.png",
+    "x": 296,
+    "y": 430,
+    "w": 290,
+    "h": 235
+   },
+   "FF": {
+    "file": "layers/mouth/FF.png",
+    "x": 289,
+    "y": 428,
+    "w": 306,
+    "h": 234
+   },
+   "TH": {
+    "file": "layers/mouth/TH.png",
+    "x": 277,
+    "y": 429,
+    "w": 342,
+    "h": 283
+   },
+   "DD": {
+    "file": "layers/mouth/DD.png",
+    "x": 270,
+    "y": 436,
+    "w": 341,
+    "h": 272
+   },
+   "kk": {
+    "file": "layers/mouth/kk.png",
+    "x": 278,
+    "y": 432,
+    "w": 340,
+    "h": 282
+   },
+   "CH": {
+    "file": "layers/mouth/CH.png",
+    "x": 265,
+    "y": 431,
+    "w": 372,
+    "h": 282
+   },
+   "SS": {
+    "file": "layers/mouth/SS.png",
+    "x": 275,
+    "y": 428,
+    "w": 347,
+    "h": 277
+   },
+   "RR": {
+    "file": "layers/mouth/RR.png",
+    "x": 262,
+    "y": 426,
+    "w": 371,
+    "h": 296
+   },
+   "aa": {
+    "file": "layers/mouth/aa.png",
+    "x": 275,
+    "y": 432,
+    "w": 347,
+    "h": 292
+   },
+   "E": {
+    "file": "layers/mouth/E.png",
+    "x": 268,
+    "y": 431,
+    "w": 362,
+    "h": 287
+   },
+   "I": {
+    "file": "layers/mouth/I.png",
+    "x": 262,
+    "y": 426,
+    "w": 365,
+    "h": 283
+   },
+   "O": {
+    "file": "layers/mouth/O.png",
+    "x": 274,
+    "y": 428,
+    "w": 350,
+    "h": 284
+   },
+   "U": {
+    "file": "layers/mouth/U.png",
+    "x": 272,
+    "y": 426,
+    "w": 363,
+    "h": 287
+   },
+   "smile": {
+    "file": "layers/mouth/smile.png",
+    "x": 270,
+    "y": 426,
+    "w": 350,
+    "h": 292
+   },
+   "laugh": {
+    "file": "layers/mouth/laugh.png",
+    "x": 256,
+    "y": 426,
+    "w": 370,
+    "h": 289
+   },
+   "sad": {
+    "file": "layers/mouth/sad.png",
+    "x": 297,
+    "y": 427,
+    "w": 301,
+    "h": 253
+   },
+   "surprised": {
+    "file": "layers/mouth/surprised.png",
+    "x": 272,
+    "y": 426,
+    "w": 353,
+    "h": 292
+   },
+   "thinking": {
+    "file": "layers/mouth/thinking.png",
+    "x": 266,
+    "y": 426,
+    "w": 345,
+    "h": 237
+   }
+  },
+  "eyes": {
+   "blink": {
+    "file": "layers/eyes/blink.png",
+    "x": 312,
+    "y": 307,
+    "w": 273,
+    "h": 117
+   },
+   "half": {
+    "file": "layers/eyes/half.png",
+    "x": 314,
+    "y": 309,
+    "w": 269,
+    "h": 108
+   },
+   "gaze_left": {
+    "file": "layers/eyes/gaze_left.png",
+    "x": 317,
+    "y": 316,
+    "w": 264,
+    "h": 89
+   },
+   "gaze_right": {
+    "file": "layers/eyes/gaze_right.png",
+    "x": 316,
+    "y": 308,
+    "w": 267,
+    "h": 99
+   },
+   "gaze_up": {
+    "file": "layers/eyes/gaze_up.png",
+    "x": 314,
+    "y": 307,
+    "w": 270,
+    "h": 114
+   },
+   "smile": {
+    "file": "layers/eyes/smile.png",
+    "x": 311,
+    "y": 307,
+    "w": 278,
+    "h": 124
+   },
+   "laugh": {
+    "file": "layers/eyes/laugh.png",
+    "x": 304,
+    "y": 307,
+    "w": 291,
+    "h": 124
+   },
+   "sad": {
+    "file": "layers/eyes/sad.png",
+    "x": 309,
+    "y": 307,
+    "w": 276,
+    "h": 121
+   },
+   "surprised": {
+    "file": "layers/eyes/surprised.png",
+    "x": 311,
+    "y": 307,
+    "w": 275,
+    "h": 122
+   },
+   "thinking": {
+    "file": "layers/eyes/thinking.png",
+    "x": 313,
+    "y": 307,
+    "w": 279,
+    "h": 122
+   }
+  },
+  "brows": {
+   "smile": {
+    "file": "layers/brows/smile.png",
+    "x": 260,
+    "y": 263,
+    "w": 373,
+    "h": 128
+   },
+   "laugh": {
+    "file": "layers/brows/laugh.png",
+    "x": 261,
+    "y": 236,
+    "w": 351,
+    "h": 165
+   },
+   "sad": {
+    "file": "layers/brows/sad.png",
+    "x": 261,
+    "y": 237,
+    "w": 339,
+    "h": 152
+   },
+   "surprised": {
+    "file": "layers/brows/surprised.png",
+    "x": 262,
+    "y": 251,
+    "w": 377,
+    "h": 141
+   },
+   "thinking": {
+    "file": "layers/brows/thinking.png",
+    "x": 277,
+    "y": 258,
+    "w": 330,
+    "h": 130
+   }
+  },
+  "glasses": {
+   "glasses": {
+    "file": "layers/glasses/glasses.png",
+    "x": 256,
+    "y": 305,
+    "w": 368,
+    "h": 125
+   }
+  }
+ },
+ "visemes": {
+  "sil": null,
+  "PP": "PP",
+  "FF": "FF",
+  "TH": "TH",
+  "DD": "DD",
+  "kk": "kk",
+  "CH": "CH",
+  "SS": "SS",
+  "nn": "DD",
+  "RR": "RR",
+  "aa": "aa",
+  "E": "E",
+  "I": "I",
+  "O": "O",
+  "U": "U"
+ },
+ "eyes": {
+  "open": null,
+  "half": "half",
+  "closed": "blink",
+  "gaze": {
+   "left": "gaze_left",
+   "right": "gaze_right",
+   "up": "gaze_up"
+  }
+ },
+ "expressions": {
+  "neutral": {
+   "mouth": null,
+   "eyes": null,
+   "brows": null
+  },
+  "smile": {
+   "mouth": "smile",
+   "eyes": "smile",
+   "brows": "smile"
+  },
+  "laugh": {
+   "mouth": "laugh",
+   "eyes": "laugh",
+   "brows": "laugh"
+  },
+  "sad": {
+   "mouth": "sad",
+   "eyes": "sad",
+   "brows": "sad"
+  },
+  "surprised": {
+   "mouth": "surprised",
+   "eyes": "surprised",
+   "brows": "surprised"
+  },
+  "thinking": {
+   "mouth": "thinking",
+   "eyes": "thinking",
+   "brows": "thinking"
+  }
+ },
+ "anchors": {
+  "mouth": [
+   451.6000061035156,
+   489.70001220703125
+  ],
+  "eyes": [
+   449.20001220703125,
+   361.29998779296875
+  ],
+  "chin": [
+   450.70001220703125,
+   591.2999877929688
+  ],
+  "neck_pivot": [
+   450.7325439453125,
+   651.2576293945312
+  ]
+ },
+ "qa": {
+  "poster_vs_original_mean_abs": 2.85,
+  "seam_warn_threshold": 8.0,
+  "frames": {
+   "PP": {
+    "align": {
+     "dx": -0.01,
+     "dy": -0.0,
+     "scale": 1.0,
+     "rot_deg": -0.001,
+     "inliers": 654,
+     "matches": 762
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.03,
+      "tone_shift": [
+       0.38999998569488525,
+       0.6200000047683716,
+       1.4800000190734863
+      ],
+      "area_px": 14443,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 3.13
+   },
+   "FF": {
+    "align": {
+     "dx": 0.018,
+     "dy": -0.114,
+     "scale": 1.0,
+     "rot_deg": 0.002,
+     "inliers": 716,
+     "matches": 802
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.12,
+      "tone_shift": [
+       0.5699999928474426,
+       0.8799999952316284,
+       1.7799999713897705
+      ],
+      "area_px": 17304,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.79
+   },
+   "TH": {
+    "align": {
+     "dx": 0.011,
+     "dy": 0.052,
+     "scale": 1.0,
+     "rot_deg": -0.005,
+     "inliers": 698,
+     "matches": 780
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.3,
+      "tone_shift": [
+       0.49000000953674316,
+       0.44999998807907104,
+       0.47999998927116394
+      ],
+      "area_px": 46321,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.69
+   },
+   "DD": {
+    "align": {
+     "dx": -0.014,
+     "dy": 0.02,
+     "scale": 1.0,
+     "rot_deg": -0.003,
+     "inliers": 791,
+     "matches": 841
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.02,
+      "tone_shift": [
+       0.6600000262260437,
+       0.7099999785423279,
+       1.090000033378601
+      ],
+      "area_px": 37734,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.6
+   },
+   "kk": {
+    "align": {
+     "dx": 0.011,
+     "dy": 0.049,
+     "scale": 1.0,
+     "rot_deg": -0.003,
+     "inliers": 684,
+     "matches": 780
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.87,
+      "tone_shift": [
+       0.5600000023841858,
+       0.6100000143051147,
+       0.7900000214576721
+      ],
+      "area_px": 47012,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.95
+   },
+   "CH": {
+    "align": {
+     "dx": 0.017,
+     "dy": 0.003,
+     "scale": 1.0,
+     "rot_deg": -0.004,
+     "inliers": 659,
+     "matches": 754
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.05,
+      "tone_shift": [
+       0.5699999928474426,
+       0.550000011920929,
+       0.6100000143051147
+      ],
+      "area_px": 43453,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 3.01
+   },
+   "SS": {
+    "align": {
+     "dx": 0.018,
+     "dy": 0.089,
+     "scale": 1.0,
+     "rot_deg": -0.003,
+     "inliers": 754,
+     "matches": 816
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.51,
+      "tone_shift": [
+       0.8899999856948853,
+       1.0,
+       1.1699999570846558
+      ],
+      "area_px": 41375,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.72
+   },
+   "RR": {
+    "align": {
+     "dx": 0.011,
+     "dy": 0.015,
+     "scale": 1.0,
+     "rot_deg": -0.001,
+     "inliers": 612,
+     "matches": 738
+    },
+    "regions": {
+     "mouth": {
+      "seam": 6.01,
+      "tone_shift": [
+       0.44999998807907104,
+       0.47999998927116394,
+       0.41999998688697815
+      ],
+      "area_px": 49492,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 3.13
+   },
+   "aa": {
+    "align": {
+     "dx": 0.05,
+     "dy": 0.064,
+     "scale": 1.0,
+     "rot_deg": -0.004,
+     "inliers": 766,
+     "matches": 806
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.4,
+      "tone_shift": [
+       0.3400000035762787,
+       0.4000000059604645,
+       0.5699999928474426
+      ],
+      "area_px": 50554,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.59
+   },
+   "E": {
+    "align": {
+     "dx": -0.004,
+     "dy": 0.003,
+     "scale": 1.0,
+     "rot_deg": -0.002,
+     "inliers": 616,
+     "matches": 741
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.03,
+      "tone_shift": [
+       0.5799999833106995,
+       0.5899999737739563,
+       0.5
+      ],
+      "area_px": 47217,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.94
+   },
+   "I": {
+    "align": {
+     "dx": 0.005,
+     "dy": 0.01,
+     "scale": 1.0,
+     "rot_deg": -0.0,
+     "inliers": 632,
+     "matches": 742
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.68,
+      "tone_shift": [
+       0.5299999713897705,
+       0.550000011920929,
+       0.6399999856948853
+      ],
+      "area_px": 44356,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.83
+   },
+   "O": {
+    "align": {
+     "dx": 0.029,
+     "dy": -0.021,
+     "scale": 1.0,
+     "rot_deg": 0.0,
+     "inliers": 648,
+     "matches": 751
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.01,
+      "tone_shift": [
+       0.5400000214576721,
+       0.5799999833106995,
+       0.5199999809265137
+      ],
+      "area_px": 47460,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.89
+   },
+   "U": {
+    "align": {
+     "dx": 0.001,
+     "dy": 0.058,
+     "scale": 1.0,
+     "rot_deg": -0.002,
+     "inliers": 510,
+     "matches": 687
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.91,
+      "tone_shift": [
+       0.5799999833106995,
+       0.6299999952316284,
+       0.6499999761581421
+      ],
+      "area_px": 45094,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 3.22
+   },
+   "blink": {
+    "align": {
+     "dx": 0.015,
+     "dy": 0.085,
+     "scale": 1.0,
+     "rot_deg": -0.002,
+     "inliers": 525,
+     "matches": 590
+    },
+    "regions": {
+     "eyes": {
+      "seam": 4.57,
+      "tone_shift": [
+       2.0399999618530273,
+       2.049999952316284,
+       1.809999942779541
+      ],
+      "area_px": 9436,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.79
+   },
+   "half": {
+    "align": {
+     "dx": 0.009,
+     "dy": 0.01,
+     "scale": 1.0,
+     "rot_deg": -0.001,
+     "inliers": 621,
+     "matches": 689
+    },
+    "regions": {
+     "eyes": {
+      "seam": 4.79,
+      "tone_shift": [
+       2.7300000190734863,
+       2.6700000762939453,
+       2.7300000190734863
+      ],
+      "area_px": 8912,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.64
+   },
+   "gaze_left": {
+    "align": {
+     "dx": 0.02,
+     "dy": 0.018,
+     "scale": 1.0,
+     "rot_deg": -0.0,
+     "inliers": 619,
+     "matches": 689
+    },
+    "regions": {
+     "eyes": {
+      "seam": 1.93,
+      "tone_shift": [
+       2.4200000762939453,
+       2.9700000286102295,
+       3.2699999809265137
+      ],
+      "area_px": 8193,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.48
+   },
+   "gaze_right": {
+    "align": {
+     "dx": 0.014,
+     "dy": 0.041,
+     "scale": 1.0,
+     "rot_deg": -0.001,
+     "inliers": 583,
+     "matches": 644
+    },
+    "regions": {
+     "eyes": {
+      "seam": 3.56,
+      "tone_shift": [
+       2.2200000286102295,
+       2.299999952316284,
+       2.630000114440918
+      ],
+      "area_px": 8649,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.5
+   },
+   "gaze_up": {
+    "align": {
+     "dx": 0.027,
+     "dy": 0.038,
+     "scale": 1.0,
+     "rot_deg": -0.0,
+     "inliers": 542,
+     "matches": 690
+    },
+    "regions": {
+     "eyes": {
+      "seam": 3.78,
+      "tone_shift": [
+       1.2400000095367432,
+       1.5,
+       1.4900000095367432
+      ],
+      "area_px": 8865,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.75
+   },
+   "smile": {
+    "align": {
+     "dx": 0.018,
+     "dy": 0.061,
+     "scale": 1.0,
+     "rot_deg": -0.003,
+     "inliers": 468,
+     "matches": 626
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.67,
+      "tone_shift": [
+       0.3700000047683716,
+       0.4099999964237213,
+       0.4699999988079071
+      ],
+      "area_px": 39877,
+      "warn": false
+     },
+     "eyes": {
+      "seam": 4.78,
+      "tone_shift": [
+       0.7799999713897705,
+       0.7799999713897705,
+       0.800000011920929
+      ],
+      "area_px": 9061,
+      "warn": false
+     },
+     "brows": {
+      "seam": 4.16,
+      "tone_shift": [
+       2.059999942779541,
+       1.899999976158142,
+       1.6299999952316284
+      ],
+      "area_px": 12220,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.5
+   },
+   "laugh": {
+    "align": {
+     "dx": 0.018,
+     "dy": 0.024,
+     "scale": 1.0,
+     "rot_deg": -0.001,
+     "inliers": 440,
+     "matches": 536
+    },
+    "regions": {
+     "mouth": {
+      "seam": 6.63,
+      "tone_shift": [
+       0.44999998807907104,
+       0.49000000953674316,
+       0.2800000011920929
+      ],
+      "area_px": 52142,
+      "warn": false
+     },
+     "eyes": {
+      "seam": 7.24,
+      "tone_shift": [
+       0.699999988079071,
+       0.6200000047683716,
+       0.6200000047683716
+      ],
+      "area_px": 10713,
+      "warn": false
+     },
+     "brows": {
+      "seam": 4.65,
+      "tone_shift": [
+       1.4500000476837158,
+       1.1399999856948853,
+       1.190000057220459
+      ],
+      "area_px": 15187,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.49
+   },
+   "sad": {
+    "align": {
+     "dx": -0.001,
+     "dy": 0.0,
+     "scale": 1.0,
+     "rot_deg": -0.002,
+     "inliers": 548,
+     "matches": 675
+    },
+    "regions": {
+     "mouth": {
+      "seam": 3.94,
+      "tone_shift": [
+       0.3499999940395355,
+       0.5799999833106995,
+       1.6399999856948853
+      ],
+      "area_px": 18232,
+      "warn": false
+     },
+     "eyes": {
+      "seam": 13.14,
+      "tone_shift": [
+       1.1399999856948853,
+       1.2100000381469727,
+       1.1699999570846558
+      ],
+      "area_px": 10572,
+      "warn": true
+     },
+     "brows": {
+      "seam": 7.52,
+      "tone_shift": [
+       1.5099999904632568,
+       1.3700000047683716,
+       1.5399999618530273
+      ],
+      "area_px": 14496,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.63
+   },
+   "surprised": {
+    "align": {
+     "dx": 0.005,
+     "dy": 0.052,
+     "scale": 1.0,
+     "rot_deg": -0.002,
+     "inliers": 463,
+     "matches": 633
+    },
+    "regions": {
+     "mouth": {
+      "seam": 5.51,
+      "tone_shift": [
+       0.5099999904632568,
+       0.550000011920929,
+       0.4000000059604645
+      ],
+      "area_px": 50413,
+      "warn": false
+     },
+     "eyes": {
+      "seam": 6.52,
+      "tone_shift": [
+       0.41999998688697815,
+       0.8199999928474426,
+       1.159999966621399
+      ],
+      "area_px": 10580,
+      "warn": false
+     },
+     "brows": {
+      "seam": 7.43,
+      "tone_shift": [
+       1.4299999475479126,
+       1.3799999952316284,
+       1.3899999856948853
+      ],
+      "area_px": 15230,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.37
+   },
+   "thinking": {
+    "align": {
+     "dx": -0.007,
+     "dy": 0.042,
+     "scale": 1.0,
+     "rot_deg": -0.004,
+     "inliers": 491,
+     "matches": 619
+    },
+    "regions": {
+     "mouth": {
+      "seam": 4.66,
+      "tone_shift": [
+       -0.05999999865889549,
+       0.3499999940395355,
+       1.590000033378601
+      ],
+      "area_px": 20228,
+      "warn": false
+     },
+     "eyes": {
+      "seam": 9.02,
+      "tone_shift": [
+       1.2300000190734863,
+       1.340000033378601,
+       1.659999966621399
+      ],
+      "area_px": 9218,
+      "warn": true
+     },
+     "brows": {
+      "seam": 7.18,
+      "tone_shift": [
+       1.9700000286102295,
+       1.9800000190734863,
+       2.2200000286102295
+      ],
+      "area_px": 12185,
+      "warn": false
+     }
+    },
+    "drift_outside_regions": 2.53
+   }
+  }
+ }
+}

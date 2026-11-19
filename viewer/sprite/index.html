@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprite Talking Avatar</title>
+<style>
+  :root { --bg: #16181c; --card: #22252b; --line: #3a3e46; --text: #e8e8ea; --muted: #9aa0a8; --accent: #6aa8ff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; }
+  .wrap { display: grid; grid-template-columns: minmax(280px, 460px) 1fr; gap: 20px; padding: 16px; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  p { margin: 0 0 12px; color: var(--muted); }
+  .stage-card { background: var(--card); border-radius: 12px; overflow: hidden; }
+  canvas { width: 100%; height: auto; display: block; aspect-ratio: 896 / 1200; background: #eef0f3; }
+  .bar { display: flex; justify-content: space-between; gap: 8px; padding: 8px 12px; color: var(--muted); font-size: 12px; }
+  #caption { padding: 0 12px 12px; min-height: 2.8em; }
+  section { margin-bottom: 16px; }
+  h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 6px; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+  button { background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  button.on { border-color: var(--accent); color: var(--accent); }
+  label { color: var(--muted); margin-right: 14px; white-space: nowrap; }
+  input[type=range] { width: 140px; vertical-align: middle; }
+  .ref { display: flex; gap: 12px; align-items: flex-start; }
+  .ref img { width: 120px; border-radius: 8px; }
+  .ref p { font-size: 12px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div>
+    <div class="stage-card">
+      <canvas id="stage" width="896" height="1200"></canvas>
+      <div class="bar"><span id="readout">viseme sil</span><span id="fps"></span></div>
+      <div id="caption"></div>
+    </div>
+  </div>
+  <div>
+    <h1>2.5D talking avatar (Gemini sprites)</h1>
+    <p id="status">Loading…</p>
+    <section><h2>Expression</h2><div class="buttons" id="expressions"></div></section>
+    <section><h2>Eyes</h2><div class="buttons" id="gaze"></div></section>
+    <section><h2>Visemes (Oculus 15)</h2><div class="buttons" id="visemes"></div></section>
+    <section>
+      <h2>Talk (offline TTS + phone-aligned visemes)</h2>
+      <div class="buttons" id="talk"></div>
+      <p style="margin-top:6px"><label><input type="checkbox" id="withExpr" checked> use the line's expression</label></p>
+    </section>
+    <section>
+      <h2>Options</h2>
+      <label><input type="checkbox" id="life" checked> breathing + sway</label>
+      <label><input type="checkbox" id="autoBlink" checked> auto blink</label>
+      <label><input type="checkbox" id="autoGlance" checked> idle glances</label>
+      <label><input type="checkbox" id="bounds"> layer bounds</label>
+      <p style="margin-top:8px"><label>Viseme cross-fade <input type="range" id="fade" min="0" max="160" step="10"> <span id="fadeVal"></span></label></p>
+    </section>
+    <section class="ref">
+      <img id="reference" alt="Original Gemini base portrait">
+      <p>Left: the original single Gemini base image. Everything on the stage is that image's glasses
+        over a glasses-free copy of it, with mouth/eye/brow regions cut from Gemini edits of the same image.
+        Notes: <a href="../../out/sprite/arvind/NOTES.md">NOTES.md</a> · <a href="../../out/sprite/arvind/qa/composites.jpg">all frames</a></p>
+    </section>
+  </div>
+</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

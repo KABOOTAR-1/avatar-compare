@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar comparison</title>
+<style>
+  :root { --bg: #16181c; --card: #22252b; --text: #e8e8ea; --muted: #9aa0a8; --accent: #6aa8ff; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; }
+  header { padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; position: sticky; top: 0; background: var(--bg); z-index: 2; border-bottom: 1px solid #2c2f36; }
+  h1 { font-size: 18px; margin: 0 16px 0 0; }
+  select, button { background: var(--card); color: var(--text); border: 1px solid #3a3e46; border-radius: 6px; padding: 6px 10px; font: inherit; }
+  button.on { border-color: var(--accent); color: var(--accent); }
+  label { color: var(--muted); }
+  input[type=range] { width: 140px; vertical-align: middle; }
+  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; padding: 16px; }
+  .card { background: var(--card); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .card h2 { font-size: 14px; margin: 0; padding: 10px 12px 4px; }
+  .card p { margin: 0; padding: 0 12px 10px; color: var(--muted); font-size: 12px; }
+  .view { aspect-ratio: 3 / 4; width: 100%; background: #30343b; display: block; }
+  .view img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stats { padding: 8px 12px 12px; color: var(--muted); font-size: 12px; border-top: 1px solid #2c2f36; }
+  .missing { color: #ff9a6a; }
+  a { color: var(--accent); }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<header>
+  <h1>Avatar comparison</h1>
+  <label>Person <select id="person"></select></label>
+  <span id="expr"></span>
+  <label>Strength <input id="strength" type="range" min="0" max="1" step="0.05" value="1"></label>
+  <button id="talk">Talk loop</button>
+</header>
+<main id="grid"></main>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+// Every approach's output for each person; LAM is Gaussian splats, so it links to its own viewer.
+const PEOPLE = {
+  arvind: [
+    { title: "Photo", image: "photos/user/arvind.jpg" },
+    { title: "Gemini concept (the target look)", image: "concept/arvind.png" },
+    { title: "Concept → sculpt → wrap (template rig)", glb: "out/wrap/arvind/avatar.glb", note: "Full body: template wrapped onto the Hunyuan3D sculpt, its paint baked on; template's 52 ARKit + 14 visemes + Mixamo skeleton" },
+    { title: "Concept → sculpt → wrap v2", glb: "out/wrap/arvind-v2/avatar.glb", note: "v1 + face layout and texture from the clean Gemini face (brows, stubble, mouth), image-sized eyes, wire aviators from the image's frames" },
+    { title: "Concept → sculpt → wrap v2 (Hunyuan 2.1 sculpt)", glb: "out/wrap/arvind-v2-hy21/avatar.glb", note: "Same v2 pipeline on the newer hy21 sculpt: closer quiff/hair silhouette" },
+    { title: "Concept → sculpt → wrap v3", glb: "out/wrap/arvind-v3/avatar.glb", note: "hy21 body/hair; the template's own smooth face warped to the image's layout (no sculpt face or paint), image face texture on plain skin, bigger glossy eyes" },
+    { title: "MetaPerson (vendor, free web export)", glb: "out/metaperson-web/arvind/avatar.glb", note: "Full body, Mixamo skeleton, 51 ARKit, no visemes, hair painted on" },
+    { title: "Template head: realistic (ICT-FaceKit)", glb: "out/ict/arvind/realistic.glb", note: "Head only, 52 ARKit + 15 visemes, photo-projected texture" },
+    { title: "Template head: caricature (ICT ×1.5)", glb: "out/ict/arvind/caricature.glb", note: "Same fit, identity exaggerated 1.5×, toon texture" },
+    { title: "LAM photoreal (Gaussian splats)", image: "out/lam/arvind/front.png", link: "out/lam/arvind/talking.mp4", note: "Photoreal from one photo; breaks past ~20° head turn. Not a GLB; weights non-commercial." },
+    { title: "MeshLAM", missing: "Not released: no code or weights public (issue aigc3d/LAM#111 unanswered)" },
+  ],
+};
+
+// One shared expression applied by morph name to every loaded avatar.
+const EXPRESSIONS = {
+  neutral: {},
+  smile: { mouthSmileLeft: 1, mouthSmileRight: 1, cheekSquintLeft: 0.4, cheekSquintRight: 0.4 },
+  jawOpen: { jawOpen: 1 },
+  blink: { eyeBlinkLeft: 1, eyeBlinkRight: 1 },
+  surprise: { browInnerUp: 1, browOuterUpLeft: 1, browOuterUpRight: 1, eyeWideLeft: 1, eyeWideRight: 1, jawOpen: 0.4 },
+  sad: { mouthFrownLeft: 1, mouthFrownRight: 1, browInnerUp: 0.8, browDownLeft: 0.3, browDownRight: 0.3 },
+  viseme_aa: { viseme_aa: 1 },
+  viseme_O: { viseme_O: 1 },
+  viseme_PP: { viseme_PP: 1 },
+  viseme_FF: { viseme_FF: 1 },
+};
+const TALK_SEQUENCE = ["viseme_aa", "viseme_PP", "viseme_O", "viseme_FF", "viseme_aa", "neutral"];
+const TALK_STEP_MS = 160;
+
+const viewers = [];
+let current = { name: "neutral", strength: 1 };
+
+const loader = new GLTFLoader();
+const grid = document.getElementById("grid");
+
+function applyExpression(viewer) {
+  const weights = EXPRESSIONS[current.name];
+  viewer.root.traverse((o) => {
+    if (!o.morphTargetDictionary) return;
+    for (const [name, index] of Object.entries(o.morphTargetDictionary)) {
+      o.morphTargetInfluences[index] = (weights[name] ?? 0) * current.strength;
+    }
+  });
+}
+
+function setExpression(name) {
+  current.name = name;
+  document.querySelectorAll("#expr button").forEach((b) => b.classList.toggle("on", b.dataset.name === name));
+  viewers.forEach(applyExpression);
+}
+
+function frameHead(camera, controls, root) {
+  // Frame the head: the mesh whose name mentions "head", else the top fifth of the model.
+  let target = null;
+  root.traverse((o) => { if (!target && o.isMesh && /head/i.test(o.name)) target = o; });
+  const box = new THREE.Box3().setFromObject(target ?? root);
+  if (!target) box.min.y = box.max.y - (box.max.y - box.min.y) * 0.2;
+  const center = box.getCenter(new THREE.Vector3());
+  const size = box.getSize(new THREE.Vector3()).length();
+  controls.target.copy(center);
+  camera.position.set(center.x, center.y, center.z + size * 1.4);
+  camera.near = size / 100; camera.far = size * 100; camera.updateProjectionMatrix();
+}
+
+function addGlbViewer(card, entry) {
+  const canvas = document.createElement("canvas");
+  canvas.className = "view";
+  card.querySelector(".slot").replaceWith(canvas);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x30343b);
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+  const camera = new THREE.PerspectiveCamera(30, 3 / 4, 0.01, 100);
+  const controls = new OrbitControls(camera, canvas);
+  const stats = card.querySelector(".stats");
+  loader.load(entry.glb, (gltf) => {
+    scene.add(gltf.scene);
+    frameHead(camera, controls, gltf.scene);
+    let tris = 0; const morphs = new Set();
+    gltf.scene.traverse((o) => {
+      if (o.isMesh) tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3;
+      if (o.morphTargetDictionary) Object.keys(o.morphTargetDictionary).forEach((m) => morphs.add(m));
+    });
+    const visemes = [...morphs].filter((m) => m.startsWith("viseme_")).length;
+    stats.textContent = `${Math.round(tris).toLocaleString()} tris · ${morphs.size} morphs (${visemes} visemes)` + (entry.note ? ` · ${entry.note}` : "");
+    const viewer = { root: gltf.scene };
+    viewers.push(viewer);
+    applyExpression(viewer);
+  }, undefined, (err) => { stats.innerHTML = `<span class="missing">Failed to load ${entry.glb}: ${err.message ?? err}</span>`; });
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.floor(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  }
+  renderer.setAnimationLoop(() => { resize(); controls.update(); renderer.render(scene, camera); });
+}
+
+// Other pipelines drop out/<track>/<person>/card.json ([{title, glb|image|link, note}]) to add cards.
+const CARD_TRACKS = ["sculpt", "fit", "sprite"];
+
+async function extraCards(person) {
+  const lists = await Promise.all(CARD_TRACKS.map((track) =>
+    fetch(`out/${track}/${person}/card.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])));
+  return lists.flat();
+}
+
+async function render(person) {
+  viewers.length = 0;
+  grid.innerHTML = "";
+  const entries = [...PEOPLE[person], ...(await extraCards(person))];
+  for (const entry of entries) {
+    if (entry.link && !entry.glb) {
+      const card = document.createElement("section");
+      card.className = "card";
+      card.innerHTML = `<h2>${entry.title}</h2><div class="view"><img src="${entry.image ?? ""}" alt=""></div><div class="stats"><a href="${entry.link}" target="_blank">Open</a>${entry.note ? ` · ${entry.note}` : ""}</div>`;
+      grid.append(card);
+      continue;
+    }
+    const card = document.createElement("section");
+    card.className = "card";
+    card.innerHTML = `<h2>${entry.title}</h2><div class="slot view"></div><div class="stats"></div>`;
+    grid.append(card);
+    const slot = card.querySelector(".slot");
+    const stats = card.querySelector(".stats");
+    if (entry.image) {
+      slot.innerHTML = `<img src="${entry.image}" alt="">`;
+      if (entry.note) stats.textContent = entry.note;
+    }
+    else if (entry.missing) stats.innerHTML = `<span class="missing">${entry.missing}</span>`;
+    else if (entry.lam) {
+      slot.innerHTML = `<img src="${entry.preview}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('p'),{textContent:'LAM run pending on Kaggle'}))">`;
+      stats.innerHTML = `Gaussian splats (not GLB). Talking 3D: <a href="http://127.0.0.1:5199/?avatar=${entry.lam}" target="_blank">LAM viewer</a> (npm --prefix avatar-eval/viewer/lam run dev)`;
+    } else addGlbViewer(card, entry);
+  }
+}
+
+const exprBar = document.getElementById("expr");
+for (const name of Object.keys(EXPRESSIONS)) {
+  const b = document.createElement("button");
+  b.textContent = name; b.dataset.name = name;
+  b.onclick = () => { stopTalk(); setExpression(name); };
+  exprBar.append(b);
+}
+document.getElementById("strength").oninput = (e) => { current.strength = +e.target.value; viewers.forEach(applyExpression); };
+
+let talkTimer = null;
+function stopTalk() { clearInterval(talkTimer); talkTimer = null; document.getElementById("talk").classList.remove("on"); }
+document.getElementById("talk").onclick = () => {
+  if (talkTimer) return stopTalk();
+  let step = 0;
+  document.getElementById("talk").classList.add("on");
+  talkTimer = setInterval(() => setExpression(TALK_SEQUENCE[step++ % TALK_SEQUENCE.length]), TALK_STEP_MS);
+};
+
+const select = document.getElementById("person");
+Object.keys(PEOPLE).forEach((p) => select.append(new Option(p, p)));
+select.onchange = () => render(select.value);
+render("arvind");
+setExpression("neutral");
+</script>
+</body>
+</html>

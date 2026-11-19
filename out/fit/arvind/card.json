@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Our parametric avatar, auto-fit to concept",
+    "glb": "out/fit/arvind/avatar.glb",
+    "image": "out/fit/arvind/compare.png",
+    "note": "Stylize-then-fit (AgileAvatar): Gemini restyled our own render to look like him, then render-and-compare chose hair, glasses, brows, stubble, clothes and colours, and CMA-ES fitted 42 sliders (combined loss 1.81 -> 1.36). Fully automatic, 8 min on M4. The catalogue limits likeness: smooth helmet hair, no thin aviators, thin brows, big cartoon eyes."
+  }
+]
