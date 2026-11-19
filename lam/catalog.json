@@ -2,7 +2,7 @@
  "avatars": [
   {
    "name": "arvind",
-   "zip": "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@79bddc7e16fa84e0678879c56222625f0c6f40e4/lam/arvind/arvind.zip",
+   "zip": "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/5e9b95da480ffbefe4ac8a0bffbaacd06f44c967/lam/arvind/arvind.zip",
    "bytes": 4079937,
    "timings": {
     "flame_tracking_s": 18.14,
@@ -21,13 +21,13 @@
  "tracks": [
   {
    "name": "BarackObama_english (Audio2Expression)",
-   "json": "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@79bddc7e16fa84e0678879c56222625f0c6f40e4/lam/_audio/BarackObama_english.json",
-   "audio": "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@79bddc7e16fa84e0678879c56222625f0c6f40e4/lam/_audio/BarackObama_english.wav"
+   "json": "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/5e9b95da480ffbefe4ac8a0bffbaacd06f44c967/lam/_audio/BarackObama_english.json",
+   "audio": "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/5e9b95da480ffbefe4ac8a0bffbaacd06f44c967/lam/_audio/BarackObama_english.wav"
   },
   {
    "name": "HillaryClinton_english (Audio2Expression)",
-   "json": "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@79bddc7e16fa84e0678879c56222625f0c6f40e4/lam/_audio/HillaryClinton_english.json",
-   "audio": "https://cdn.jsdelivr.net/gh/KABOOTAR-1/avatar-compare@79bddc7e16fa84e0678879c56222625f0c6f40e4/lam/_audio/HillaryClinton_english.wav"
+   "json": "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/5e9b95da480ffbefe4ac8a0bffbaacd06f44c967/lam/_audio/HillaryClinton_english.json",
+   "audio": "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/5e9b95da480ffbefe4ac8a0bffbaacd06f44c967/lam/_audio/HillaryClinton_english.wav"
   }
  ]
 }
