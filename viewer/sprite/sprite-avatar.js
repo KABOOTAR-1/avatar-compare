@@ -36,6 +36,7 @@ const REGIONS = ["brows", "eyes", "mouth"];
 
 const loadImage = (src) => new Promise((resolve, reject) => {
   const img = new Image();
+  img.crossOrigin = "anonymous"; // layers may come from a CDN; getImageData needs an untainted canvas
   img.onload = () => resolve(img);
   img.onerror = () => reject(new Error(`failed to load ${src}`));
   img.src = src;
