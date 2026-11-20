@@ -97,7 +97,7 @@ const CLIPS = ["idle", "idle_variant", "listen", "talk_gesture", "wave", "think"
 let currentClip = "";
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/9a8285174822db32118170404ac5eaf9b8e3b821/";
+const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/21182aa18a4c6652bf6ab7797e4dce2d28c846ef/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
@@ -136,22 +136,68 @@ function frameHead(camera, controls, root) {
   camera.near = size / 100; camera.far = size * 100; camera.updateProjectionMatrix();
 }
 
+// Browsers keep only ~16 live WebGL contexts per page, so a card owns a renderer only while it
+// is on screen: scrolling away disposes it, scrolling back builds a fresh canvas for the same scene.
+const VISIBLE_MARGIN = "200px";
+const environment = new RoomEnvironment();
+
 function addGlbViewer(card, entry) {
-  const canvas = document.createElement("canvas");
+  let canvas = document.createElement("canvas");
   canvas.className = "view";
   card.querySelector(".slot").replaceWith(canvas);
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x30343b);
-  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
   const camera = new THREE.PerspectiveCamera(30, 3 / 4, 0.01, 100);
-  const controls = new OrbitControls(camera, canvas);
+  const target = new THREE.Vector3();
+  let renderer = null, controls = null, envMap = null;
   const stats = card.querySelector(".stats");
   stats.textContent = "Loading when scrolled into view…";
-  whenNear(canvas, () => loader.load(ASSET + entry.glb, (gltf) => {
+  const clock = new THREE.Clock();
+
+  function activate() {
+    if (renderer) return;
+    const fresh = document.createElement("canvas");
+    fresh.className = "view";
+    canvas.replaceWith(fresh);
+    canvas = fresh;
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    envMap = pmrem.fromScene(environment, 0.04).texture;
+    pmrem.dispose();
+    scene.environment = envMap;
+    controls = new OrbitControls(camera, canvas);
+    controls.target.copy(target);
+    clock.getDelta();
+    renderer.setAnimationLoop(() => {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      if (canvas.width !== Math.floor(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+      controls.update();
+      target.copy(controls.target);
+      const dt = clock.getDelta();
+      for (const v of viewers) if (v.mixer && v.root.parent === scene) v.mixer.update(dt);
+      renderer.render(scene, camera);
+    });
+  }
+
+  function deactivate() {
+    if (!renderer) return;
+    renderer.setAnimationLoop(null);
+    controls.dispose();
+    envMap.dispose();
+    renderer.dispose();
+    renderer.forceContextLoss();
+    renderer = null; controls = null; envMap = null;
+  }
+
+  new IntersectionObserver((seen) => { seen.some((e) => e.isIntersecting) ? activate() : deactivate(); },
+    { rootMargin: VISIBLE_MARGIN }).observe(card);
+
+  whenNear(card, () => loader.load(ASSET + entry.glb, (gltf) => {
     scene.add(gltf.scene);
-    frameHead(camera, controls, gltf.scene);
+    const dummy = { target: new THREE.Vector3(), update() {} };
+    frameHead(camera, controls ?? dummy, gltf.scene);
+    target.copy((controls ?? dummy).target);
     let tris = 0; const morphs = new Set();
     gltf.scene.traverse((o) => {
       if (o.isMesh) tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3;
@@ -168,26 +214,33 @@ function addGlbViewer(card, entry) {
     viewers.push(viewer);
     applyExpression(viewer);
   }, undefined, (err) => { stats.innerHTML = `<span class="missing">Failed to load ${entry.glb}: ${err.message ?? err}</span>`; }));
-  function resize() {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if (canvas.width !== Math.floor(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
-  }
-  const clock = new THREE.Clock();
-  renderer.setAnimationLoop(() => {
-    resize(); controls.update();
-    const dt = clock.getDelta();
-    for (const v of viewers) if (v.mixer && v.root.parent === scene) v.mixer.update(dt);
-    renderer.render(scene, camera);
-  });
 }
 
 // Other pipelines drop out/<track>/<person>/card.json ([{title, glb|image|link, note}]) to add cards.
 const CARD_TRACKS = ["sculpt", "fit", "sprite"];
 
+// Character library (scripts/avatar3d/library): every build that passed the measured QA gate
+const LIBRARY_MANIFESTS = ["out/library/characters_a/manifest.json", "out/library/characters_b/manifest.json", "out/library/characters_c/manifest.json", "out/library/manifest.json"];
+
+async function libraryCards() {
+  const cards = [];
+  for (const url of LIBRARY_MANIFESTS) {
+    const m = await fetch(url, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    for (const [name, c] of Object.entries(m?.cases ?? {})) {
+      const glb = c.outputs?.["avatar_anim.glb"];
+      if (!c.pass || !glb || name.includes("bad")) continue;
+      const fixes = (c.repairs ?? []).length;
+      cards.push({ title: `Library: ${name}`, glb: glb.replace(/^avatar-eval\//, ""),
+        note: `Passed the automatic QA gate after ${c.tries} tr${c.tries === 1 ? "y" : "ies"}${fixes ? ` (${fixes} scripted repair${fixes > 1 ? "s" : ""})` : ""}. Mixamo body + v11 head, 9 clips.` });
+    }
+  }
+  return cards;
+}
+
 async function extraCards(person) {
   const lists = await Promise.all(CARD_TRACKS.map((track) =>
     fetch(`out/${track}/${person}/card.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])));
-  return lists.flat();
+  return [...(await libraryCards()), ...lists.flat()];
 }
 
 async function render(person) {
