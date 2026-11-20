@@ -10,7 +10,7 @@ const EXPRESSION_LABELS = { neutral: "Neutral", smile: "Smile", laugh: "Laugh", 
 
 const params = new URLSearchParams(location.search);
 const avatarId = params.get("avatar") ?? DEFAULT_AVATAR;
-const root = `https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/5e9b95da480ffbefe4ac8a0bffbaacd06f44c967/out/sprite/${avatarId}/`;
+const root = `../../out/sprite/${avatarId}/`; // same site: dozens of small layer images, which a CDN/raw host throttles;
 const $ = (id) => document.getElementById(id);
 
 function button(label, onClick, title = "") {
