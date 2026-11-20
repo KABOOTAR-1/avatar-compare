@@ -97,7 +97,7 @@ const CLIPS = ["idle", "idle_variant", "listen", "talk_gesture", "wave", "think"
 let currentClip = "";
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/21182aa18a4c6652bf6ab7797e4dce2d28c846ef/";
+const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/4954edc6cc1b6cf74afa92d29b5dc299b213fbe9/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
@@ -222,6 +222,8 @@ const CARD_TRACKS = ["sculpt", "fit", "sprite"];
 // Character library (scripts/avatar3d/library): every build that passed the measured QA gate
 const LIBRARY_MANIFESTS = ["out/library/characters_a/manifest.json", "out/library/characters_b/manifest.json", "out/library/characters_c/manifest.json", "out/library/manifest.json"];
 
+const MIXAMO_VIEW = "mixamo";
+
 async function libraryCards() {
   const cards = [];
   for (const url of LIBRARY_MANIFESTS) {
@@ -230,7 +232,8 @@ async function libraryCards() {
       const glb = c.outputs?.["avatar_anim.glb"];
       if (!c.pass || !glb || name.includes("bad")) continue;
       const fixes = (c.repairs ?? []).length;
-      cards.push({ title: `Library: ${name}`, glb: glb.replace(/^avatar-eval\//, ""),
+      const [who, build] = name.split("/");
+      cards.push({ title: `${who[0].toUpperCase()}${who.slice(1)} (${build})`, glb: glb.replace(/^avatar-eval\//, ""),
         note: `Passed the automatic QA gate after ${c.tries} tr${c.tries === 1 ? "y" : "ies"}${fixes ? ` (${fixes} scripted repair${fixes > 1 ? "s" : ""})` : ""}. Mixamo body + v11 head, 9 clips.` });
     }
   }
@@ -246,7 +249,8 @@ async function extraCards(person) {
 async function render(person) {
   viewers.length = 0;
   grid.innerHTML = "";
-  const entries = [...PEOPLE[person], ...(await extraCards(person))];
+  // the Mixamo view shows only the character library (bodies that passed the QA gate)
+  const entries = person === MIXAMO_VIEW ? await libraryCards() : [...PEOPLE[person], ...(await extraCards(person))];
   for (const entry of entries) {
     if (entry.link && !entry.glb) {
       const card = document.createElement("section");
@@ -303,8 +307,12 @@ document.getElementById("talk").onclick = () => {
 
 const select = document.getElementById("person");
 Object.keys(PEOPLE).forEach((p) => select.append(new Option(p, p)));
-select.onchange = () => render(select.value);
-render("arvind");
+select.append(new Option("Mixamo characters", MIXAMO_VIEW));
+// #mixamo opens the Mixamo-only view directly (shareable link)
+const initial = location.hash === `#${MIXAMO_VIEW}` ? MIXAMO_VIEW : "arvind";
+select.value = initial;
+select.onchange = () => { history.replaceState(null, "", select.value === MIXAMO_VIEW ? `#${MIXAMO_VIEW}` : location.pathname); render(select.value); };
+render(initial);
 setExpression("neutral");
 </script>
 </body>
