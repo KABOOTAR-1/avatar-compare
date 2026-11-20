@@ -97,7 +97,7 @@ const CLIPS = ["idle", "idle_variant", "listen", "talk_gesture", "wave", "think"
 let currentClip = "";
 let current = { name: "neutral", strength: 1 };
 
-const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/4954edc6cc1b6cf74afa92d29b5dc299b213fbe9/";
+const ASSET = "https://raw.githubusercontent.com/KABOOTAR-1/avatar-compare/c88ef29f8666ed41304e35fda9060a12199cb865/";
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 // a model downloads only once its card is about to scroll into view
 const LAZY_MARGIN = "400px";
@@ -121,6 +121,16 @@ function setExpression(name) {
   current.name = name;
   document.querySelectorAll("#expr button").forEach((b) => b.classList.toggle("on", b.dataset.name === name));
   viewers.forEach(applyExpression);
+}
+
+function frameBody(camera, controls, root) {
+  // Whole figure in view: the bounding box of everything, camera back far enough for its height.
+  const box = new THREE.Box3().setFromObject(root);
+  const center = box.getCenter(new THREE.Vector3());
+  const height = box.max.y - box.min.y;
+  controls.target.copy(center);
+  camera.position.set(center.x, center.y, center.z + height * BODY_FRAMING);
+  camera.near = height / 200; camera.far = height * 50; camera.updateProjectionMatrix();
 }
 
 function frameHead(camera, controls, root) {
@@ -194,9 +204,11 @@ function addGlbViewer(card, entry) {
     { rootMargin: VISIBLE_MARGIN }).observe(card);
 
   whenNear(card, () => loader.load(ASSET + entry.glb, (gltf) => {
+    // skinned meshes are culled by their rest-pose bounds, so animated or offset parts vanish
+    gltf.scene.traverse((o) => { if (o.isMesh) o.frustumCulled = false; });
     scene.add(gltf.scene);
     const dummy = { target: new THREE.Vector3(), update() {} };
-    frameHead(camera, controls ?? dummy, gltf.scene);
+    (entry.fullBody ? frameBody : frameHead)(camera, controls ?? dummy, gltf.scene);
     target.copy((controls ?? dummy).target);
     let tris = 0; const morphs = new Set();
     gltf.scene.traverse((o) => {
@@ -223,6 +235,7 @@ const CARD_TRACKS = ["sculpt", "fit", "sprite"];
 const LIBRARY_MANIFESTS = ["out/library/characters_a/manifest.json", "out/library/characters_b/manifest.json", "out/library/characters_c/manifest.json", "out/library/manifest.json"];
 
 const MIXAMO_VIEW = "mixamo";
+const BODY_FRAMING = 2.1; // camera distance in figure heights for the whole-body view (30° FOV)
 
 async function libraryCards() {
   const cards = [];
@@ -233,7 +246,7 @@ async function libraryCards() {
       if (!c.pass || !glb || name.includes("bad")) continue;
       const fixes = (c.repairs ?? []).length;
       const [who, build] = name.split("/");
-      cards.push({ title: `${who[0].toUpperCase()}${who.slice(1)} (${build})`, glb: glb.replace(/^avatar-eval\//, ""),
+      cards.push({ title: `${who[0].toUpperCase()}${who.slice(1)} (${build})`, fullBody: true, glb: glb.replace(/^avatar-eval\//, ""),
         note: `Passed the automatic QA gate after ${c.tries} tr${c.tries === 1 ? "y" : "ies"}${fixes ? ` (${fixes} scripted repair${fixes > 1 ? "s" : ""})` : ""}. Mixamo body + v11 head, 9 clips.` });
     }
   }
