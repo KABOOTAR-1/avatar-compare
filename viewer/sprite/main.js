@@ -45,7 +45,7 @@ async function main() {
     return;
   }
   const m = avatar.manifest;
-  $("reference").src = `${root}raw/base.png`;
+  $("reference").src = `${root}raw/base.webp`;
   $("status").textContent = `${avatarId}: ${Object.values(m.layers).reduce((n, l) => n + Object.keys(l).length, 0)} layers`;
 
   const selectExpression = radioGroup($("expressions"),

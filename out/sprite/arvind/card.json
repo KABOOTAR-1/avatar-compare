@@ -2,7 +2,7 @@
   {
     "title": "2.5D talking concept (sprites)",
     "link": "viewer/sprite/index.html",
-    "image": "out/sprite/arvind/frames/base.png",
+    "image": "out/sprite/arvind/frames/base.webp",
     "note": "The exact Gemini concept look, animated: 1 base portrait + 23 Gemini face edits (15 Oculus visemes, blink, gaze, 5 expressions) cut into mouth/eyes/brows layers over a glasses-free face, with the original glasses on top. Blinks while talking, breathing + small head sway, TTS clips lip-synced via Rhubarb phone alignment. ~26 Gemini calls / ~3 min / ~0.5 MB WebP per user; no head turns."
   }
 ]

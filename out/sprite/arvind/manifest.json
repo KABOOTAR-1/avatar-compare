@@ -2,8 +2,8 @@
  "id": "arvind",
  "width": 896,
  "height": 1200,
- "base": "frames/face.png",
- "poster": "frames/base.png",
+ "base": "frames/face.webp",
+ "poster": "frames/base.webp",
  "draw_order": [
   "brows",
   "eyes",
@@ -16,126 +16,126 @@
  "layers": {
   "mouth": {
    "PP": {
-    "file": "layers/mouth/PP.png",
+    "file": "layers/mouth/PP.webp",
     "x": 296,
     "y": 430,
     "w": 290,
     "h": 235
    },
    "FF": {
-    "file": "layers/mouth/FF.png",
+    "file": "layers/mouth/FF.webp",
     "x": 289,
     "y": 428,
     "w": 306,
     "h": 234
    },
    "TH": {
-    "file": "layers/mouth/TH.png",
+    "file": "layers/mouth/TH.webp",
     "x": 277,
     "y": 429,
     "w": 342,
     "h": 283
    },
    "DD": {
-    "file": "layers/mouth/DD.png",
+    "file": "layers/mouth/DD.webp",
     "x": 270,
     "y": 436,
     "w": 341,
     "h": 272
    },
    "kk": {
-    "file": "layers/mouth/kk.png",
+    "file": "layers/mouth/kk.webp",
     "x": 278,
     "y": 432,
     "w": 340,
     "h": 282
    },
    "CH": {
-    "file": "layers/mouth/CH.png",
+    "file": "layers/mouth/CH.webp",
     "x": 265,
     "y": 431,
     "w": 372,
     "h": 282
    },
    "SS": {
-    "file": "layers/mouth/SS.png",
+    "file": "layers/mouth/SS.webp",
     "x": 275,
     "y": 428,
     "w": 347,
     "h": 277
    },
    "RR": {
-    "file": "layers/mouth/RR.png",
+    "file": "layers/mouth/RR.webp",
     "x": 262,
     "y": 426,
     "w": 371,
     "h": 296
    },
    "aa": {
-    "file": "layers/mouth/aa.png",
+    "file": "layers/mouth/aa.webp",
     "x": 275,
     "y": 432,
     "w": 347,
     "h": 292
    },
    "E": {
-    "file": "layers/mouth/E.png",
+    "file": "layers/mouth/E.webp",
     "x": 268,
     "y": 431,
     "w": 362,
     "h": 287
    },
    "I": {
-    "file": "layers/mouth/I.png",
+    "file": "layers/mouth/I.webp",
     "x": 262,
     "y": 426,
     "w": 365,
     "h": 283
    },
    "O": {
-    "file": "layers/mouth/O.png",
+    "file": "layers/mouth/O.webp",
     "x": 274,
     "y": 428,
     "w": 350,
     "h": 284
    },
    "U": {
-    "file": "layers/mouth/U.png",
+    "file": "layers/mouth/U.webp",
     "x": 272,
     "y": 426,
     "w": 363,
     "h": 287
    },
    "smile": {
-    "file": "layers/mouth/smile.png",
+    "file": "layers/mouth/smile.webp",
     "x": 270,
     "y": 426,
     "w": 350,
     "h": 292
    },
    "laugh": {
-    "file": "layers/mouth/laugh.png",
+    "file": "layers/mouth/laugh.webp",
     "x": 256,
     "y": 426,
     "w": 370,
     "h": 289
    },
    "sad": {
-    "file": "layers/mouth/sad.png",
+    "file": "layers/mouth/sad.webp",
     "x": 297,
     "y": 427,
     "w": 301,
     "h": 253
    },
    "surprised": {
-    "file": "layers/mouth/surprised.png",
+    "file": "layers/mouth/surprised.webp",
     "x": 272,
     "y": 426,
     "w": 353,
     "h": 292
    },
    "thinking": {
-    "file": "layers/mouth/thinking.png",
+    "file": "layers/mouth/thinking.webp",
     "x": 266,
     "y": 426,
     "w": 345,
@@ -144,70 +144,70 @@
   },
   "eyes": {
    "blink": {
-    "file": "layers/eyes/blink.png",
+    "file": "layers/eyes/blink.webp",
     "x": 312,
     "y": 307,
     "w": 273,
     "h": 117
    },
    "half": {
-    "file": "layers/eyes/half.png",
+    "file": "layers/eyes/half.webp",
     "x": 314,
     "y": 309,
     "w": 269,
     "h": 108
    },
    "gaze_left": {
-    "file": "layers/eyes/gaze_left.png",
+    "file": "layers/eyes/gaze_left.webp",
     "x": 317,
     "y": 316,
     "w": 264,
     "h": 89
    },
    "gaze_right": {
-    "file": "layers/eyes/gaze_right.png",
+    "file": "layers/eyes/gaze_right.webp",
     "x": 316,
     "y": 308,
     "w": 267,
     "h": 99
    },
    "gaze_up": {
-    "file": "layers/eyes/gaze_up.png",
+    "file": "layers/eyes/gaze_up.webp",
     "x": 314,
     "y": 307,
     "w": 270,
     "h": 114
    },
    "smile": {
-    "file": "layers/eyes/smile.png",
+    "file": "layers/eyes/smile.webp",
     "x": 311,
     "y": 307,
     "w": 278,
     "h": 124
    },
    "laugh": {
-    "file": "layers/eyes/laugh.png",
+    "file": "layers/eyes/laugh.webp",
     "x": 304,
     "y": 307,
     "w": 291,
     "h": 124
    },
    "sad": {
-    "file": "layers/eyes/sad.png",
+    "file": "layers/eyes/sad.webp",
     "x": 309,
     "y": 307,
     "w": 276,
     "h": 121
    },
    "surprised": {
-    "file": "layers/eyes/surprised.png",
+    "file": "layers/eyes/surprised.webp",
     "x": 311,
     "y": 307,
     "w": 275,
     "h": 122
    },
    "thinking": {
-    "file": "layers/eyes/thinking.png",
+    "file": "layers/eyes/thinking.webp",
     "x": 313,
     "y": 307,
     "w": 279,
@@ -216,35 +216,35 @@
   },
   "brows": {
    "smile": {
-    "file": "layers/brows/smile.png",
+    "file": "layers/brows/smile.webp",
     "x": 260,
     "y": 263,
     "w": 373,
     "h": 128
    },
    "laugh": {
-    "file": "layers/brows/laugh.png",
+    "file": "layers/brows/laugh.webp",
     "x": 261,
     "y": 236,
     "w": 351,
     "h": 165
    },
    "sad": {
-    "file": "layers/brows/sad.png",
+    "file": "layers/brows/sad.webp",
     "x": 261,
     "y": 237,
     "w": 339,
     "h": 152
    },
    "surprised": {
-    "file": "layers/brows/surprised.png",
+    "file": "layers/brows/surprised.webp",
     "x": 262,
     "y": 251,
     "w": 377,
     "h": 141
    },
    "thinking": {
-    "file": "layers/brows/thinking.png",
+    "file": "layers/brows/thinking.webp",
     "x": 277,
     "y": 258,
     "w": 330,
@@ -253,7 +253,7 @@
   },
   "glasses": {
    "glasses": {
-    "file": "layers/glasses/glasses.png",
+    "file": "layers/glasses/glasses.webp",
     "x": 256,
     "y": 305,
     "w": 368,
