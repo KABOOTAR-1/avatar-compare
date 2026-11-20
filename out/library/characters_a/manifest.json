@@ -1,0 +1,20 @@
+{
+ "cases": {
+  "brian/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_a/brian/average/avatar_anim.glb"
+   }
+  },
+  "josh/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_a/josh/average/avatar_anim.glb"
+   }
+  }
+ }
+}

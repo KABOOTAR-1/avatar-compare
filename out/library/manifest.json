@@ -1,0 +1,85 @@
+{
+ "cases": {
+  "leonard/average": {
+   "pass": true,
+   "tries": 2,
+   "repairs": [
+    {
+     "after_try": 0,
+     "for": "neck_gap_mm",
+     "fix": {
+      "body": {
+       "cut_offset": 0.01
+      }
+     }
+    }
+   ],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/leonard/average/avatar_anim.glb"
+   }
+  },
+  "leonard/slim": {
+   "pass": true,
+   "tries": 2,
+   "repairs": [
+    {
+     "after_try": 0,
+     "for": "neck_gap_mm",
+     "fix": {
+      "body": {
+       "cut_offset": 0.01
+      }
+     }
+    }
+   ],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/leonard/slim/avatar_anim.glb"
+   }
+  },
+  "leonard/broad": {
+   "pass": true,
+   "tries": 5,
+   "repairs": [
+    {
+     "after_try": 0,
+     "for": "neck_gap_mm",
+     "fix": {
+      "body": {
+       "cut_offset": 0.01
+      }
+     }
+    },
+    {
+     "after_try": 1,
+     "for": "neck_gap_mm",
+     "fix": {
+      "body": {
+       "cut_offset": 0.01
+      }
+     }
+    },
+    {
+     "after_try": 2,
+     "for": "neck_head_through_k_mm",
+     "fix": {
+      "body": {
+       "seam_band": 0.04
+      }
+     }
+    },
+    {
+     "after_try": 3,
+     "for": "neck_head_through_k_mm",
+     "fix": {
+      "body": {
+       "cut_offset": -0.006
+      }
+     }
+    }
+   ],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/leonard/broad/avatar_anim.glb"
+   }
+  }
+ }
+}

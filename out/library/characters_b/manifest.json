@@ -1,0 +1,44 @@
+{
+ "cases": {
+  "elizabeth/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_b/elizabeth/average/avatar_anim.glb"
+   }
+  },
+  "jody/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_b/jody/average/avatar_anim.glb"
+   }
+  },
+  "lewis/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_b/lewis/average/avatar_anim.glb"
+   }
+  },
+  "roth/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_b/roth/average/avatar_anim.glb"
+   }
+  },
+  "steve/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_b/steve/average/avatar_anim.glb"
+   }
+  }
+ }
+}

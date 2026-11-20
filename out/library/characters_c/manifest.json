@@ -1,0 +1,52 @@
+{
+ "cases": {
+  "kate/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_c/kate/average/avatar_anim.glb"
+   }
+  },
+  "louise/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_c/louise/average/avatar_anim.glb"
+   }
+  },
+  "martha/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_c/martha/average/avatar_anim.glb"
+   }
+  },
+  "megan/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_c/megan/average/avatar_anim.glb"
+   }
+  },
+  "shannon/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_c/shannon/average/avatar_anim.glb"
+   }
+  },
+  "sophie/average": {
+   "pass": true,
+   "tries": 1,
+   "repairs": [],
+   "outputs": {
+    "avatar_anim.glb": "avatar-eval/out/library/characters_c/sophie/average/avatar_anim.glb"
+   }
+  }
+ }
+}
