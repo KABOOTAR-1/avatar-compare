@@ -363,7 +363,7 @@
   },
   "laugh": {
    "mouth": "laugh",
-   "eyes": "smile",
+   "eyes": "laugh",
    "brows": "laugh"
   },
   "sad": {
@@ -1492,5 +1492,6 @@
     "drift_outside_regions": 0.18
    }
   }
- }
+ },
+ "morph": "morph.json"
 }

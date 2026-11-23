@@ -12,7 +12,14 @@
  * for the diphthongs 9/10/11) AND the clip has a "visemes_azure" timeline, that richer timeline
  * drives the mouth; a diphthong holds its first shape, then cross-fades into the second over the
  * rest of its cue. Otherwise the 15 Oculus visemes are used exactly as before.
+ *
+ * Morph mode (manifest "morph": morph.json from morph_data.py): no alpha cross-fades at all. Each
+ * region shows ONE full texture over the same mask at rest; a change A -> B warps the mesh from the
+ * current geometry to B's landmarks (ease-in-out, shared Delaunay triangles) and dissolves the two
+ * aligned textures, rendered with WebGL (morph-core.js; CPU canvas fallback). Without morph.json the
+ * cross-fade path below runs unchanged.
  */
+import { MorphTrack, GLMeshRenderer, drawMesh2D, overAlphas, quad } from "./morph-core.js";
 
 // --- timing (ms) -----------------------------------------------------------------------------
 export const VISEME_FADE_MS = 70;
@@ -27,6 +34,16 @@ const GLANCE_HOLD_MS = [500, 1300];
 const VISEME_LEAD_S = 0.03; // mouth shapes lead the audio slightly, as in hand animation
 const GLIDE_HOLD = 0.3;     // diphthong: share of the cue that holds the first shape before gliding
 const GLIDE_PREVIEW_MS = 450;
+// morph timing (ms)
+const MORPH_VISEME_MS = [40, 120];   // transition = clamp(share x phone duration, min, max)
+const MORPH_VISEME_SHARE = 0.6;
+const MIN_CUE_S = 0.017;             // shapes shorter than about one frame are skipped (coarticulation)
+const MORPH_EXPRESSION_MS = 280;
+const MORPH_GAZE_MS = 240;
+const MORPH_BLINK_CLOSE_MS = 70;
+const MORPH_BLINK_OPEN_MS = 150;
+const MORPH_BLINK_SEQUENCE = [["closed", 110]]; // close (70 ms morph) + short hold, then open (150 ms)
+const MICRO_PX = 0.35;               // head micro-motion amplitude (sub-pixel, whole image)
 
 // --- procedural motion -----------------------------------------------------------------------
 const BREATH_PERIOD_S = 4.2;
@@ -114,14 +131,23 @@ export class SpriteAvatar {
   }
 
   async load() {
-    this.manifest = await (await fetch(`${this.root}manifest.json`)).json();
+    this.bust ??= "";  // e.g. "?t=..." to bypass the HTTP cache (QA renders right after a rebuild)
+    this.manifest = await (await fetch(`${this.root}manifest.json${this.bust}`)).json();
     const m = this.manifest;
     const files = { face: m.base };
     for (const [region, layers] of Object.entries(m.layers)) {
       for (const [id, layer] of Object.entries(layers)) files[`${region}/${id}`] = layer.file;
     }
-    const entries = await Promise.all(Object.entries(files).map(async ([k, f]) => [k, await loadImage(this.root + f)]));
+    const entries = await Promise.all(Object.entries(files).map(async ([k, f]) => [k, await loadImage(this.root + f + this.bust)]));
     this.images = Object.fromEntries(entries);
+    if (m.morph) {
+      try {
+        await this.loadMorph(m.morph);
+      } catch (error) {
+        console.warn("morph data unavailable, using cross-fades", error);
+        this.morph = null;
+      }
+    }
     const { width: w, height: h } = m;
     this.canvas.width = w;
     this.canvas.height = h;
@@ -191,6 +217,104 @@ export class SpriteAvatar {
     this.clearMask = toCanvas(clear);
   }
 
+  /** morph.json -> textures, per-state points / UVs, one MorphTrack per region, WebGL (or 2D) renderer. */
+  async loadMorph(file) {
+    const data = await (await fetch(this.root + file + this.bust)).json();
+    const { width: w, height: h } = this.manifest;
+    const regions = {};
+    for (const [name, r] of Object.entries(data.regions)) {
+      const ids = Object.keys(r.states);
+      const imgs = await Promise.all(ids.map((s) => loadImage(this.root + r.states[s].file + this.bust)));
+      const points = {}, src = {}, uv = {}, img = {};
+      ids.forEach((s, i) => {
+        const p = Float32Array.from(r.states[s].points.flat());
+        points[s] = p;
+        src[s] = p.map((v, k) => v - (k % 2 ? r.y : r.x));
+        uv[s] = p.map((v, k) => (k % 2 ? (v - r.y) / r.h : (v - r.x) / r.w));
+        img[s] = imgs[i];
+      });
+      regions[name] = { ...r, points, src, uv, img, track: new MorphTrack(points, r.base ?? "base") };
+    }
+    const canvas = Object.assign(document.createElement("canvas"), { width: w, height: h });
+    let gl = null;
+    try {
+      gl = new GLMeshRenderer(canvas);
+      gl.texture("face", this.images.face);
+      const fq = quad(0, 0, w, h);
+      gl.mesh("face", fq.tris, { face: fq.uv });
+      for (const [name, r] of Object.entries(regions)) {
+        for (const [s, im] of Object.entries(r.img)) gl.texture(`${name}/${s}`, im);
+        gl.mesh(name, r.triangles, r.uv);
+      }
+      for (const [region, id] of Object.entries(this.manifest.overlay ?? {})) {
+        const l = this.manifest.layers[region][id];
+        const q = quad(l.x, l.y, l.w, l.h);
+        gl.texture(`overlay/${region}`, this.images[`${region}/${id}`]);
+        gl.mesh(`overlay/${region}`, q.tris, { [region]: q.uv });
+        regions[`overlay/${region}`] = { overlay: true, dst: q.dst, state: region };
+      }
+    } catch (error) {
+      console.warn("WebGL unavailable, CPU canvas morph", error);
+      gl = null;
+    }
+    this.morph = { regions, canvas, gl, ctx2d: gl ? null : canvas.getContext("2d") };
+    this.renderer = gl ? "webgl" : "canvas2d";
+  }
+
+  /**
+   * Morph targets: brows and eyes form ONE region ("upper", state "<brows>|<eyes>", textures made from
+   * exactly that pair), the mouth another. {brows: [id, ms], eyes: [id, ms], mouth: [id, ms]}.
+   */
+  setMorphTargets(tg, now) {
+    const r = this.morph.regions;
+    if (r.upper) {
+      const [b, bms] = tg.brows ?? [null, MORPH_EXPRESSION_MS];
+      const [e, ems] = tg.eyes ?? [null, MORPH_EXPRESSION_MS];
+      const key = `${b ?? "base"}|${e ?? "base"}`;
+      const [cb, ce] = r.upper.track.to.split("|");
+      const ms = (ce !== (e ?? "base")) ? ems : bms;  // an eye change (blink, gaze) sets the pace
+      r.upper.track.set(key, now, cb !== (b ?? "base") && ce !== (e ?? "base") ? Math.max(bms, ems) : ms);
+    }
+    if (r.mouth && tg.mouth) r.mouth.track.set(tg.mouth[0] ?? "base", now, tg.mouth[1]);
+  }
+
+  /** Render the face with every region at its current morph state into this.faceCanvas. */
+  composeMorph(now) {
+    const { regions, canvas, gl, ctx2d } = this.morph;
+    const { width: w, height: h } = this.manifest;
+    this.bounds = [];
+    if (gl) {
+      gl.begin(w, h);
+      gl.draw("face", quad(0, 0, w, h).dst, [["face", 1]], () => "face");
+    } else {
+      ctx2d.globalAlpha = 1;
+      ctx2d.drawImage(this.images.face, 0, 0);
+    }
+    for (const name of ["upper", "brows", "eyes", "mouth"]) {
+      const r = regions[name];
+      if (!r || r.overlay) continue;
+      const { points, draws } = r.track.sample(now);
+      if (gl) gl.draw(name, points, draws);
+      else {
+        const alphas = overAlphas(draws);
+        draws.forEach(([s], i) => drawMesh2D(ctx2d, r.img[s], r.src[s], points, r.triangles, alphas[i]));
+      }
+      this.bounds.push([name, { x: r.x, y: r.y, w: r.w, h: r.h }]);
+    }
+    for (const [key, r] of Object.entries(regions)) {
+      if (!r.overlay) continue;
+      if (gl) gl.draw(key, r.dst, [[r.state, 1]], () => key);
+      else {
+        const [region, id] = [r.state, this.manifest.overlay[r.state]];
+        const l = this.manifest.layers[region][id];
+        ctx2d.drawImage(this.images[`${region}/${id}`], l.x, l.y);
+      }
+    }
+    const g = this.faceCanvas.getContext("2d");
+    g.globalAlpha = 1;
+    g.drawImage(canvas, 0, 0);
+  }
+
   // --- public controls ------------------------------------------------------------------------
   setExpression(name) { this.expression = name in this.manifest.expressions ? name : "neutral"; }
   setGaze(dir) { this.gaze = dir; }
@@ -223,9 +347,9 @@ export class SpriteAvatar {
     let t = now;
     const reps = allowDouble && Math.random() < DOUBLE_BLINK_CHANCE ? 2 : 1;
     for (let r = 0; r < reps; r++) {
-      for (const [state, ms] of BLINK_SEQUENCE) { steps.push({ state, at: t }); t += ms; }
+      for (const [state, ms] of this.morph ? MORPH_BLINK_SEQUENCE : BLINK_SEQUENCE) { steps.push({ state, at: t }); t += ms; }
       steps.push({ state: null, at: t });
-      t += 90;
+      t += this.morph ? MORPH_BLINK_OPEN_MS + 60 : 90;
     }
     return steps;
   }
@@ -258,6 +382,22 @@ export class SpriteAvatar {
     const { visemes, words } = this.speech.clip;
     const word = words?.find((w) => t >= w.start && t < w.end);
     const azure = this.manifest.visemes_azure && this.speech.clip.visemes_azure;
+    if (azure && this.morph) {
+      // coarticulation: drop sub-frame cues, and start moving to the next shape half a transition early
+      const cues = (this.speech.clip._cues ??= azure.filter((c) => c.end - c.start >= MIN_CUE_S));
+      let i = cues.findIndex((c) => t >= c.start && t < c.end);
+      if (i < 0) i = t < cues[0].start ? 0 : cues.length - 1;
+      const next = cues[i + 1];
+      if (next) {
+        const nextMs = Math.min(MORPH_VISEME_MS[1], Math.max(MORPH_VISEME_MS[0], MORPH_VISEME_SHARE * (next.end - next.start) * 1000));
+        if (t + nextMs / 2000 >= next.start) i += 1;
+      }
+      const cue = cues[i];
+      const dur = Math.max(cue.end - cue.start, 1e-3);
+      return { viseme: `az${cue.id}`, azure: String(cue.id), phone: cue.phone, word: word?.word ?? "",
+        progress: clamp01((t - cue.start) / dur), durMs: dur * 1000,
+        morphMs: Math.min(MORPH_VISEME_MS[1], Math.max(MORPH_VISEME_MS[0], MORPH_VISEME_SHARE * dur * 1000)) };
+    }
     if (azure) {
       const cue = azure.find((c) => t >= c.start && t < c.end) ?? azure[azure.length - 1];
       const dur = Math.max(cue.end - cue.start, 1e-3);
@@ -265,7 +405,8 @@ export class SpriteAvatar {
         progress: clamp01((t - cue.start) / dur), durMs: dur * 1000 };
     }
     const cue = visemes.find((c) => t >= c.start && t < c.end) ?? visemes[visemes.length - 1];
-    return { viseme: cue.viseme, phone: cue.phone, word: word?.word ?? "" };
+    const ms = Math.min(MORPH_VISEME_MS[1], Math.max(MORPH_VISEME_MS[0], MORPH_VISEME_SHARE * (cue.end - cue.start) * 1000));
+    return { viseme: cue.viseme, phone: cue.phone, word: word?.word ?? "", morphMs: ms };
   }
 
   /** Mouth layer (+ fade ms or null for the default) for an Azure viseme id at progress 0..1. */
@@ -312,6 +453,13 @@ export class SpriteAvatar {
       eyeFade = BLINK_STEP_FADE_MS;
     }
     const mouthFade = glideFade ?? (speaking || this.mouthOverride ? this.visemeFadeMs : EXPRESSION_FADE_MS);
+    if (this.morph) {
+      const closing = this.blinkState === "closed";
+      const fromBlink = this.morph.regions.upper?.track.to.endsWith(`|${m.eyes.closed}`) && !closing;
+      const eyeMs = closing ? MORPH_BLINK_CLOSE_MS : fromBlink ? MORPH_BLINK_OPEN_MS : gaze ? MORPH_GAZE_MS : MORPH_EXPRESSION_MS;
+      const mouthMs = glideFade ?? (speaking ? speaking.morphMs ?? MORPH_VISEME_MS[1] : this.mouthOverride ? MORPH_VISEME_MS[1] : MORPH_EXPRESSION_MS);
+      return { brows: [expr.brows, MORPH_EXPRESSION_MS], eyes: [eyes, eyeMs], mouth: [mouth, mouthMs] };
+    }
     return {
       brows: [expr.brows, EXPRESSION_FADE_MS],
       eyes: [eyes, eyeFade],
@@ -345,7 +493,8 @@ export class SpriteAvatar {
 
   draw(now) {
     const { width: w, height: h } = this.manifest;
-    this.composeFace(now);
+    if (this.morph) this.composeMorph(now);
+    else this.composeFace(now);
     const t = now / 1000;
     const talking = this.speech ? 1 : 0;
     // smooth pseudo-noise from incommensurate sines
@@ -355,8 +504,10 @@ export class SpriteAvatar {
     const life = this.life ? 1 : 0;
     const breath = life * Math.sin((2 * Math.PI * t) / BREATH_PERIOD_S);
     const roll = life * (n1 * SWAY_DEG + talking * n3 * TALK_NOD_DEG * 0.5) * (Math.PI / 180);
-    const dx = life * n2 * SWAY_PX;
-    const dy = life * (n1 * SWAY_PX * 0.4 + talking * Math.abs(n3) * 1.5);
+    // + subtle head micro-motion: slow noise, sub-pixel, whole image
+    const micro = this.morph ? life * MICRO_PX : 0;
+    const dx = life * n2 * SWAY_PX + micro * Math.sin(t * 0.37 + 1.1) * Math.sin(t * 0.23);
+    const dy = life * (n1 * SWAY_PX * 0.4 + talking * Math.abs(n3) * 1.5) + micro * Math.sin(t * 0.29 + 2.3);
 
     // body plate: the face canvas with the head cleared to background
     const p = this.plateCanvas.getContext("2d");
@@ -404,9 +555,12 @@ export class SpriteAvatar {
   }
 
   loop(now) {
+    if (this.paused) { requestAnimationFrame(this.loop); return; }  // QA renders frames itself
     try {
       this.updateEyesAuto(now);
-      for (const [region, [id, dur]] of Object.entries(this.targets(now))) this.fades[region].set(id, now, dur);
+      const tg = this.targets(now);
+      if (this.morph) this.setMorphTargets(tg, now);
+      else for (const [region, [id, dur]] of Object.entries(tg)) this.fades[region].set(id, now, dur);
       this.draw(now);
       for (const fn of this.listeners) fn(this.current, now);
     } catch (error) {

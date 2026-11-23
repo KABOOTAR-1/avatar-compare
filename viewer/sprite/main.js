@@ -37,8 +37,20 @@ function radioGroup(container, items, onSelect, initial) {
   return select;
 }
 
+/** Local work-in-progress badge (this viewer is not the published one). */
+function wipBadge() {
+  const b = document.createElement("div");
+  b.textContent = "WIP · local";
+  b.title = "Work in progress: local viewer with the morph renderer, not yet published";
+  Object.assign(b.style, { position: "fixed", top: "10px", right: "10px", zIndex: 1000, padding: "4px 10px",
+    borderRadius: "6px", background: "#c2410c", color: "#fff", font: "600 13px system-ui, sans-serif" });
+  document.body.append(b);
+}
+
 async function main() {
+  if (["127.0.0.1", "localhost"].includes(location.hostname)) wipBadge();
   const avatar = new SpriteAvatar($("stage"), root);
+  if (params.get("qa")) avatar.bust = `?t=${Date.now()}`;
   try {
     await avatar.load();
   } catch (error) {
@@ -49,7 +61,8 @@ async function main() {
   // local runs have raw/base.png; a published web/ copy has raw/base.webp
   $("reference").onerror = () => { $("reference").onerror = null; $("reference").src = `${root}raw/base.webp`; };
   $("reference").src = `${root}raw/base.png`;
-  $("status").textContent = `${avatarId}: ${Object.values(m.layers).reduce((n, l) => n + Object.keys(l).length, 0)} layers`;
+  $("status").textContent = `${avatarId}: ${Object.values(m.layers).reduce((n, l) => n + Object.keys(l).length, 0)} layers`
+    + (avatar.morph ? ` · morph (${avatar.renderer})` : " · cross-fade");
 
   const selectExpression = radioGroup($("expressions"),
     Object.keys(m.expressions).map((k) => [k, EXPRESSION_LABELS[k] ?? k]), (k) => avatar.setExpression(k), "neutral");
@@ -107,6 +120,8 @@ async function main() {
     $("talk").append(b);
   }
   $("talk").append(button("Stop", () => avatar.stopSpeech()));
+  // ?qa=<port>: render every viewer state + expression transitions and send them to qa_frame_server.py
+  if (params.get("qa")) (await import("./qa-states.js")).runStateQA(avatar, avatarId, Number(params.get("qa")));
 
   $("life").addEventListener("change", (e) => { avatar.life = e.target.checked; });
   $("autoBlink").addEventListener("change", (e) => { avatar.autoBlink = e.target.checked; });
