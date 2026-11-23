@@ -9,7 +9,8 @@ const VISEME_PREVIEW_MS = 700;
 const EXPRESSION_LABELS = { neutral: "Neutral", smile: "Smile", laugh: "Laugh", sad: "Sad", surprised: "Surprised", thinking: "Thinking" };
 
 const params = new URLSearchParams(location.search);
-const avatarId = params.get("avatar") ?? DEFAULT_AVATAR;
+// keep only id characters: links pasted from chat often drag a trailing ")" or "." along
+const avatarId = (params.get("avatar") ?? DEFAULT_AVATAR).replace(/[^A-Za-z0-9_-]/g, "") || DEFAULT_AVATAR;
 const root = `../../out/sprite/${avatarId}/`; // same site: dozens of small layer images, which a CDN/raw host throttles;
 const $ = (id) => document.getElementById(id);
 
