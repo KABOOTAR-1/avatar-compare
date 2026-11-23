@@ -7,6 +7,11 @@
  * body plate and a head cut-out that gets a small 2D affine sway/nod around the neck, and apply
  * a breathing scale to both. Input signals are the same as a 3D avatar's: an Oculus viseme
  * timeline, an expression name, gaze, blink.
+ *
+ * Azure 22-viseme set: when the manifest has "visemes_azure" (id -> mouth layer, or {glide: [a, b]}
+ * for the diphthongs 9/10/11) AND the clip has a "visemes_azure" timeline, that richer timeline
+ * drives the mouth; a diphthong holds its first shape, then cross-fades into the second over the
+ * rest of its cue. Otherwise the 15 Oculus visemes are used exactly as before.
  */
 
 // --- timing (ms) -----------------------------------------------------------------------------
@@ -20,6 +25,8 @@ const DOUBLE_BLINK_CHANCE = 0.18;
 const GLANCE_INTERVAL_MS = [3500, 8000];
 const GLANCE_HOLD_MS = [500, 1300];
 const VISEME_LEAD_S = 0.03; // mouth shapes lead the audio slightly, as in hand animation
+const GLIDE_HOLD = 0.3;     // diphthong: share of the cue that holds the first shape before gliding
+const GLIDE_PREVIEW_MS = 450;
 
 // --- procedural motion -----------------------------------------------------------------------
 const BREATH_PERIOD_S = 4.2;
@@ -187,7 +194,7 @@ export class SpriteAvatar {
   // --- public controls ------------------------------------------------------------------------
   setExpression(name) { this.expression = name in this.manifest.expressions ? name : "neutral"; }
   setGaze(dir) { this.gaze = dir; }
-  previewViseme(v) { this.mouthOverride = v; }
+  previewViseme(v) { this.mouthOverride = v; this.overrideStart = performance.now(); }
   blink(now = performance.now()) { this.blinkQueue = this.makeBlink(now, false); }
   onUpdate(fn) { this.listeners.add(fn); }
 
@@ -249,9 +256,25 @@ export class SpriteAvatar {
     if (!this.speech) return null;
     const t = this.speech.audio.currentTime + VISEME_LEAD_S;
     const { visemes, words } = this.speech.clip;
-    const cue = visemes.find((c) => t >= c.start && t < c.end) ?? visemes[visemes.length - 1];
     const word = words?.find((w) => t >= w.start && t < w.end);
+    const azure = this.manifest.visemes_azure && this.speech.clip.visemes_azure;
+    if (azure) {
+      const cue = azure.find((c) => t >= c.start && t < c.end) ?? azure[azure.length - 1];
+      const dur = Math.max(cue.end - cue.start, 1e-3);
+      return { viseme: `az${cue.id}`, azure: String(cue.id), phone: cue.phone, word: word?.word ?? "",
+        progress: clamp01((t - cue.start) / dur), durMs: dur * 1000 };
+    }
+    const cue = visemes.find((c) => t >= c.start && t < c.end) ?? visemes[visemes.length - 1];
     return { viseme: cue.viseme, phone: cue.phone, word: word?.word ?? "" };
+  }
+
+  /** Mouth layer (+ fade ms or null for the default) for an Azure viseme id at progress 0..1. */
+  azureMouth(id, progress, durMs) {
+    const entry = this.manifest.visemes_azure[id];
+    if (!entry || typeof entry === "string") return [entry ?? null, null];
+    const [from, to] = entry.glide;
+    if (progress < GLIDE_HOLD) return [from, null];
+    return [to, Math.max(1, (1 - GLIDE_HOLD) * durMs)];  // glide: cross-fade over the rest of the cue
   }
 
   /** Decide each region's target layer id. */
@@ -261,8 +284,19 @@ export class SpriteAvatar {
     const speaking = this.currentViseme();
     let mouth = expr.mouth;
     let viseme = "sil";
-    if (speaking) { viseme = speaking.viseme; mouth = m.visemes[viseme] ?? null; }
-    if (this.mouthOverride) { viseme = this.mouthOverride; mouth = m.visemes[viseme] ?? null; }
+    let glideFade = null;
+    if (speaking) {
+      viseme = speaking.viseme;
+      if (speaking.azure !== undefined) [mouth, glideFade] = this.azureMouth(speaking.azure, speaking.progress, speaking.durMs);
+      else mouth = m.visemes[viseme] ?? null;
+    }
+    if (this.mouthOverride) {
+      viseme = this.mouthOverride;
+      if (viseme.startsWith("az:") && m.visemes_azure) {
+        const p = clamp01((now - (this.overrideStart ?? now)) / GLIDE_PREVIEW_MS);
+        [mouth, glideFade] = this.azureMouth(viseme.slice(3), p, GLIDE_PREVIEW_MS);
+      } else mouth = m.visemes[viseme] ?? null;
+    }
     this.current = { viseme, phone: speaking?.phone ?? "", word: speaking?.word ?? "" };
 
     // eyes: blink > gaze > expression. Expressions with their own closed eyes (laugh) do not blink.
@@ -277,7 +311,7 @@ export class SpriteAvatar {
     } else if (this.fades.eyes.cur === m.eyes.half || this.fades.eyes.cur === m.eyes.closed) {
       eyeFade = BLINK_STEP_FADE_MS;
     }
-    const mouthFade = speaking || this.mouthOverride ? this.visemeFadeMs : EXPRESSION_FADE_MS;
+    const mouthFade = glideFade ?? (speaking || this.mouthOverride ? this.visemeFadeMs : EXPRESSION_FADE_MS);
     return {
       brows: [expr.brows, EXPRESSION_FADE_MS],
       eyes: [eyes, eyeFade],

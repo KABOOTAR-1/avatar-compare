@@ -1,0 +1,4240 @@
+{
+ "summary": {
+  "cells": 28,
+  "pass_first_try": 24,
+  "pass_final": 27,
+  "flagged": [
+   "gaze_left"
+  ],
+  "pass_rate_first_try": 0.857,
+  "pass_rate_final": 0.964
+ },
+ "cells": {
+  "PP": {
+   "pass": true,
+   "chosen": "g1/PP",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "closed: gap",
+     "value": 0.0023,
+     "op": "<",
+     "limit": 0.035,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "no teeth",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.004,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "no dark interior",
+     "value": 0.0003,
+     "op": "<",
+     "limit": 0.004,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9908,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0014,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 6.1736,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.8052,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.73,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0012,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.01,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0023,
+    "mouth_w_rel": 0.8741,
+    "open_aspect": 0.0032,
+    "outer_h_rel": 0.8742,
+    "corner_lift": -0.0355,
+    "lower_lip_up": 0.0374,
+    "teeth": 0.0,
+    "dark": 0.0003,
+    "tongue": 0.0022,
+    "teeth_gain": -0.0,
+    "dark_gain": -0.0012,
+    "ap_rel_l": 0.9813,
+    "ap_rel_r": 1.0002,
+    "ap_rel": 0.9908,
+    "ap_asym": 0.0189,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.0014,
+    "iris_dy_lm": -0.001,
+    "gaze_dx": -0.0007,
+    "gaze_dy": -0.0005,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 4.8052287101745605,
+   "align_resid_px": 2.25,
+   "takes": {
+    "g1/PP": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "FF": {
+   "pass": true,
+   "chosen": "g1/FF",
+   "first_try_pass": true,
+   "n_takes": 2,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "upper teeth visible",
+     "value": 0.0051,
+     "op": ">",
+     "limit": 0.004,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "little dark interior",
+     "value": 0.0102,
+     "op": "<",
+     "limit": 0.02,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "lower lip tucked up: gap small",
+     "value": 0.0855,
+     "op": "<",
+     "limit": 0.1,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "lower lip pulled in: width/base",
+     "value": 0.9106,
+     "op": "<",
+     "limit": 0.98,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9934,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0011,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 5.9729,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.8112,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.9,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0034,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.0,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0855,
+    "mouth_w_rel": 0.9106,
+    "open_aspect": 0.1125,
+    "outer_h_rel": 1.1217,
+    "corner_lift": -0.0316,
+    "lower_lip_up": -0.0176,
+    "teeth": 0.0051,
+    "dark": 0.0102,
+    "tongue": 0.0083,
+    "teeth_gain": 0.0051,
+    "dark_gain": 0.0087,
+    "ap_rel_l": 0.9874,
+    "ap_rel_r": 0.9993,
+    "ap_rel": 0.9934,
+    "ap_asym": 0.0119,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0039,
+    "iris_dy_lm": 0.0059,
+    "gaze_dx": 0.0019,
+    "gaze_dy": 0.003,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.8111636638641357,
+   "align_resid_px": 2.14,
+   "takes": {
+    "g1/FF": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    },
+    "g3/FF~2": {
+     "pass": false,
+     "n_fail": 2,
+     "badness": 0.223,
+     "failed": [
+      "upper teeth visible",
+      "lower lip tucked up: gap small"
+     ]
+    }
+   }
+  },
+  "TH": {
+   "pass": true,
+   "chosen": "g1/TH",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "parted: gap",
+     "value": 0.1927,
+     "op": ">",
+     "limit": 0.035,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "not wide: gap",
+     "value": 0.1927,
+     "op": "<",
+     "limit": 0.26,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "tongue visible",
+     "value": 0.0555,
+     "op": ">",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9931,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0011,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.3728,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.8095,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.71,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0026,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.04,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1927,
+    "mouth_w_rel": 0.9019,
+    "open_aspect": 0.256,
+    "outer_h_rel": 1.5657,
+    "corner_lift": -0.0569,
+    "lower_lip_up": -0.1591,
+    "teeth": 0.0039,
+    "dark": 0.0114,
+    "tongue": 0.0555,
+    "teeth_gain": 0.0038,
+    "dark_gain": 0.0099,
+    "ap_rel_l": 0.9902,
+    "ap_rel_r": 0.9961,
+    "ap_rel": 0.9931,
+    "ap_asym": 0.0059,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.0013,
+    "iris_dy_lm": 0.0127,
+    "gaze_dx": -0.0007,
+    "gaze_dy": 0.0063,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.8094985485076904,
+   "align_resid_px": 2.7,
+   "takes": {
+    "g1/TH": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "DD": {
+   "pass": true,
+   "chosen": "g1/DD",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "slightly open: gap",
+     "value": 0.1232,
+     "op": "in",
+     "limit": [
+      0.0175,
+      0.16
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "teeth visible",
+     "value": 0.0073,
+     "op": ">",
+     "limit": 0.004,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 1.0074,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.001,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 6.5507,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.524,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.51,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0022,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.05,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1232,
+    "mouth_w_rel": 0.9734,
+    "open_aspect": 0.1516,
+    "outer_h_rel": 1.3628,
+    "corner_lift": -0.0324,
+    "lower_lip_up": -0.0916,
+    "teeth": 0.0073,
+    "dark": 0.021,
+    "tongue": 0.0051,
+    "teeth_gain": 0.0073,
+    "dark_gain": 0.0195,
+    "ap_rel_l": 1.0023,
+    "ap_rel_r": 1.0125,
+    "ap_rel": 1.0074,
+    "ap_asym": 0.0101,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.0037,
+    "iris_dy_lm": 0.0057,
+    "gaze_dx": -0.0018,
+    "gaze_dy": 0.0029,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.523986577987671,
+   "align_resid_px": 1.72,
+   "takes": {
+    "g1/DD": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "kk": {
+   "pass": true,
+   "chosen": "g1/kk",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "open: gap",
+     "value": 0.1664,
+     "op": "in",
+     "limit": [
+      0.035,
+      0.192
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "dark gap or teeth",
+     "value": 0.0676,
+     "op": ">",
+     "limit": 0.008,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9722,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0018,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.1514,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.5856,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.68,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0024,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.02,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1664,
+    "mouth_w_rel": 0.9146,
+    "open_aspect": 0.218,
+    "outer_h_rel": 1.5626,
+    "corner_lift": -0.0731,
+    "lower_lip_up": -0.15,
+    "teeth": 0.0035,
+    "dark": 0.0641,
+    "tongue": 0.0002,
+    "teeth_gain": 0.0034,
+    "dark_gain": 0.0626,
+    "ap_rel_l": 0.97,
+    "ap_rel_r": 0.9744,
+    "ap_rel": 0.9722,
+    "ap_asym": 0.0044,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0004,
+    "iris_dy_lm": 0.0124,
+    "gaze_dx": 0.0002,
+    "gaze_dy": 0.0062,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.5856082439422607,
+   "align_resid_px": 2.28,
+   "takes": {
+    "g1/kk": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "CH": {
+   "pass": true,
+   "chosen": "g1/CH",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "lips forward: width/base",
+     "value": 0.8693,
+     "op": "<",
+     "limit": 0.97,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "teeth visible",
+     "value": 0.0137,
+     "op": ">",
+     "limit": 0.002,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9951,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0013,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 6.4379,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.6458,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.86,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0012,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.11,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1609,
+    "mouth_w_rel": 0.8693,
+    "open_aspect": 0.2217,
+    "outer_h_rel": 1.5172,
+    "corner_lift": -0.034,
+    "lower_lip_up": -0.1074,
+    "teeth": 0.0137,
+    "dark": 0.0082,
+    "tongue": 0.0032,
+    "teeth_gain": 0.0137,
+    "dark_gain": 0.0067,
+    "ap_rel_l": 0.9852,
+    "ap_rel_r": 1.005,
+    "ap_rel": 0.9951,
+    "ap_asym": 0.0198,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.001,
+    "iris_dy_lm": 0.0119,
+    "gaze_dx": -0.0005,
+    "gaze_dy": 0.0059,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.6457879543304443,
+   "align_resid_px": 1.94,
+   "takes": {
+    "g1/CH": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "SS": {
+   "pass": true,
+   "chosen": "g1/SS",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "teeth almost touching: gap",
+     "value": 0.1127,
+     "op": "<",
+     "limit": 0.14,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "teeth/gap visible",
+     "value": 0.0209,
+     "op": ">",
+     "limit": 0.01,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "not narrowed: width/base",
+     "value": 0.9901,
+     "op": ">",
+     "limit": 0.92,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.995,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0016,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 6.7849,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.8522,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.76,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0042,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.04,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1127,
+    "mouth_w_rel": 0.9901,
+    "open_aspect": 0.1364,
+    "outer_h_rel": 1.3341,
+    "corner_lift": -0.0253,
+    "lower_lip_up": -0.0641,
+    "teeth": 0.0069,
+    "dark": 0.014,
+    "tongue": 0.0047,
+    "teeth_gain": 0.0069,
+    "dark_gain": 0.0125,
+    "ap_rel_l": 0.9782,
+    "ap_rel_r": 1.0119,
+    "ap_rel": 0.995,
+    "ap_asym": 0.0337,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0035,
+    "iris_dy_lm": 0.0123,
+    "gaze_dx": 0.0018,
+    "gaze_dy": 0.0061,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.8522257804870605,
+   "align_resid_px": 2.85,
+   "takes": {
+    "g1/SS": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "RR": {
+   "pass": true,
+   "chosen": "g1/RR",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "rounded: width/base",
+     "value": 0.7322,
+     "op": "<",
+     "limit": 0.8999999999999999,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "small opening: gap",
+     "value": 0.0426,
+     "op": "<",
+     "limit": 0.16,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9858,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0013,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.2036,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.7463,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.8,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0011,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.09,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0426,
+    "mouth_w_rel": 0.7322,
+    "open_aspect": 0.0697,
+    "outer_h_rel": 1.4674,
+    "corner_lift": -0.0733,
+    "lower_lip_up": -0.1408,
+    "teeth": 0.0001,
+    "dark": 0.0115,
+    "tongue": 0.0037,
+    "teeth_gain": 0.0,
+    "dark_gain": 0.01,
+    "ap_rel_l": 0.9722,
+    "ap_rel_r": 0.9993,
+    "ap_rel": 0.9858,
+    "ap_asym": 0.0271,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0023,
+    "iris_dy_lm": 0.0108,
+    "gaze_dx": 0.0012,
+    "gaze_dy": 0.0054,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.7463207244873047,
+   "align_resid_px": 1.72,
+   "takes": {
+    "g1/RR": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "aa": {
+   "pass": true,
+   "chosen": "g1/aa",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "wide open: gap",
+     "value": 0.32,
+     "op": ">",
+     "limit": 0.16,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "open interior (dark+teeth+tongue)",
+     "value": 0.1305,
+     "op": ">",
+     "limit": 0.03,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9715,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0033,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 8.3288,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.9283,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 4.0,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0008,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.03,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.32,
+    "mouth_w_rel": 0.9116,
+    "open_aspect": 0.4206,
+    "outer_h_rel": 1.985,
+    "corner_lift": -0.1204,
+    "lower_lip_up": -0.2737,
+    "teeth": 0.0092,
+    "dark": 0.096,
+    "tongue": 0.0253,
+    "teeth_gain": 0.0092,
+    "dark_gain": 0.0945,
+    "ap_rel_l": 0.9614,
+    "ap_rel_r": 0.9817,
+    "ap_rel": 0.9715,
+    "ap_asym": 0.0203,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0039,
+    "iris_dy_lm": 0.0139,
+    "gaze_dx": 0.002,
+    "gaze_dy": 0.007,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.928270101547241,
+   "align_resid_px": 2.88,
+   "takes": {
+    "g1/aa": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "E": {
+   "pass": true,
+   "chosen": "g2/E",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "medium open: gap",
+     "value": 0.2106,
+     "op": "in",
+     "limit": [
+      0.035,
+      0.35200000000000004
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "spread: width/base",
+     "value": 0.9641,
+     "op": ">",
+     "limit": 0.95,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "open interior (teeth+dark)",
+     "value": 0.0668,
+     "op": ">",
+     "limit": 0.01,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9899,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.002,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.4576,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.8743,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.62,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0022,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.03,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.2106,
+    "mouth_w_rel": 0.9641,
+    "open_aspect": 0.2617,
+    "outer_h_rel": 1.6882,
+    "corner_lift": -0.0537,
+    "lower_lip_up": -0.1904,
+    "teeth": 0.0113,
+    "dark": 0.0555,
+    "tongue": 0.0095,
+    "teeth_gain": 0.0113,
+    "dark_gain": 0.054,
+    "ap_rel_l": 0.9702,
+    "ap_rel_r": 1.0095,
+    "ap_rel": 0.9899,
+    "ap_asym": 0.0394,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0036,
+    "iris_dy_lm": 0.0122,
+    "gaze_dx": 0.0018,
+    "gaze_dy": 0.0061,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.874272584915161,
+   "align_resid_px": 2.95,
+   "takes": {
+    "g2/E": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "I": {
+   "pass": true,
+   "chosen": "r2a/I~r2a2",
+   "first_try_pass": false,
+   "n_takes": 4,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "spread: width/base",
+     "value": 1.1962,
+     "op": ">",
+     "limit": 1.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "narrow opening: gap",
+     "value": 0.1548,
+     "op": "<",
+     "limit": 0.16,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "teeth visible",
+     "value": 0.0428,
+     "op": ">",
+     "limit": 0.004,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9762,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0021,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 9.5284,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.6827,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 4.12,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0034,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.0,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1548,
+    "mouth_w_rel": 1.1962,
+    "open_aspect": 0.1551,
+    "outer_h_rel": 1.4029,
+    "corner_lift": 0.0695,
+    "lower_lip_up": -0.0935,
+    "teeth": 0.0428,
+    "dark": 0.0173,
+    "tongue": 0.0072,
+    "teeth_gain": 0.0427,
+    "dark_gain": 0.0159,
+    "ap_rel_l": 0.9668,
+    "ap_rel_r": 0.9856,
+    "ap_rel": 0.9762,
+    "ap_asym": 0.0188,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0037,
+    "iris_dy_lm": 0.015,
+    "gaze_dx": 0.0019,
+    "gaze_dy": 0.0075,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 4.682713508605957,
+   "align_resid_px": 1.12,
+   "takes": {
+    "r2a/I~r2a2": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    },
+    "g2/I": {
+     "pass": false,
+     "n_fail": 1,
+     "badness": 0.084,
+     "failed": [
+      "narrow opening: gap"
+     ]
+    },
+    "r2a/I~r2a1": {
+     "pass": false,
+     "n_fail": 1,
+     "badness": 0.162,
+     "failed": [
+      "narrow opening: gap"
+     ]
+    },
+    "r1a/I~r1a1": {
+     "pass": false,
+     "n_fail": 1,
+     "badness": 0.178,
+     "failed": [
+      "narrow opening: gap"
+     ]
+    }
+   }
+  },
+  "O": {
+   "pass": true,
+   "chosen": "g2/O",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "rounded: width/base",
+     "value": 0.7405,
+     "op": "<",
+     "limit": 0.88,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "open: gap",
+     "value": 0.2402,
+     "op": ">",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "round: height/width",
+     "value": 0.3886,
+     "op": ">",
+     "limit": 0.25,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9706,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0017,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 8.6763,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.1828,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.8,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0018,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.0,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.2402,
+    "mouth_w_rel": 0.7405,
+    "open_aspect": 0.3886,
+    "outer_h_rel": 1.8563,
+    "corner_lift": -0.1467,
+    "lower_lip_up": -0.2637,
+    "teeth": 0.0027,
+    "dark": 0.0784,
+    "tongue": 0.0007,
+    "teeth_gain": 0.0027,
+    "dark_gain": 0.0769,
+    "ap_rel_l": 0.9662,
+    "ap_rel_r": 0.975,
+    "ap_rel": 0.9706,
+    "ap_asym": 0.0088,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0056,
+    "iris_dy_lm": 0.0133,
+    "gaze_dx": 0.0028,
+    "gaze_dy": 0.0066,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 4.18277645111084,
+   "align_resid_px": 3.29,
+   "takes": {
+    "g2/O": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "U": {
+   "pass": true,
+   "chosen": "g2/U",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "pucker: width/base",
+     "value": 0.5806,
+     "op": "<",
+     "limit": 0.84,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "small opening: gap",
+     "value": 0.0368,
+     "op": "<",
+     "limit": 0.16,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 1.0074,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0021,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.3958,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.0864,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 4.07,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0027,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.07,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0368,
+    "mouth_w_rel": 0.5806,
+    "open_aspect": 0.0759,
+    "outer_h_rel": 1.4704,
+    "corner_lift": -0.0692,
+    "lower_lip_up": -0.1251,
+    "teeth": 0.0,
+    "dark": 0.0052,
+    "tongue": 0.0038,
+    "teeth_gain": -0.0,
+    "dark_gain": 0.0037,
+    "ap_rel_l": 0.9964,
+    "ap_rel_r": 1.0183,
+    "ap_rel": 1.0074,
+    "ap_asym": 0.0219,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0057,
+    "iris_dy_lm": 0.006,
+    "gaze_dx": 0.0029,
+    "gaze_dy": 0.003,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 4.086411476135254,
+   "align_resid_px": 2.74,
+   "takes": {
+    "g2/U": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "AE": {
+   "pass": true,
+   "chosen": "r2a/AE~r2a1",
+   "first_try_pass": false,
+   "n_takes": 3,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "open (between E and aa): gap",
+     "value": 0.311,
+     "op": "in",
+     "limit": [
+      0.07,
+      0.32
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "spread, not rounded: width/base",
+     "value": 0.9848,
+     "op": ">",
+     "limit": 0.95,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "open interior (teeth+dark)",
+     "value": 0.1114,
+     "op": ">",
+     "limit": 0.01,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9747,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0023,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.9477,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.8622,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.77,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0019,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.14,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.311,
+    "mouth_w_rel": 0.9848,
+    "open_aspect": 0.3783,
+    "outer_h_rel": 2.0027,
+    "corner_lift": -0.0779,
+    "lower_lip_up": -0.2842,
+    "teeth": 0.0214,
+    "dark": 0.09,
+    "tongue": 0.0128,
+    "teeth_gain": 0.0214,
+    "dark_gain": 0.0885,
+    "ap_rel_l": 0.9573,
+    "ap_rel_r": 0.9921,
+    "ap_rel": 0.9747,
+    "ap_asym": 0.0347,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0068,
+    "iris_dy_lm": 0.0214,
+    "gaze_dx": 0.0034,
+    "gaze_dy": 0.0107,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.862189769744873,
+   "align_resid_px": 3.58,
+   "takes": {
+    "r2a/AE~r2a1": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    },
+    "r1a/AE~r1a1": {
+     "pass": false,
+     "n_fail": 1,
+     "badness": 0.014,
+     "failed": [
+      "spread, not rounded: width/base"
+     ]
+    },
+    "g2/AE": {
+     "pass": false,
+     "n_fail": 1,
+     "badness": 0.03,
+     "failed": [
+      "spread, not rounded: width/base"
+     ]
+    }
+   }
+  },
+  "AO": {
+   "pass": true,
+   "chosen": "g2/AO",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "open: gap",
+     "value": 0.2681,
+     "op": ">",
+     "limit": 0.1,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "rounded: width/base",
+     "value": 0.7563,
+     "op": "<",
+     "limit": 0.95,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "tall opening: height/width",
+     "value": 0.4248,
+     "op": ">",
+     "limit": 0.25,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 0.9609,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0018,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 8.6723,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.2138,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.89,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0022,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.07,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.2681,
+    "mouth_w_rel": 0.7563,
+    "open_aspect": 0.4248,
+    "outer_h_rel": 1.9369,
+    "corner_lift": -0.1444,
+    "lower_lip_up": -0.2855,
+    "teeth": 0.0028,
+    "dark": 0.0743,
+    "tongue": 0.0042,
+    "teeth_gain": 0.0028,
+    "dark_gain": 0.0728,
+    "ap_rel_l": 0.9562,
+    "ap_rel_r": 0.9656,
+    "ap_rel": 0.9609,
+    "ap_asym": 0.0094,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": 0.0117,
+    "iris_dy_lm": 0.0215,
+    "gaze_dx": 0.0058,
+    "gaze_dy": 0.0108,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 4.21377420425415,
+   "align_resid_px": 3.07,
+   "takes": {
+    "g2/AO": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "ER": {
+   "pass": true,
+   "chosen": "r1a/ER~r1a1",
+   "first_try_pass": false,
+   "n_takes": 2,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "small opening: gap",
+     "value": 0.1163,
+     "op": "<",
+     "limit": 0.14,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "lips pushed in/rounded: width/base",
+     "value": 0.7335,
+     "op": "<",
+     "limit": 0.95,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 1.0192,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0009,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 6.9057,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.3649,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.82,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.06,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1163,
+    "mouth_w_rel": 0.7335,
+    "open_aspect": 0.1899,
+    "outer_h_rel": 1.5458,
+    "corner_lift": -0.078,
+    "lower_lip_up": -0.1498,
+    "teeth": 0.0,
+    "dark": 0.0199,
+    "tongue": 0.0032,
+    "teeth_gain": -0.0,
+    "dark_gain": 0.0184,
+    "ap_rel_l": 1.0162,
+    "ap_rel_r": 1.0223,
+    "ap_rel": 1.0192,
+    "ap_asym": 0.0061,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.0037,
+    "iris_dy_lm": 0.0141,
+    "gaze_dx": -0.0019,
+    "gaze_dy": 0.0071,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.364940643310547,
+   "align_resid_px": 1.44,
+   "takes": {
+    "r1a/ER~r1a1": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    },
+    "g2/ER": {
+     "pass": false,
+     "n_fail": 1,
+     "badness": 0.004,
+     "failed": [
+      "small opening: gap"
+     ]
+    }
+   }
+  },
+  "H": {
+   "pass": true,
+   "chosen": "g2/H",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "slightly open: gap",
+     "value": 0.0911,
+     "op": "in",
+     "limit": [
+      0.0175,
+      0.14
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "relaxed width: width/base",
+     "value": 0.9342,
+     "op": "in",
+     "limit": [
+      0.88,
+      1.1
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 1.0032,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0011,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 6.9106,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.9153,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.89,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.004,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.04,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0911,
+    "mouth_w_rel": 0.9342,
+    "open_aspect": 0.1169,
+    "outer_h_rel": 1.3268,
+    "corner_lift": -0.0431,
+    "lower_lip_up": -0.0886,
+    "teeth": 0.001,
+    "dark": 0.0308,
+    "tongue": 0.0014,
+    "teeth_gain": 0.0009,
+    "dark_gain": 0.0293,
+    "ap_rel_l": 1.0009,
+    "ap_rel_r": 1.0055,
+    "ap_rel": 1.0032,
+    "ap_asym": 0.0046,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.0007,
+    "iris_dy_lm": 0.012,
+    "gaze_dx": -0.0004,
+    "gaze_dy": 0.006,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.9152634143829346,
+   "align_resid_px": 1.43,
+   "takes": {
+    "g2/H": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "L": {
+   "pass": true,
+   "chosen": "g2/L",
+   "first_try_pass": true,
+   "n_takes": 2,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "open a little: gap",
+     "value": 0.1954,
+     "op": "in",
+     "limit": [
+      0.035,
+      0.22399999999999998
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "tongue or teeth visible (max of tongue/0.01, teeth/TEETH_MIN)",
+     "value": 5.35,
+     "op": ">",
+     "limit": 1.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes unchanged: aperture/base",
+     "value": 1.0013,
+     "op": "in",
+     "limit": [
+      0.75,
+      1.3
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0013,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.6914,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.7242,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 3.82,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0003,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.05,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1954,
+    "mouth_w_rel": 0.936,
+    "open_aspect": 0.2502,
+    "outer_h_rel": 1.5975,
+    "corner_lift": -0.0597,
+    "lower_lip_up": -0.1756,
+    "teeth": 0.008,
+    "dark": 0.0141,
+    "tongue": 0.0535,
+    "teeth_gain": 0.008,
+    "dark_gain": 0.0126,
+    "ap_rel_l": 0.9885,
+    "ap_rel_r": 1.0141,
+    "ap_rel": 1.0013,
+    "ap_asym": 0.0256,
+    "white_rel": 1.0,
+    "iris_dx_px": 0.0,
+    "iris_dy_px": 0.0,
+    "iris_dx_lm": -0.0088,
+    "iris_dy_lm": 0.0143,
+    "gaze_dx": -0.0044,
+    "gaze_dy": 0.0071,
+    "brow_tilt": 0.0,
+    "brow_up": 0.0,
+    "brow_inner_up": 0.0,
+    "brow_asym": 0.0
+   },
+   "seam": 3.724202871322632,
+   "align_resid_px": 1.95,
+   "takes": {
+    "g2/L": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    },
+    "g4/L~2": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "blink": {
+   "pass": true,
+   "chosen": "g3/blink",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "lids closed: aperture/base",
+     "value": 0.0509,
+     "op": "<",
+     "limit": 0.3,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "no eye white visible (white/base)",
+     "value": 0.0,
+     "op": "<",
+     "limit": 0.25,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "both eyes (asymmetry)",
+     "value": 0.0067,
+     "op": "<",
+     "limit": 0.35,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth unchanged: gap",
+     "value": 0.0011,
+     "op": "<",
+     "limit": 0.05,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.003,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0024,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 5.8306,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 5.0231,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 5.52,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.006,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.01,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0011,
+    "mouth_w_rel": 0.9928,
+    "open_aspect": 0.0013,
+    "outer_h_rel": 1.0064,
+    "corner_lift": -0.0026,
+    "lower_lip_up": -0.0053,
+    "teeth": 0.0003,
+    "dark": 0.0013,
+    "tongue": 0.0046,
+    "teeth_gain": 0.0002,
+    "dark_gain": -0.0002,
+    "ap_rel_l": 0.0543,
+    "ap_rel_r": 0.0476,
+    "ap_rel": 0.0509,
+    "ap_asym": 0.0067,
+    "white_rel": 0.0,
+    "iris_dx_px": -0.2127,
+    "iris_dy_px": 0.1767,
+    "iris_dx_lm": -0.0081,
+    "iris_dy_lm": 0.1929,
+    "gaze_dx": -0.1104,
+    "gaze_dy": 0.1848,
+    "brow_tilt": 0.0002,
+    "brow_up": -0.003,
+    "brow_inner_up": -0.002,
+    "brow_asym": 0.0009
+   },
+   "seam": 5.023133277893066,
+   "align_resid_px": 2.6,
+   "takes": {
+    "g3/blink": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "half": {
+   "pass": true,
+   "chosen": "g3/half",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "half closed: aperture/base",
+     "value": 0.6081,
+     "op": "in",
+     "limit": [
+      0.2,
+      0.85
+     ],
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eye white partly hidden (white/base)",
+     "value": 0.2817,
+     "op": "<",
+     "limit": 0.8,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "both eyes (asymmetry)",
+     "value": 0.0086,
+     "op": "<",
+     "limit": 0.35,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth unchanged: gap",
+     "value": 0.0002,
+     "op": "<",
+     "limit": 0.05,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0011,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0025,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 5.795,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.4316,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 5.64,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0039,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.1,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0002,
+    "mouth_w_rel": 1.001,
+    "open_aspect": 0.0003,
+    "outer_h_rel": 1.0206,
+    "corner_lift": -0.0016,
+    "lower_lip_up": 0.0003,
+    "teeth": 0.0,
+    "dark": 0.0015,
+    "tongue": 0.0029,
+    "teeth_gain": 0.0,
+    "dark_gain": 0.0,
+    "ap_rel_l": 0.6038,
+    "ap_rel_r": 0.6124,
+    "ap_rel": 0.6081,
+    "ap_asym": 0.0086,
+    "white_rel": 0.2817,
+    "iris_dx_px": -0.0262,
+    "iris_dy_px": 0.0896,
+    "iris_dx_lm": -0.0148,
+    "iris_dy_lm": 0.0811,
+    "gaze_dx": -0.0205,
+    "gaze_dy": 0.0853,
+    "brow_tilt": -0.0017,
+    "brow_up": -0.0011,
+    "brow_inner_up": -0.0017,
+    "brow_asym": 0.0001
+   },
+   "seam": 4.431603908538818,
+   "align_resid_px": 2.47,
+   "takes": {
+    "g3/half": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "gaze_left": {
+   "pass": false,
+   "chosen": "g3/gaze_left",
+   "first_try_pass": false,
+   "n_takes": 3,
+   "failed_checks": [
+    "gaze: iris shift -x (x eye width)",
+    "gaze: both estimates agree in sign (landmark iris, dark centroid)"
+   ],
+   "checks": [
+    {
+     "check": "gaze: iris shift -x (x eye width)",
+     "value": -0.1811,
+     "op": ">",
+     "limit": 0.06,
+     "pass": false,
+     "excess": 4.018
+    },
+    {
+     "check": "gaze: both estimates agree in sign (landmark iris, dark centroid)",
+     "value": -0.1895,
+     "op": ">",
+     "limit": 0.0,
+     "pass": false,
+     "excess": 189.5
+    },
+    {
+     "check": "gaze: off-axis shift beyond the wanted one",
+     "value": -0.1612,
+     "op": "<",
+     "limit": 0.08,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: lids stay open (aperture/base)",
+     "value": 1.0168,
+     "op": ">",
+     "limit": 0.6,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth unchanged: gap",
+     "value": 0.0034,
+     "op": "<",
+     "limit": 0.05,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0031,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0015,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 5.6981,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 3.9632,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 5.37,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0041,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.07,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0034,
+    "mouth_w_rel": 1.0027,
+    "open_aspect": 0.0041,
+    "outer_h_rel": 1.0033,
+    "corner_lift": -0.0003,
+    "lower_lip_up": 0.0023,
+    "teeth": 0.0,
+    "dark": 0.0016,
+    "tongue": 0.0028,
+    "teeth_gain": -0.0,
+    "dark_gain": 0.0001,
+    "ap_rel_l": 1.0304,
+    "ap_rel_r": 1.0031,
+    "ap_rel": 1.0168,
+    "ap_asym": 0.0272,
+    "white_rel": 1.91,
+    "iris_dx_px": 0.1727,
+    "iris_dy_px": 0.0145,
+    "iris_dx_lm": 0.1895,
+    "iris_dy_lm": 0.0254,
+    "gaze_dx": 0.1811,
+    "gaze_dy": 0.0199,
+    "brow_tilt": -0.0009,
+    "brow_up": -0.0031,
+    "brow_inner_up": -0.0012,
+    "brow_asym": 0.0016
+   },
+   "seam": 3.9631924629211426,
+   "align_resid_px": 1.41,
+   "takes": {
+    "g3/gaze_left": {
+     "pass": false,
+     "n_fail": 2,
+     "badness": 193.518,
+     "failed": [
+      "gaze: iris shift -x (x eye width)",
+      "gaze: both estimates agree in sign (landmark iris, dark centroid)"
+     ]
+    },
+    "r1a/gaze_left~r1a1": {
+     "pass": false,
+     "n_fail": 2,
+     "badness": 200.832,
+     "failed": [
+      "gaze: iris shift -x (x eye width)",
+      "gaze: both estimates agree in sign (landmark iris, dark centroid)"
+     ]
+    },
+    "r2a/gaze_left~r2a1": {
+     "pass": false,
+     "n_fail": 2,
+     "badness": 233.555,
+     "failed": [
+      "gaze: iris shift -x (x eye width)",
+      "gaze: both estimates agree in sign (landmark iris, dark centroid)"
+     ]
+    }
+   }
+  },
+  "gaze_right": {
+   "pass": true,
+   "chosen": "g3/gaze_right",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "gaze: iris shift +x (x eye width)",
+     "value": 0.2181,
+     "op": ">",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: both estimates agree in sign (landmark iris, dark centroid)",
+     "value": 0.194,
+     "op": ">",
+     "limit": 0.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: off-axis shift beyond the wanted one",
+     "value": -0.1946,
+     "op": "<",
+     "limit": 0.08,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: lids stay open (aperture/base)",
+     "value": 0.9994,
+     "op": ">",
+     "limit": 0.6,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth unchanged: gap",
+     "value": 0.0041,
+     "op": "<",
+     "limit": 0.05,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0031,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0019,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 5.9455,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.2392,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 5.7,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0032,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.06,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0041,
+    "mouth_w_rel": 0.9998,
+    "open_aspect": 0.0049,
+    "outer_h_rel": 0.9979,
+    "corner_lift": 0.0004,
+    "lower_lip_up": 0.0007,
+    "teeth": 0.0,
+    "dark": 0.0015,
+    "tongue": 0.003,
+    "teeth_gain": -0.0,
+    "dark_gain": 0.0,
+    "ap_rel_l": 1.0034,
+    "ap_rel_r": 0.9955,
+    "ap_rel": 0.9994,
+    "ap_asym": 0.0078,
+    "white_rel": 2.0192,
+    "iris_dx_px": 0.194,
+    "iris_dy_px": 0.013,
+    "iris_dx_lm": 0.2421,
+    "iris_dy_lm": 0.034,
+    "gaze_dx": 0.2181,
+    "gaze_dy": 0.0235,
+    "brow_tilt": -0.0012,
+    "brow_up": -0.0031,
+    "brow_inner_up": -0.0015,
+    "brow_asym": 0.001
+   },
+   "seam": 4.239185333251953,
+   "align_resid_px": 1.6,
+   "takes": {
+    "g3/gaze_right": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "gaze_up": {
+   "pass": true,
+   "chosen": "g3/gaze_up",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "gaze: iris shift -y (x eye width)",
+     "value": 0.0723,
+     "op": ">",
+     "limit": 0.03,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: both estimates agree in sign (landmark iris, dark centroid)",
+     "value": 0.0689,
+     "op": ">",
+     "limit": 0.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: off-axis shift beyond the wanted one",
+     "value": -0.0676,
+     "op": "<",
+     "limit": 0.08,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "gaze: lids stay open (aperture/base)",
+     "value": 0.8453,
+     "op": ">",
+     "limit": 0.6,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth unchanged: gap",
+     "value": 0.0008,
+     "op": "<",
+     "limit": 0.05,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "brows unchanged: |brow move|",
+     "value": 0.0059,
+     "op": "<",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0019,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 5.7815,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 4.6663,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 5.57,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0043,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.02,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0008,
+    "mouth_w_rel": 1.0066,
+    "open_aspect": 0.0009,
+    "outer_h_rel": 1.0108,
+    "corner_lift": 0.0006,
+    "lower_lip_up": -0.0011,
+    "teeth": 0.0,
+    "dark": 0.0015,
+    "tongue": 0.0026,
+    "teeth_gain": -0.0,
+    "dark_gain": 0.0,
+    "ap_rel_l": 0.8608,
+    "ap_rel_r": 0.8298,
+    "ap_rel": 0.8453,
+    "ap_asym": 0.031,
+    "white_rel": 3.2139,
+    "iris_dx_px": -0.0099,
+    "iris_dy_px": -0.0757,
+    "iris_dx_lm": 0.0004,
+    "iris_dy_lm": -0.0689,
+    "gaze_dx": -0.0047,
+    "gaze_dy": -0.0723,
+    "brow_tilt": -0.0009,
+    "brow_up": -0.0059,
+    "brow_inner_up": -0.0015,
+    "brow_asym": 0.0028
+   },
+   "seam": 4.666342735290527,
+   "align_resid_px": 1.59,
+   "takes": {
+    "g3/gaze_up": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "smile": {
+   "pass": true,
+   "chosen": "g4/smile",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "corners up",
+     "value": 0.0931,
+     "op": ">",
+     "limit": 0.008,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "wider mouth: width/base",
+     "value": 1.1963,
+     "op": ">",
+     "limit": 1.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "teeth visible",
+     "value": 0.027,
+     "op": ">",
+     "limit": 0.004,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0033,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 11.7522,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 5.5083,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 6.85,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.004,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.03,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.1204,
+    "mouth_w_rel": 1.1963,
+    "open_aspect": 0.1206,
+    "outer_h_rel": 1.259,
+    "corner_lift": 0.0931,
+    "lower_lip_up": -0.0529,
+    "teeth": 0.027,
+    "dark": 0.0123,
+    "tongue": 0.0127,
+    "teeth_gain": 0.0269,
+    "dark_gain": 0.0108,
+    "ap_rel_l": 0.8629,
+    "ap_rel_r": 0.8535,
+    "ap_rel": 0.8582,
+    "ap_asym": 0.0094,
+    "white_rel": 0.4631,
+    "iris_dx_px": 0.001,
+    "iris_dy_px": -0.0167,
+    "iris_dx_lm": 0.0087,
+    "iris_dy_lm": 0.0035,
+    "gaze_dx": 0.0049,
+    "gaze_dy": -0.0066,
+    "brow_tilt": -0.0059,
+    "brow_up": -0.0028,
+    "brow_inner_up": -0.0043,
+    "brow_asym": 0.0032
+   },
+   "seam": 5.508326053619385,
+   "align_resid_px": 3.82,
+   "takes": {
+    "g4/smile": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "laugh": {
+   "pass": true,
+   "chosen": "g4/laugh",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "mouth open: gap",
+     "value": 0.2295,
+     "op": ">",
+     "limit": 0.1,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "corners up",
+     "value": 0.0999,
+     "op": ">",
+     "limit": 0.008,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes squeezed: aperture/base",
+     "value": 0.2941,
+     "op": "<",
+     "limit": 0.75,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "symmetric eyes (no wink)",
+     "value": 0.0419,
+     "op": "<",
+     "limit": 0.35,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0036,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 13.4894,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 6.5578,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 9.48,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0084,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.12,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.2295,
+    "mouth_w_rel": 1.2033,
+    "open_aspect": 0.2285,
+    "outer_h_rel": 1.6478,
+    "corner_lift": 0.0999,
+    "lower_lip_up": -0.1373,
+    "teeth": 0.0455,
+    "dark": 0.0595,
+    "tongue": 0.0175,
+    "teeth_gain": 0.0454,
+    "dark_gain": 0.058,
+    "ap_rel_l": 0.2732,
+    "ap_rel_r": 0.3151,
+    "ap_rel": 0.2941,
+    "ap_asym": 0.0419,
+    "white_rel": 0.0,
+    "iris_dx_px": -0.0383,
+    "iris_dy_px": -0.005,
+    "iris_dx_lm": -0.052,
+    "iris_dy_lm": 0.0154,
+    "gaze_dx": -0.0451,
+    "gaze_dy": 0.0052,
+    "brow_tilt": -0.0086,
+    "brow_up": 0.0094,
+    "brow_inner_up": 0.0021,
+    "brow_asym": 0.0029
+   },
+   "seam": 6.557847023010254,
+   "align_resid_px": 3.03,
+   "takes": {
+    "g4/laugh": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "sad": {
+   "pass": true,
+   "chosen": "g4/sad",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "corners down",
+     "value": -0.083,
+     "op": "<",
+     "limit": -0.01,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth closed: gap",
+     "value": 0.0029,
+     "op": "<",
+     "limit": 0.1,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "inner brow ends raised vs outer (tilt)",
+     "value": 0.0714,
+     "op": ">",
+     "limit": 0.04,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0034,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.6057,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 11.3179,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 6.37,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0046,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.04,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0029,
+    "mouth_w_rel": 0.9276,
+    "open_aspect": 0.0037,
+    "outer_h_rel": 0.9356,
+    "corner_lift": -0.083,
+    "lower_lip_up": 0.0271,
+    "teeth": 0.0,
+    "dark": 0.0003,
+    "tongue": 0.0047,
+    "teeth_gain": -0.0,
+    "dark_gain": -0.0012,
+    "ap_rel_l": 1.0465,
+    "ap_rel_r": 1.0479,
+    "ap_rel": 1.0472,
+    "ap_asym": 0.0014,
+    "white_rel": 0.913,
+    "iris_dx_px": -0.0145,
+    "iris_dy_px": 0.0001,
+    "iris_dx_lm": 0.0021,
+    "iris_dy_lm": -0.0044,
+    "gaze_dx": -0.0062,
+    "gaze_dy": -0.0021,
+    "brow_tilt": 0.0714,
+    "brow_up": -0.0083,
+    "brow_inner_up": 0.035,
+    "brow_asym": 0.0269
+   },
+   "seam": 11.31785774230957,
+   "align_resid_px": 4.59,
+   "takes": {
+    "g4/sad": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "surprised": {
+   "pass": true,
+   "chosen": "g4/surprised",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "brows up",
+     "value": 0.0944,
+     "op": ">",
+     "limit": 0.025,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "eyes wide: max(aperture, eye white)/base",
+     "value": 1.972,
+     "op": ">",
+     "limit": 1.05,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "mouth open: gap",
+     "value": 0.2349,
+     "op": ">",
+     "limit": 0.035,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0045,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 10.5586,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 12.5608,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 6.16,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0032,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.01,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.2349,
+    "mouth_w_rel": 0.843,
+    "open_aspect": 0.3339,
+    "outer_h_rel": 1.7825,
+    "corner_lift": -0.1322,
+    "lower_lip_up": -0.2312,
+    "teeth": 0.0031,
+    "dark": 0.0844,
+    "tongue": 0.0072,
+    "teeth_gain": 0.003,
+    "dark_gain": 0.0829,
+    "ap_rel_l": 1.226,
+    "ap_rel_r": 1.2434,
+    "ap_rel": 1.2347,
+    "ap_asym": 0.0174,
+    "white_rel": 1.972,
+    "iris_dx_px": -0.0184,
+    "iris_dy_px": 0.0401,
+    "iris_dx_lm": 0.0039,
+    "iris_dy_lm": 0.0438,
+    "gaze_dx": -0.0073,
+    "gaze_dy": 0.0419,
+    "brow_tilt": 0.0122,
+    "brow_up": 0.0944,
+    "brow_inner_up": 0.0995,
+    "brow_asym": 0.013
+   },
+   "seam": 12.560783386230469,
+   "align_resid_px": 5.33,
+   "takes": {
+    "g4/surprised": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  },
+  "thinking": {
+   "pass": true,
+   "chosen": "g4/thinking",
+   "first_try_pass": true,
+   "n_takes": 1,
+   "failed_checks": [],
+   "checks": [
+    {
+     "check": "brow asymmetry or gaze shift",
+     "value": 3.442,
+     "op": ">",
+     "limit": 1.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "lips closed: gap",
+     "value": 0.0046,
+     "op": "<",
+     "limit": 0.1,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: landmark shape (Procrustes RMS / IOD)",
+     "value": 0.0014,
+     "op": "<",
+     "limit": 0.012,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "identity drift: colour shift before tone fit",
+     "value": 7.79,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "seam (worst region)",
+     "value": 8.4459,
+     "op": "<",
+     "limit": 18.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: ring error after tone fit",
+     "value": 5.91,
+     "op": "<",
+     "limit": 14.0,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |scale-1|",
+     "value": 0.0041,
+     "op": "<",
+     "limit": 0.06,
+     "pass": true,
+     "excess": 0.0
+    },
+    {
+     "check": "align: |rotation| deg",
+     "value": 0.04,
+     "op": "<",
+     "limit": 3.0,
+     "pass": true,
+     "excess": 0.0
+    }
+   ],
+   "metrics": {
+    "gap": 0.0046,
+    "mouth_w_rel": 0.8903,
+    "open_aspect": 0.0062,
+    "outer_h_rel": 0.9661,
+    "corner_lift": -0.0141,
+    "lower_lip_up": 0.0485,
+    "teeth": 0.0006,
+    "dark": 0.001,
+    "tongue": 0.0028,
+    "teeth_gain": 0.0005,
+    "dark_gain": -0.0005,
+    "ap_rel_l": 1.0444,
+    "ap_rel_r": 1.0655,
+    "ap_rel": 1.055,
+    "ap_asym": 0.0211,
+    "white_rel": 1.7021,
+    "iris_dx_px": 0.1641,
+    "iris_dy_px": -0.0221,
+    "iris_dx_lm": 0.1801,
+    "iris_dy_lm": -0.0277,
+    "gaze_dx": 0.1721,
+    "gaze_dy": -0.0249,
+    "brow_tilt": -0.0148,
+    "brow_up": 0.0085,
+    "brow_inner_up": 0.0069,
+    "brow_asym": 0.0412
+   },
+   "seam": 8.445878982543945,
+   "align_resid_px": 3.5,
+   "takes": {
+    "g4/thinking": {
+     "pass": true,
+     "n_fail": 0,
+     "badness": 0.0,
+     "failed": []
+    }
+   }
+  }
+ },
+ "final": true,
+ "thresholds": {
+  "LIP_UP_IN": 13,
+  "LIP_LO_IN": 14,
+  "LIP_UP_OUT": 0,
+  "LIP_LO_OUT": 17,
+  "CORNER_L": 61,
+  "CORNER_R": 291,
+  "IRIS_CENTRES": [
+   468,
+   473
+  ],
+  "TEETH_S_MAX": 80,
+  "TEETH_V_MIN": 165,
+  "DARK_V_MAX": 70,
+  "TONGUE_H": [
+   0,
+   12,
+   165,
+   180
+  ],
+  "TONGUE_S_MIN": 90,
+  "TONGUE_V_MIN": 110,
+  "SCLERA_S_MAX": 70,
+  "SCLERA_V_MIN": 160,
+  "SCLERA_S_SKIN": 0.45,
+  "SCLERA_V_SKIN": 1.0,
+  "IRIS_V_FRAC": 0.62,
+  "MOUTH_BAND_IOD": 0.02,
+  "BROW_SEARCH_UP": 0.7,
+  "BROW_SEARCH_DOWN": 0.12,
+  "BROW_DARK_FRAC": 0.7,
+  "BROW_MIN_PX": 3,
+  "GAP_CLOSED": 0.035,
+  "GAP_SMALL": 0.1,
+  "GAP_SS": 0.14,
+  "GAP_TH": 0.26,
+  "TONGUE_MIN": 0.025,
+  "OPEN_MIN": 0.01,
+  "NARROW_FF": 0.98,
+  "GAP_WIDE": 0.16,
+  "TEETH_MIN": 0.004,
+  "TEETH_NONE": 0.004,
+  "DARK_MIN": 0.004,
+  "NARROW_O": 0.88,
+  "NARROW_U": 0.84,
+  "NARROW_CH": 0.97,
+  "WIDE_I": 1.0,
+  "ROUND_O": 0.25,
+  "LIFT_SMILE": 0.008,
+  "LIFT_SAD": -0.01,
+  "BLINK_AP": 0.3,
+  "BLINK_WHITE": 0.25,
+  "HALF_AP": [
+   0.2,
+   0.85
+  ],
+  "HALF_WHITE": 0.8,
+  "EYES_SQUINT": 0.75,
+  "EYES_WIDE": 1.05,
+  "EYE_SYM": 0.35,
+  "GAZE_X": 0.06,
+  "GAZE_UP": 0.03,
+  "GAZE_OFF_AXIS": 0.08,
+  "BROW_UP": 0.025,
+  "SAD_TILT": 0.04,
+  "THINK_ASYM": 0.015,
+  "THINK_GAZE": 0.05,
+  "UNCHANGED_AP": [
+   0.75,
+   1.3
+  ],
+  "UNCHANGED_GAP": 0.05,
+  "UNCHANGED_BROW": 0.025,
+  "IDENTITY_MAX": 0.012,
+  "TONE_DRIFT_MAX": 14.0,
+  "SEAM_MAX": 18.0,
+  "RING_ERR_MAX": 14.0,
+  "SCALE_MAX": 0.06,
+  "ROT_MAX": 3.0,
+  "BASE_FACE_CX": [
+   0.42,
+   0.58
+  ],
+  "BASE_FACE_W": [
+   0.28,
+   0.52
+  ],
+  "BASE_EYES_Y": [
+   0.24,
+   0.5
+  ],
+  "BASE_HAIR_TOP": 0.02,
+  "BASE_CHIN_Y": 0.75,
+  "BASE_BG_FLAT": 0.85,
+  "BASE_BG_TOL": 12,
+  "BASE_BG_LIGHT": 200,
+  "BASE_ROLL_DEG": 4.0,
+  "BASE_MOUTH_CLOSED": 0.035,
+  "BASE_EYES_OPEN": 0.18,
+  "MIRROR_SKIN_RATIO": 1.5,
+  "LEAK_MAX_PX": 20,
+  "JUDGE_PHOTO_MAX": 4.5,
+  "JUDGE_RENDER_MIN": 5.5,
+  "BASE_SKIN_DL": 25,
+  "BASE_HAIR_DL": 35,
+  "SKIN_SPOTS": [
+   50,
+   280,
+   101,
+   330
+  ],
+  "SKIN_SPOT_IOD": 0.12,
+  "HAIR_BOX": [
+   0.3,
+   0.08,
+   0.2
+  ]
+ },
+ "model": "gemini-3.1-flash-image",
+ "look": "realistic",
+ "base": {
+  "chosen": "raw/base_cand0.jpg",
+  "pass": true,
+  "attempts": [
+   {
+    "image": "raw/base_cand0.jpg",
+    "size": [
+     896,
+     1200
+    ],
+    "checks": [
+     {
+      "check": "face centred: centre x / width",
+      "value": 0.5004,
+      "op": "in",
+      "limit": [
+       0.42,
+       0.58
+      ],
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "face size: face width / image width",
+      "value": 0.4937,
+      "op": "in",
+      "limit": [
+       0.28,
+       0.52
+      ],
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "eye line: y / height",
+      "value": 0.4038,
+      "op": "in",
+      "limit": [
+       0.24,
+       0.5
+      ],
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "hair not cut: top of head / height",
+      "value": 0.0575,
+      "op": ">",
+      "limit": 0.02,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "shoulders visible: chin / height",
+      "value": 0.7013,
+      "op": "<",
+      "limit": 0.75,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "head level: roll deg",
+      "value": 0.1776,
+      "op": "<",
+      "limit": 4.0,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "mouth closed: gap",
+      "value": 0.0014,
+      "op": "<",
+      "limit": 0.035,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "eyes open: aperture / eye width",
+      "value": 0.3587,
+      "op": ">",
+      "limit": 0.18,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "likeness: |skin lightness - photo|",
+      "value": 17.0,
+      "op": "<",
+      "limit": 25,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "likeness: |hair lightness - photo|",
+      "value": 5.0,
+      "op": "<",
+      "limit": 35,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "style judge: class is 3d_render (got 3d_render)",
+      "value": 1.0,
+      "op": ">",
+      "limit": 0.5,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "style judge: photo_score (0-10)",
+      "value": 2.0,
+      "op": "<",
+      "limit": 4.5,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "style judge: render_score (0-10)",
+      "value": 9.0,
+      "op": ">",
+      "limit": 5.5,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "flat background: border pixels near median",
+      "value": 0.8992,
+      "op": ">",
+      "limit": 0.85,
+      "pass": true,
+      "excess": 0.0
+     },
+     {
+      "check": "light background: median border brightness",
+      "value": 230.3333,
+      "op": ">",
+      "limit": 200,
+      "pass": true,
+      "excess": 0.0
+     }
+    ],
+    "pass": true,
+    "badness": 0.0
+   }
+  ]
+ },
+ "reroll_rounds": 2,
+ "budget_stop": false,
+ "usd": 0.49006,
+ "calls": 8,
+ "usd_azure_extra": 0.10225,
+ "parity": {
+  "checks": [
+   {
+    "check": "15 Oculus visemes in the manifest",
+    "value": 15.0,
+    "op": "in",
+    "limit": [
+     15,
+     15
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "visemes without a mouth layer (sil excepted)",
+    "value": 0.0,
+    "op": "<",
+    "limit": 0.5,
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "blink/half/gaze eye layers present",
+    "value": 5.0,
+    "op": "in",
+    "limit": [
+     5,
+     5
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "6 expressions (neutral + 5 with mouth, eyes and brows)",
+    "value": 6.0,
+    "op": "in",
+    "limit": [
+     6,
+     6
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "no glasses layer",
+    "value": 0.0,
+    "op": "<",
+    "limit": 0.5,
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "talk clips (4, or 4 + the glides clip with the 22 Azure visemes)",
+    "value": 5.0,
+    "op": "in",
+    "limit": [
+     5,
+     5
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "all 15 visemes occur in the clips",
+    "value": 15.0,
+    "op": "in",
+    "limit": [
+     15,
+     15
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "22 Azure visemes in the manifest",
+    "value": 22.0,
+    "op": "in",
+    "limit": [
+     22,
+     22
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "Azure visemes without their mouth layer(s)",
+    "value": 0.0,
+    "op": "<",
+    "limit": 0.5,
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "distinct mouth images for the 18 non-diphthong, non-silence Azure ids",
+    "value": 18.0,
+    "op": "in",
+    "limit": [
+     18,
+     18
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "all 22 Azure visemes occur in the clips",
+    "value": 22.0,
+    "op": "in",
+    "limit": [
+     22,
+     22
+    ],
+    "pass": true,
+    "excess": 0.0
+   },
+   {
+    "check": "layer leak: max px of alpha outside the polygon margin",
+    "value": 0.0,
+    "op": "<",
+    "limit": 20,
+    "pass": true,
+    "excess": 0.0
+   }
+  ],
+  "pass": true,
+  "ref": "/Users/kabootar/Desktop/Plutus_Labs/Pixelsurf/pixelsurf-companion-app/avatar-eval/out/sprite/person-c",
+  "manifest_keys_only_here": [],
+  "manifest_keys_only_in_ref": [],
+  "speech_same": true
+ }
+}

@@ -3203,6 +3203,10 @@
   "BASE_ROLL_DEG": 4.0,
   "BASE_MOUTH_CLOSED": 0.035,
   "BASE_EYES_OPEN": 0.18,
+  "MIRROR_SKIN_RATIO": 1.5,
+  "LEAK_MAX_PX": 20,
+  "JUDGE_PHOTO_MAX": 4.5,
+  "JUDGE_RENDER_MIN": 5.5,
   "BASE_SKIN_DL": 25,
   "BASE_HAIR_DL": 35,
   "SKIN_SPOTS": [
@@ -3514,7 +3518,7 @@
     "excess": 0.0
    },
    {
-    "check": "4 talk clips",
+    "check": "talk clips (4, or 4 + the glides clip with the 22 Azure visemes)",
     "value": 4.0,
     "op": "in",
     "limit": [
@@ -3534,6 +3538,14 @@
     ],
     "pass": true,
     "excess": 0.0
+   },
+   {
+    "check": "layer leak: max px of alpha outside the polygon margin",
+    "value": 0.0,
+    "op": "<",
+    "limit": 20,
+    "pass": true,
+    "excess": 0.0
    }
   ],
   "pass": true,
@@ -3541,5 +3553,6 @@
   "manifest_keys_only_here": [],
   "manifest_keys_only_in_ref": [],
   "speech_same": true
- }
+ },
+ "usd_azure_extra": 0.0
 }

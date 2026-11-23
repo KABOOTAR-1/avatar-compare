@@ -11,7 +11,7 @@ const EXPRESSION_LABELS = { neutral: "Neutral", smile: "Smile", laugh: "Laugh", 
 const params = new URLSearchParams(location.search);
 // keep only id characters: links pasted from chat often drag a trailing ")" or "." along
 const avatarId = (params.get("avatar") ?? DEFAULT_AVATAR).replace(/[^A-Za-z0-9_-]/g, "") || DEFAULT_AVATAR;
-const root = `../../out/sprite/${avatarId}/`; // same site: dozens of small layer images, which a CDN/raw host throttles;
+const root = `../../out/sprite/${avatarId}/`;
 const $ = (id) => document.getElementById(id);
 
 function button(label, onClick, title = "") {
@@ -46,7 +46,9 @@ async function main() {
     return;
   }
   const m = avatar.manifest;
-  $("reference").src = `${root}raw/base.webp`;
+  // local runs have raw/base.png; a published web/ copy has raw/base.webp
+  $("reference").onerror = () => { $("reference").onerror = null; $("reference").src = `${root}raw/base.webp`; };
+  $("reference").src = `${root}raw/base.png`;
   $("status").textContent = `${avatarId}: ${Object.values(m.layers).reduce((n, l) => n + Object.keys(l).length, 0)} layers`;
 
   const selectExpression = radioGroup($("expressions"),
@@ -65,6 +67,20 @@ async function main() {
       previewTimer = setTimeout(() => avatar.previewViseme(null), VISEME_PREVIEW_MS);
     }, target === null ? "base mouth" : target === v ? "" : `reuses ${target}`);
     $("visemes").append(b);
+  }
+  // Azure 22-viseme set (optional manifest key): one button per id; 9-11 preview their glide
+  if (m.visemes_azure) {
+    const label = document.createElement("span");
+    label.textContent = " Azure:";
+    $("visemes").append(document.createElement("br"), label);
+    for (const [id, target] of Object.entries(m.visemes_azure)) {
+      const title = target === null ? "base mouth" : typeof target === "string" ? target : `glide ${target.glide.join(" -> ")}`;
+      $("visemes").append(button(id, () => {
+        avatar.previewViseme(`az:${id}`);
+        clearTimeout(previewTimer);
+        previewTimer = setTimeout(() => avatar.previewViseme(null), VISEME_PREVIEW_MS);
+      }, title));
+    }
   }
 
   // speech clips
