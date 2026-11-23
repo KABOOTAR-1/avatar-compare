@@ -1,0 +1,476 @@
+{
+ "id": "greet",
+ "text": "Hey Arvind! I missed you. How was your day?",
+ "voice": "Daniel",
+ "audio": "speech/greet.wav",
+ "duration": 3.23,
+ "expression": "smile",
+ "source": "macOS say + Rhubarb 1.14 dialog-guided phone alignment -> Oculus visemes",
+ "visemes": [
+  {
+   "start": 0.03,
+   "end": 0.14150000000000001,
+   "viseme": "E",
+   "phone": "HH"
+  },
+  {
+   "start": 0.142,
+   "end": 0.2,
+   "viseme": "I",
+   "phone": "EY"
+  },
+  {
+   "start": 0.2,
+   "end": 0.33,
+   "viseme": "aa",
+   "phone": "AA"
+  },
+  {
+   "start": 0.33,
+   "end": 0.36,
+   "viseme": "RR",
+   "phone": "R"
+  },
+  {
+   "start": 0.36,
+   "end": 0.43,
+   "viseme": "FF",
+   "phone": "V"
+  },
+  {
+   "start": 0.43,
+   "end": 0.53,
+   "viseme": "I",
+   "phone": "IH"
+  },
+  {
+   "start": 0.53,
+   "end": 0.7,
+   "viseme": "nn",
+   "phone": "N"
+  },
+  {
+   "start": 0.7,
+   "end": 0.76,
+   "viseme": "DD",
+   "phone": "D"
+  },
+  {
+   "start": 0.76,
+   "end": 0.97,
+   "viseme": "sil",
+   "phone": ""
+  },
+  {
+   "start": 0.97,
+   "end": 1.058,
+   "viseme": "aa",
+   "phone": "AY"
+  },
+  {
+   "start": 1.058,
+   "end": 1.13,
+   "viseme": "I",
+   "phone": "AY"
+  },
+  {
+   "start": 1.13,
+   "end": 1.2,
+   "viseme": "PP",
+   "phone": "M"
+  },
+  {
+   "start": 1.2,
+   "end": 1.29,
+   "viseme": "I",
+   "phone": "IH"
+  },
+  {
+   "start": 1.29,
+   "end": 1.35,
+   "viseme": "SS",
+   "phone": "S"
+  },
+  {
+   "start": 1.35,
+   "end": 1.45,
+   "viseme": "DD",
+   "phone": "T"
+  },
+  {
+   "start": 1.45,
+   "end": 1.54,
+   "viseme": "I",
+   "phone": "Y"
+  },
+  {
+   "start": 1.54,
+   "end": 1.78,
+   "viseme": "U",
+   "phone": "UW"
+  },
+  {
+   "start": 1.78,
+   "end": 2.06,
+   "viseme": "sil",
+   "phone": ""
+  },
+  {
+   "start": 2.06,
+   "end": 2.2035,
+   "viseme": "aa",
+   "phone": "HH"
+  },
+  {
+   "start": 2.204,
+   "end": 2.34,
+   "viseme": "U",
+   "phone": "AW"
+  },
+  {
+   "start": 2.34,
+   "end": 2.4,
+   "viseme": "aa",
+   "phone": "AH"
+  },
+  {
+   "start": 2.4,
+   "end": 2.44,
+   "viseme": "SS",
+   "phone": "Z"
+  },
+  {
+   "start": 2.44,
+   "end": 2.49,
+   "viseme": "I",
+   "phone": "Y"
+  },
+  {
+   "start": 2.49,
+   "end": 2.56,
+   "viseme": "O",
+   "phone": "AO"
+  },
+  {
+   "start": 2.56,
+   "end": 2.6,
+   "viseme": "RR",
+   "phone": "R"
+  },
+  {
+   "start": 2.6,
+   "end": 2.67,
+   "viseme": "DD",
+   "phone": "D"
+  },
+  {
+   "start": 2.67,
+   "end": 2.862,
+   "viseme": "E",
+   "phone": "EY"
+  },
+  {
+   "start": 2.862,
+   "end": 3.02,
+   "viseme": "I",
+   "phone": "EY"
+  },
+  {
+   "start": 3.02,
+   "end": 3.23,
+   "viseme": "sil",
+   "phone": ""
+  }
+ ],
+ "words": [
+  {
+   "start": 0.03,
+   "end": 0.2,
+   "word": "hey"
+  },
+  {
+   "start": 0.2,
+   "end": 0.76,
+   "word": "arvind"
+  },
+  {
+   "start": 0.97,
+   "end": 1.12,
+   "word": "i"
+  },
+  {
+   "start": 1.12,
+   "end": 1.45,
+   "word": "missed"
+  },
+  {
+   "start": 1.45,
+   "end": 1.78,
+   "word": "you"
+  },
+  {
+   "start": 2.06,
+   "end": 2.28,
+   "word": "how"
+  },
+  {
+   "start": 2.28,
+   "end": 2.44,
+   "word": "was"
+  },
+  {
+   "start": 2.44,
+   "end": 2.6,
+   "word": "your"
+  },
+  {
+   "start": 2.6,
+   "end": 3.02,
+   "word": "day"
+  }
+ ],
+ "phones": [
+  {
+   "start": 0.03,
+   "end": 0.07,
+   "phone": "HH"
+  },
+  {
+   "start": 0.07,
+   "end": 0.2,
+   "phone": "EY"
+  },
+  {
+   "start": 0.2,
+   "end": 0.33,
+   "phone": "AA"
+  },
+  {
+   "start": 0.33,
+   "end": 0.36,
+   "phone": "R"
+  },
+  {
+   "start": 0.36,
+   "end": 0.43,
+   "phone": "V"
+  },
+  {
+   "start": 0.43,
+   "end": 0.53,
+   "phone": "IH"
+  },
+  {
+   "start": 0.53,
+   "end": 0.7,
+   "phone": "N"
+  },
+  {
+   "start": 0.7,
+   "end": 0.76,
+   "phone": "D"
+  },
+  {
+   "start": 0.97,
+   "end": 1.13,
+   "phone": "AY"
+  },
+  {
+   "start": 1.13,
+   "end": 1.2,
+   "phone": "M"
+  },
+  {
+   "start": 1.2,
+   "end": 1.29,
+   "phone": "IH"
+  },
+  {
+   "start": 1.29,
+   "end": 1.35,
+   "phone": "S"
+  },
+  {
+   "start": 1.35,
+   "end": 1.45,
+   "phone": "T"
+  },
+  {
+   "start": 1.45,
+   "end": 1.54,
+   "phone": "Y"
+  },
+  {
+   "start": 1.54,
+   "end": 1.78,
+   "phone": "UW"
+  },
+  {
+   "start": 2.06,
+   "end": 2.11,
+   "phone": "HH"
+  },
+  {
+   "start": 2.11,
+   "end": 2.28,
+   "phone": "AW"
+  },
+  {
+   "start": 2.28,
+   "end": 2.34,
+   "phone": "W"
+  },
+  {
+   "start": 2.34,
+   "end": 2.4,
+   "phone": "AH"
+  },
+  {
+   "start": 2.4,
+   "end": 2.44,
+   "phone": "Z"
+  },
+  {
+   "start": 2.44,
+   "end": 2.49,
+   "phone": "Y"
+  },
+  {
+   "start": 2.49,
+   "end": 2.56,
+   "phone": "AO"
+  },
+  {
+   "start": 2.56,
+   "end": 2.6,
+   "phone": "R"
+  },
+  {
+   "start": 2.6,
+   "end": 2.67,
+   "phone": "D"
+  },
+  {
+   "start": 2.67,
+   "end": 3.02,
+   "phone": "EY"
+  }
+ ],
+ "rhubarbCues": [
+  {
+   "start": 0,
+   "end": 0.03,
+   "value": "X"
+  },
+  {
+   "start": 0.03,
+   "end": 0.13,
+   "value": "C"
+  },
+  {
+   "start": 0.13,
+   "end": 0.2,
+   "value": "B"
+  },
+  {
+   "start": 0.2,
+   "end": 0.3,
+   "value": "D"
+  },
+  {
+   "start": 0.3,
+   "end": 0.34,
+   "value": "C"
+  },
+  {
+   "start": 0.34,
+   "end": 0.41,
+   "value": "G"
+  },
+  {
+   "start": 0.41,
+   "end": 0.97,
+   "value": "B"
+  },
+  {
+   "start": 0.97,
+   "end": 1.05,
+   "value": "C"
+  },
+  {
+   "start": 1.05,
+   "end": 1.12,
+   "value": "B"
+  },
+  {
+   "start": 1.12,
+   "end": 1.2,
+   "value": "A"
+  },
+  {
+   "start": 1.2,
+   "end": 1.36,
+   "value": "B"
+  },
+  {
+   "start": 1.36,
+   "end": 1.78,
+   "value": "F"
+  },
+  {
+   "start": 1.78,
+   "end": 2.06,
+   "value": "B"
+  },
+  {
+   "start": 2.06,
+   "end": 2.18,
+   "value": "C"
+  },
+  {
+   "start": 2.18,
+   "end": 2.25,
+   "value": "E"
+  },
+  {
+   "start": 2.25,
+   "end": 2.32,
+   "value": "F"
+  },
+  {
+   "start": 2.32,
+   "end": 2.39,
+   "value": "C"
+  },
+  {
+   "start": 2.39,
+   "end": 2.46,
+   "value": "B"
+  },
+  {
+   "start": 2.46,
+   "end": 2.53,
+   "value": "E"
+  },
+  {
+   "start": 2.53,
+   "end": 2.6,
+   "value": "B"
+  },
+  {
+   "start": 2.6,
+   "end": 2.88,
+   "value": "C"
+  },
+  {
+   "start": 2.88,
+   "end": 3.02,
+   "value": "B"
+  },
+  {
+   "start": 3.02,
+   "end": 3.23,
+   "value": "X"
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+[
+ {
+  "id": "greet",
+  "text": "Hey Arvind! I missed you. How was your day?",
+  "duration": 3.23,
+  "expression": "smile",
+  "file": "speech/greet.json"
+ },
+ {
+  "id": "empathy",
+  "text": "Oh no, that sounds really frustrating. Do you want to talk about it?",
+  "duration": 4.69,
+  "expression": "sad",
+  "file": "speech/empathy.json"
+ },
+ {
+  "id": "excited",
+  "text": "Wait, you finished the whole thing already? That's amazing!",
+  "duration": 3.65,
+  "expression": "surprised",
+  "file": "speech/excited.json"
+ },
+ {
+  "id": "phonemes",
+  "text": "Five quick chefs think the jazz show starts at seven, so move over.",
+  "duration": 4.31,
+  "expression": "neutral",
+  "file": "speech/phonemes.json"
+ }
+]
