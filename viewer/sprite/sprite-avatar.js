@@ -19,7 +19,8 @@
  * aligned textures, rendered with WebGL (morph-core.js; CPU canvas fallback). Without morph.json the
  * cross-fade path below runs unchanged.
  */
-import { MorphTrack, GLMeshRenderer, drawMesh2D, overAlphas, quad } from "./morph-core.js";
+import { MorphTrack, GLMeshRenderer, drawMesh2D, overAlphas, quad, TIMELINE_SIGMA_S, TIMELINE_CONTACT_SIGMA_S,
+  SWITCH_WINDOW, ADAPTIVE, TIMELINE_SHARPEN } from "./morph-core.js";
 
 // --- timing (ms) -----------------------------------------------------------------------------
 export const VISEME_FADE_MS = 70;
@@ -37,6 +38,16 @@ const GLIDE_PREVIEW_MS = 450;
 // morph timing (ms)
 const MORPH_VISEME_MS = [40, 120];   // transition = clamp(share x phone duration, min, max)
 const MORPH_VISEME_SHARE = 0.6;
+// speech plays viseme shapes at this share of their full pose (see MorphTrack.set). 0.7 was for the exaggerated
+// image-model poses; the shapes are now the photo moved by LivePortrait (natural size), and 0.7 left the mouth
+// half-open while talking.
+const SPEECH_MOUTH_AMOUNT = 1.0;
+// Playback settings: these are only the fallbacks. Each avatar's manifest "playback" (chosen per avatar by the AI judge
+// watching captioned talking clips, scripts/avatar3d/sprite/tune_playback.py) overrides them.
+const PLAYBACK_DEFAULTS = { timeline: true, sigma_s: TIMELINE_SIGMA_S, contact_sigma_s: TIMELINE_CONTACT_SIGMA_S,
+  speech_amount: SPEECH_MOUTH_AMOUNT, lead_s: VISEME_LEAD_S, switch_window: SWITCH_WINDOW, sharpen: TIMELINE_SHARPEN,
+  adapt_lo: ADAPTIVE.lo, adapt_hi: ADAPTIVE.hi, adapt_radius: ADAPTIVE.radiusTexels, stretch_lo: ADAPTIVE.stretchLo,
+  stretch_hi: ADAPTIVE.stretchHi, undershoot_s: 0 };
 const MIN_CUE_S = 0.017;             // shapes shorter than about one frame are skipped (coarticulation)
 const MORPH_EXPRESSION_MS = 280;
 const MORPH_GAZE_MS = 240;
@@ -52,6 +63,14 @@ const SWAY_DEG = 0.9;            // head roll amplitude
 const SWAY_PX = 1.5;             // head drift amplitude (image px)
 const TALK_NOD_DEG = 0.6;        // extra nodding while talking
 const NECK_FEATHER_PX = 14;      // head/body blend band around the neck cut (kept below the jaw)
+const CHIN_CLEAR_PX = 3;          // extra gap between the lowest chin and the blend band
+// Head sway as ONE smooth bend of the picture (not a head layer blended into the body at a band: anything crossing
+// that band, the neck outline or a collar, showed twice while the head moved, ai-curly / ai-gym). Above the lowest
+// chin the head moves fully; down the neck the motion fades out; below that nothing moves. Nothing is drawn twice.
+const BEND_NECK_X = 2.0;          // fade length = this x (neck pivot - chin): roughly chin to shoulders
+const BEND_STRIP_PX = 3;          // strip height inside the fade (each strip its own share of the motion)
+const BEND_OVERLAP_PX = 4;        // strips overlap the already-drawn strip below them by this much
+const BEND_MIN_PX = 4;            // shortest fade (a collar right under the chin)
 const NECK_CUT_BELOW_CHIN = 0.53; // cut line: chin + this x (pivot - chin); below the dropped jaw of "aa", above the collar
 const BG_MATTE_LO = 6;           // colour distance from the flat background that counts as figure
 const HEAD_MATTE_MARGIN_PX = 6;  // matte grown into pure background so its edge is invisible
@@ -108,6 +127,19 @@ class RegionFade {
   }
 }
 
+// MediaPipe landmark ids (the face model's fixed topology, the same for every face): inner-lip centre and corners
+const LIP_IN_TOP = 13, LIP_IN_BOTTOM = 14, LIP_IN_L = 78, LIP_IN_R = 308;
+const CONTACT_GAP = 0.03;  // inner-lip gap / inner mouth width below this = the lips touch (= morph_render.py)
+
+/** States of a morph region whose lips touch, measured on each state's own points (no state names). */
+function contactStates(r, points) {
+  const idx = (id) => { const j = (r.landmarks ?? []).indexOf(id); return j < 0 ? -1 : r.ring + j; };
+  const [a, b, l, rr] = [LIP_IN_TOP, LIP_IN_BOTTOM, LIP_IN_L, LIP_IN_R].map(idx);
+  if ([a, b, l, rr].some((i) => i < 0)) return new Set();
+  const d = (p, i, j) => Math.hypot(p[2 * i] - p[2 * j], p[2 * i + 1] - p[2 * j + 1]);
+  return new Set(Object.entries(points).filter(([, p]) => d(p, a, b) < CONTACT_GAP * d(p, l, rr)).map(([s]) => s));
+}
+
 export class SpriteAvatar {
   /** @param {HTMLCanvasElement} canvas  @param {string} root URL of the avatar dir (ends with /) */
   constructor(canvas, root) {
@@ -131,10 +163,13 @@ export class SpriteAvatar {
   }
 
   async load() {
-    this.bust ??= "";  // e.g. "?t=..." to bypass the HTTP cache (QA renders right after a rebuild)
-    this.manifest = await (await fetch(`${this.root}manifest.json${this.bust}`)).json();
+    // a fresh tag on every file: a picture cached while a rebuild was half-written (a black face) must never be
+    // reused; a hard refresh did not re-fetch pictures the script loads (ai-curly-lp)
+    this.bust ??= `?v=${Date.now()}`;
+    this.manifest = await (await fetch(`${this.root}manifest.json${this.bust}`, { cache: "no-store" })).json();
     const m = this.manifest;
     const files = { face: m.base };
+    if (m.matte) files.matte = m.matte;  // soft person matte (head_matte.py, MODNet); else the colour test below
     for (const [region, layers] of Object.entries(m.layers)) {
       for (const [id, layer] of Object.entries(layers)) files[`${region}/${id}`] = layer.file;
     }
@@ -175,6 +210,16 @@ export class SpriteAvatar {
     const base = g.getImageData(0, 0, w, h).data;
     const bg = [base[0], base[1], base[2]];
     this.bgColor = `rgb(${bg.join(",")})`;
+    // person alpha 0..255: the build-time matte when there is one (pixel-accurate, soft hair edges), else the old
+    // colour test (distance from the top-left pixel) grown by a margin
+    let person;
+    if (this.images.matte) {
+      g.drawImage(this.images.matte, 0, 0, w, h);
+      const md = g.getImageData(0, 0, w, h).data;
+      person = new Uint8Array(w * h);
+      for (let k = 0; k < w * h; k++) person[k] = md[k * 4];
+      g.drawImage(this.images.face, 0, 0);
+    }
     const fg = new Uint8Array(w * h);
     const mark = (d, x0, y0, cw, ch) => {
       for (let y = 0; y < ch; y++) {
@@ -193,9 +238,16 @@ export class SpriteAvatar {
         mark(g.getImageData(l.x, l.y, l.w, l.h).data, l.x, l.y, l.w, l.h);
       }
     }
-    const grown = dilate(fg, w, h, HEAD_MATTE_MARGIN_PX);
+    if (!person) {
+      const grown = dilate(fg, w, h, HEAD_MATTE_MARGIN_PX);
+      person = new Uint8Array(w * h);
+      for (let k = 0; k < w * h; k++) person[k] = grown[k] ? 255 : 0;
+    }
     const chinY = anchors.chin[1];
-    const cutY = chinY + NECK_CUT_BELOW_CHIN * (anchors.neck_pivot[1] - chinY);
+    // below the LOWEST chin of any frame (+ the blend band): else an open jaw's chin bottom stays with the still
+    // body while the head sways, and the collar peeks through (build_layers.py chin_low)
+    const cutY = Math.max(chinY + NECK_CUT_BELOW_CHIN * (anchors.neck_pivot[1] - chinY),
+      (anchors.chin_low?.[1] ?? 0) + NECK_FEATHER_PX + CHIN_CLEAR_PX);
     this.pivot = [anchors.neck_pivot[0], cutY];
     const head = g.createImageData(w, h);
     const clear = g.createImageData(w, h);
@@ -204,8 +256,8 @@ export class SpriteAvatar {
       const above = y < cutY - NECK_FEATHER_PX;
       for (let x = 0; x < w; x++) {
         const k = y * w + x;
-        head.data[k * 4 + 3] = grown[k] ? Math.round(255 * v) : 0;
-        clear.data[k * 4 + 3] = grown[k] && above ? 255 : 0;
+        head.data[k * 4 + 3] = Math.round(person[k] * v);
+        clear.data[k * 4 + 3] = above ? person[k] : 0;
       }
     }
     const toCanvas = (img) => {
@@ -215,6 +267,13 @@ export class SpriteAvatar {
     };
     this.headMask = toCanvas(head);
     this.clearMask = toCanvas(clear);
+    const chinLow = anchors.chin_low?.[1] ?? chinY;
+    this.bendTop = Math.round(chinLow + CHIN_CLEAR_PX);
+    this.bendBottom = Math.min(h, Math.round(this.bendTop + BEND_NECK_X * Math.max(20, anchors.neck_pivot[1] - chinY)));
+    // clothing never sways with the head: the bend ends where the clothing starts (a turtleneck right under the chin:
+    // the head moves above the chin and the sweater stays still)
+    if (anchors.clothes_top) this.bendBottom = Math.max(this.bendTop + BEND_MIN_PX, Math.min(this.bendBottom, Math.round(anchors.clothes_top)));
+    this.bendPivot = [anchors.neck_pivot[0], this.bendBottom];
   }
 
   /** morph.json -> textures, per-state points / UVs, one MorphTrack per region, WebGL (or 2D) renderer. */
@@ -233,7 +292,8 @@ export class SpriteAvatar {
         uv[s] = p.map((v, k) => (k % 2 ? (v - r.y) / r.h : (v - r.x) / r.w));
         img[s] = imgs[i];
       });
-      regions[name] = { ...r, points, src, uv, img, track: new MorphTrack(points, r.base ?? "base") };
+      regions[name] = { ...r, points, src, uv, img, track: new MorphTrack(points, r.base ?? "base"),
+        contact: contactStates(r, points) };
     }
     const canvas = Object.assign(document.createElement("canvas"), { width: w, height: h });
     let gl = null;
@@ -257,6 +317,10 @@ export class SpriteAvatar {
       console.warn("WebGL unavailable, CPU canvas morph", error);
       gl = null;
     }
+    const play = this.playback();
+    for (const r of Object.values(regions)) if (r.track) r.track.switchWindow = play.switch_window;
+    if (gl) gl.adapt = { radiusTexels: play.adapt_radius, lo: play.adapt_lo, hi: play.adapt_hi, stretchLo: play.stretch_lo,
+      stretchHi: play.stretch_hi };
     this.morph = { regions, canvas, gl, ctx2d: gl ? null : canvas.getContext("2d") };
     this.renderer = gl ? "webgl" : "canvas2d";
   }
@@ -275,7 +339,7 @@ export class SpriteAvatar {
       const ms = (ce !== (e ?? "base")) ? ems : bms;  // an eye change (blink, gaze) sets the pace
       r.upper.track.set(key, now, cb !== (b ?? "base") && ce !== (e ?? "base") ? Math.max(bms, ems) : ms);
     }
-    if (r.mouth && tg.mouth) r.mouth.track.set(tg.mouth[0] ?? "base", now, tg.mouth[1]);
+    if (r.mouth && tg.mouth) r.mouth.track.set(tg.mouth[0] ?? "base", now, tg.mouth[1], tg.mouth[2] ?? 1);
   }
 
   /** Render the face with every region at its current morph state into this.faceCanvas. */
@@ -290,11 +354,11 @@ export class SpriteAvatar {
       ctx2d.globalAlpha = 1;
       ctx2d.drawImage(this.images.face, 0, 0);
     }
-    for (const name of ["upper", "brows", "eyes", "mouth"]) {
+    for (const name of ["mouth", "upper", "brows", "eyes"]) {  // upper drawn over the mouth region's top edge
       const r = regions[name];
       if (!r || r.overlay) continue;
-      const { points, draws } = r.track.sample(now);
-      if (gl) gl.draw(name, points, draws);
+      const { points, draws, layers } = r.track.sample(now);
+      if (gl) gl.drawAdaptive(name, points, layers);
       else {
         const alphas = overAlphas(draws);
         draws.forEach(([s], i) => drawMesh2D(ctx2d, r.img[s], r.src[s], points, r.triangles, alphas[i]));
@@ -327,6 +391,14 @@ export class SpriteAvatar {
     this.stopSpeech();
     const audio = new Audio(this.root + clip.audio);
     this.speech = { clip, audio };
+    const mouth = this.morph?.regions.mouth;
+    const play = this.playback();
+    if (mouth && play.timeline) {  // the whole shape sequence is known: the mouth follows it with zero-lag smoothing
+      const speech = this.speech;
+      mouth.track.setTimeline(this.speechKeys(clip), () => speech.audio.currentTime + play.lead_s, mouth.contact,
+        { sigma: play.sigma_s, contactSigma: play.contact_sigma_s, amount: play.speech_amount, rest: this.speechRestMouth(),
+          sharpen: play.sharpen, undershoot: play.undershoot_s });
+    }
     audio.addEventListener("ended", () => { if (this.speech?.audio === audio) this.stopSpeech(); });
     try {
       await audio.play();
@@ -339,6 +411,58 @@ export class SpriteAvatar {
   stopSpeech() {
     if (this.speech) this.speech.audio.pause();
     this.speech = null;
+    const mouth = this.morph?.regions.mouth;
+    if (mouth?.track.timeline) mouth.track.clearTimeline(performance.now(), this.restMouth(), MORPH_EXPRESSION_MS);
+  }
+
+  /** This avatar's playback settings (manifest "playback" over PLAYBACK_DEFAULTS). */
+  playback() {
+    return { ...PLAYBACK_DEFAULTS, ...(this.manifest?.playback?.settings ?? {}) };
+  }
+
+  /**
+   * The mouth between words while talking: always the neutral mouth. The line's expression stays in the eyes and brows
+   * (a happy line has smiling eyes); with the expression's mouth here (a smile) the mouth snapped back to the smile in
+   * every pause between words.
+   */
+  speechRestMouth() {
+    return this.morph?.regions.mouth?.base ?? "base";
+  }
+
+  /** The mouth shown when not talking: the expression's mouth, else the base. */
+  restMouth() {
+    const expr = this.manifest.expressions[this.expression] ?? this.manifest.expressions.neutral;
+    return expr.mouth ?? "base";
+  }
+
+  /**
+   * A clip's mouth shapes as contiguous keys [{start, end, state}] (seconds): Azure visemes when the avatar has them
+   * (a diphthong = its two shapes, split at GLIDE_HOLD), else the Oculus ones; silence and unmapped ids = the rest
+   * mouth, which also fills gaps and runs before and after the clip.
+   */
+  speechKeys(clip) {
+    const m = this.manifest, rest = this.speechRestMouth(), keys = [];
+    const push = (start, end, state) => {
+      if (end <= start) return;
+      const last = keys[keys.length - 1];
+      if (last && last.state === state && Math.abs(last.end - start) < 1e-6) last.end = end;
+      else keys.push({ start, end, state });
+    };
+    const azure = m.visemes_azure && clip.visemes_azure;
+    const cues = azure ? clip.visemes_azure : clip.visemes;
+    let t = -1e3;
+    for (const c of cues) {
+      push(t, c.start, rest);
+      const entry = azure ? m.visemes_azure[String(c.id)] : m.visemes[c.viseme];
+      if (entry && typeof entry === "object" && entry.glide) {
+        const split = c.start + GLIDE_HOLD * (c.end - c.start);
+        push(c.start, split, entry.glide[0] ?? rest);
+        push(split, c.end, entry.glide[1] ?? rest);
+      } else push(c.start, c.end, entry ?? rest);
+      t = c.end;
+    }
+    push(t, t + 1e3, rest);
+    return keys;
   }
 
   // --- state machine --------------------------------------------------------------------------
@@ -378,7 +502,7 @@ export class SpriteAvatar {
 
   currentViseme() {
     if (!this.speech) return null;
-    const t = this.speech.audio.currentTime + VISEME_LEAD_S;
+    const t = this.speech.audio.currentTime + this.playback().lead_s;
     const { visemes, words } = this.speech.clip;
     const word = words?.find((w) => t >= w.start && t < w.end);
     const azure = this.manifest.visemes_azure && this.speech.clip.visemes_azure;
@@ -440,8 +564,9 @@ export class SpriteAvatar {
     }
     this.current = { viseme, phone: speaking?.phone ?? "", word: speaking?.word ?? "" };
 
-    // eyes: blink > gaze > expression. Expressions with their own closed eyes (laugh) do not blink.
-    const eyesClosedByExpr = this.expression === "laugh";
+    // eyes: blink > gaze > expression. Expressions whose own eyes are shut (measured at build time,
+    // manifest "eyes_closed") do not blink.
+    const eyesClosedByExpr = Boolean(expr.eyes_closed);
     let eyes = expr.eyes;
     const gaze = this.gaze ?? (this.expression === "neutral" ? this.idleGaze : null);
     if (gaze) eyes = m.eyes.gaze[gaze];
@@ -458,7 +583,8 @@ export class SpriteAvatar {
       const fromBlink = this.morph.regions.upper?.track.to.endsWith(`|${m.eyes.closed}`) && !closing;
       const eyeMs = closing ? MORPH_BLINK_CLOSE_MS : fromBlink ? MORPH_BLINK_OPEN_MS : gaze ? MORPH_GAZE_MS : MORPH_EXPRESSION_MS;
       const mouthMs = glideFade ?? (speaking ? speaking.morphMs ?? MORPH_VISEME_MS[1] : this.mouthOverride ? MORPH_VISEME_MS[1] : MORPH_EXPRESSION_MS);
-      return { brows: [expr.brows, MORPH_EXPRESSION_MS], eyes: [eyes, eyeMs], mouth: [mouth, mouthMs] };
+      const mouthAmount = speaking && !this.mouthOverride && mouth ? this.playback().speech_amount : 1;
+      return { brows: [expr.brows, MORPH_EXPRESSION_MS], eyes: [eyes, eyeMs], mouth: [mouth, mouthMs, mouthAmount] };
     }
     return {
       brows: [expr.brows, EXPRESSION_FADE_MS],
@@ -509,6 +635,49 @@ export class SpriteAvatar {
     const dx = life * n2 * SWAY_PX + micro * Math.sin(t * 0.37 + 1.1) * Math.sin(t * 0.23);
     const dy = life * (n1 * SWAY_PX * 0.4 + talking * Math.abs(n3) * 1.5) + micro * Math.sin(t * 0.29 + 2.3);
 
+    const c = this.ctx;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.fillStyle = this.bgColor;
+    c.fillRect(0, 0, w, h);
+    // breathing: scale about the bottom edge (shoulders rise, head rides along)
+    const s = 1 + BREATH_SCALE * breath;
+    const breathe = () => c.setTransform(1, 0, 0, s, 0, h * (1 - s));
+    // the bend: a share k of the head's motion (1 = the head, 0 = the still body), one strip of rows at a time
+    const [bx, by] = this.bendPivot;
+    const strip = (y0, y1, k) => {
+      breathe();
+      if (k > 0) {
+        c.translate(bx + dx * k, by + dy * k);
+        c.rotate(roll * k);
+        c.translate(-bx, -by);
+      }
+      // each strip reaches BEND_OVERLAP_PX down over the one drawn before it (bottom up): its soft, sub-pixel
+      // shifted edge then blends with almost the same picture, not with the background fill (a faint line showed)
+      const hh = Math.min(h, y1 + BEND_OVERLAP_PX) - y0;
+      if (hh > 0) c.drawImage(this.faceCanvas, 0, y0, w, hh, 0, y0, w, hh);
+    };
+    strip(this.bendBottom, h, 0);
+    for (let y = this.bendBottom - BEND_STRIP_PX; y > this.bendTop - BEND_STRIP_PX; y -= BEND_STRIP_PX) {
+      const y0 = Math.max(this.bendTop, y);
+      const u = (y0 + BEND_STRIP_PX / 2 - this.bendTop) / Math.max(1, this.bendBottom - this.bendTop);
+      strip(y0, y0 + BEND_STRIP_PX, 1 - smoothstep(0, 1, u));
+    }
+    strip(0, this.bendTop, 1);
+    if (this.showBounds) {
+      breathe();
+      c.lineWidth = 2;
+      const colours = { brows: "#4aa3ff", eyes: "#47d16c", mouth: "#ff6a6a" };
+      for (const [region, l] of this.bounds) {
+        c.strokeStyle = colours[region];
+        c.strokeRect(l.x, l.y, l.w, l.h);
+      }
+    }
+    c.setTransform(1, 0, 0, 1, 0, 0);
+  }
+
+  /** The previous head-layer sway (kept for reference; not called): a head cut-out over a body plate. */
+  drawCutout(dx, dy, roll, breath) {
+    const { width: w, height: h } = this.manifest;
     // body plate: the face canvas with the head cleared to background
     const p = this.plateCanvas.getContext("2d");
     p.globalCompositeOperation = "source-over";
@@ -543,14 +712,6 @@ export class SpriteAvatar {
     c.rotate(roll);
     c.translate(-px, -py);
     c.drawImage(this.headCanvas, 0, 0);
-    if (this.showBounds) {
-      c.lineWidth = 2;
-      const colours = { brows: "#4aa3ff", eyes: "#47d16c", mouth: "#ff6a6a" };
-      for (const [region, l] of this.bounds) {
-        c.strokeStyle = colours[region];
-        c.strokeRect(l.x, l.y, l.w, l.h);
-      }
-    }
     c.setTransform(1, 0, 0, 1, 0, 0);
   }
 

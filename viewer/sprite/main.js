@@ -63,9 +63,15 @@ async function main() {
   $("reference").src = `${root}raw/base.png`;
   $("status").textContent = `${avatarId}: ${Object.values(m.layers).reduce((n, l) => n + Object.keys(l).length, 0)} layers`
     + (avatar.morph ? ` · morph (${avatar.renderer})` : " · cross-fade");
+  if (!m.morph) {  // the pipeline writes the morph data near its end: before that this is a half-built avatar
+    $("status").textContent += " · STILL BUILDING (preview only: no morphing, no speech yet; reload when it finishes)";
+    $("status").style.color = "#f0a040";
+  }
 
-  const selectExpression = radioGroup($("expressions"),
-    Object.keys(m.expressions).map((k) => [k, EXPRESSION_LABELS[k] ?? k]), (k) => avatar.setExpression(k), "neutral");
+  let chosenExpression = "neutral";  // the user's choice; a line's own expression only lasts while it is spoken
+  const selectExpression = radioGroup($("expressions"), Object.keys(m.expressions).map((k) => [k, EXPRESSION_LABELS[k] ?? k]),
+    (k) => { chosenExpression = k; avatar.setExpression(k); }, "neutral");
+  const restoreExpression = () => avatar.setExpression(chosenExpression);
 
   radioGroup($("gaze"), [[null, "Centre"], ...Object.keys(m.eyes.gaze).map((k) => [k, k[0].toUpperCase() + k.slice(1)])],
     (k) => avatar.setGaze(k), null);
@@ -74,7 +80,8 @@ async function main() {
   let previewTimer = 0;
   for (const v of Object.keys(m.visemes)) {
     const target = m.visemes[v];
-    const b = button(v, () => {
+    // "sil" (silence) IS the resting mouth: labelled so pressing it does not look like a broken button
+    const b = button(target === null ? `${v} (rest)` : v, () => {
       avatar.previewViseme(v);
       clearTimeout(previewTimer);
       previewTimer = setTimeout(() => avatar.previewViseme(null), VISEME_PREVIEW_MS);
@@ -114,12 +121,13 @@ async function main() {
       }
       const clip = clips[item.id];
       $("caption").textContent = clip.text;
-      if ($("withExpr").checked) selectExpression(clip.expression in m.expressions ? clip.expression : "neutral");
-      avatar.say(clip);
+      if ($("withExpr").checked) avatar.setExpression(clip.expression in m.expressions ? clip.expression : chosenExpression);
+      await avatar.say(clip);
+      avatar.speech?.audio.addEventListener("ended", restoreExpression);  // back to the chosen expression afterwards
     }, item.text);
     $("talk").append(b);
   }
-  $("talk").append(button("Stop", () => avatar.stopSpeech()));
+  $("talk").append(button("Stop", () => { avatar.stopSpeech(); restoreExpression(); }));
   // ?qa=<port>: render every viewer state + expression transitions and send them to qa_frame_server.py
   if (params.get("qa")) (await import("./qa-states.js")).runStateQA(avatar, avatarId, Number(params.get("qa")));
 

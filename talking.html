@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Talking Avatars</title>
+<style>
+  :root { --bg: #16181c; --card: #22252b; --text: #e8e8ea; --muted: #9aa0a8; --accent: #6aa8ff; --line: #2c2f36; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  p.lead { color: var(--muted); margin: 0 0 28px; max-width: 760px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .card img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; display: block; background: #0f1013; }
+  .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .name { font-weight: 600; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  a.btn { flex: 1; text-align: center; text-decoration: none; color: var(--text); border: 1px solid var(--line);
+          border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+  a.btn.main { background: var(--accent); color: #0d1320; border-color: var(--accent); font-weight: 600; }
+  a.btn:hover { filter: brightness(1.1); }
+  .how { margin-top: 32px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .how b { color: var(--text); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Talking avatars from a single photo</h1>
+  <p class="lead">Each avatar is made from one photo: a studio portrait, 28 mouth and eye shapes, and a morphing viewer
+    that lip-syncs to speech. Every frame is checked and fixed by an AI judge. All people shown are AI-generated
+    characters. Open one, press <b>Talk</b>, try the expressions and eyes.</p>
+  <div class="grid" id="grid"></div>
+  <div class="how">
+    <b>Standard</b> uses the generated mouth and eye pictures directly (the default).
+    <b>LivePortrait</b> moves the photo's own pixels instead: steadier skin, weaker expressions.
+    Best in a desktop browser (WebGL).
+  </div>
+</main>
+<script>
+  const AVATARS = [
+    { name: "Bearded man", id: "ai-beard", lp: "ai-beard-lp" },
+    { name: "Curly hair", id: "ai-curly", lp: "ai-curly-lp" },
+    { name: "Gym selfie", id: "ai-gym", lp: "ai-gym-lp" },
+    { name: "Long dark hair", id: "ai-character-nolp", lp: "ai-character-natural" },
+  ];
+  const viewer = (id) => `viewer/sprite/index.html?avatar=${encodeURIComponent(id)}`;
+  const grid = document.getElementById("grid");
+  for (const a of AVATARS) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <a href="${viewer(a.id)}"><img loading="lazy" alt="${a.name}" src="out/sprite/${a.id}/raw/base.webp"></a>
+      <div class="body">
+        <div class="name">${a.name}</div>
+        <div class="links">
+          <a class="btn main" href="${viewer(a.id)}">Standard</a>
+          <a class="btn" href="${viewer(a.lp)}">LivePortrait</a>
+        </div>
+      </div>`;
+    grid.append(card);
+  }
+</script>
+</body>
+</html>
