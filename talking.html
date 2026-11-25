@@ -33,18 +33,14 @@
     that lip-syncs to speech. Every frame is checked and fixed by an AI judge. All people shown are AI-generated
     characters. Open one, press <b>Talk</b>, try the expressions and eyes.</p>
   <div class="grid" id="grid"></div>
-  <div class="how">
-    <b>Standard</b> uses the generated mouth and eye pictures directly (the default).
-    <b>LivePortrait</b> moves the photo's own pixels instead: steadier skin, weaker expressions.
-    Best in a desktop browser (WebGL).
-  </div>
+  <div class="how">Best in a desktop browser (WebGL).</div>
 </main>
 <script>
   const AVATARS = [
-    { name: "Bearded man", id: "ai-beard", lp: "ai-beard-lp" },
-    { name: "Curly hair", id: "ai-curly", lp: "ai-curly-lp" },
-    { name: "Gym selfie", id: "ai-gym", lp: "ai-gym-lp" },
-    { name: "Long dark hair", id: "ai-character-nolp", lp: "ai-character-natural" },
+    { name: "Bearded man", id: "ai-beard" },
+    { name: "Curly hair", id: "ai-curly" },
+    { name: "Gym selfie", id: "ai-gym" },
+    { name: "Long dark hair", id: "ai-character-nolp" },
   ];
   const viewer = (id) => `viewer/sprite/index.html?avatar=${encodeURIComponent(id)}`;
   const grid = document.getElementById("grid");
@@ -56,8 +52,7 @@
       <div class="body">
         <div class="name">${a.name}</div>
         <div class="links">
-          <a class="btn main" href="${viewer(a.id)}">Standard</a>
-          <a class="btn" href="${viewer(a.lp)}">LivePortrait</a>
+          <a class="btn main" href="${viewer(a.id)}">Open</a>
         </div>
       </div>`;
     grid.append(card);
